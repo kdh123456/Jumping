@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Floor
+  - FireBall
+  - LeftWall
+  - RightWall
+  - Spring
+  - Summer
+  - Fall
+  - Winter
+  - Water
+  - BaseFloor
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - ground
+  - Water
+  - UI
+  - Ability
+  - Player
+  - Wall
+  - Rope
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 370719525
+    locked: 0
+  - name: Floor
+    uniqueID: 1746217257
+    locked: 0
+  - name: Wall
+    uniqueID: 3922134671
+    locked: 0
+  - name: Object
+    uniqueID: 1388900915
+    locked: 0
+  - name: Player
+    uniqueID: 1855293625
+    locked: 0
