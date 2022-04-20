@@ -55,7 +55,7 @@ public class PlayerMove : Player
         position = new Vector2(transform.position.x, transform.position.y + .5f);
 
         hit = Physics2D.Raycast(position, direction, 3, LayerMask.GetMask("Ability"));
-        Debug.DrawRay(position, direction, Color.green, 400);
+        Debug.DrawRay(position, direction * 3, Color.green);
         base.Update();
         //moveInput = Input.GetAxisRaw("Horizontal");
 
@@ -239,6 +239,10 @@ public class PlayerMove : Player
         {
             playerpos = 2;
             playerScrollbar.maxValue = 20;
+        }
+        else if (collision.collider.CompareTag("Cloud"))
+        {
+            StartCoroutine(ItemSpawnManager.Instance.ItmeSpawn(PoolObjectType.CLOUD, collision.transform));
         }
     }
 
