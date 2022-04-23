@@ -564,8 +564,8 @@ TextureImporter:
       physicsShape:
       - - {x: -4, y: 4}
         - {x: -4, y: -4}
-        - {x: 4, y: -4}
-        - {x: 4, y: 4}
+        - {x: -3, y: -4}
+        - {x: -3, y: 4}
       tessellationDetail: 0
       bones: []
       spriteID: d23c2a21386d4b3c0800000000000000

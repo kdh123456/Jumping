@@ -223,7 +223,7 @@ public class PlayerMove : Player
             isOneWall = false;
             animator.Play("Idle");
         }
-        else if(collision.collider.CompareTag("RightWall") && isOneWall)
+        else if (collision.collider.CompareTag("RightWall") && isOneWall)
         {
             transform.localEulerAngles = new Vector3(0, 0, -90);
             rigid.bodyType = RigidbodyType2D.Static;
@@ -235,7 +235,7 @@ public class PlayerMove : Player
         {
             SoundManager.Instance.SetEffectSoundClip(EffectSoundState.Land);
         }
-        else if(collision.collider.CompareTag("Water"))
+        else if (collision.collider.CompareTag("Water"))
         {
             playerpos = 2;
             playerScrollbar.maxValue = 20;
@@ -243,6 +243,10 @@ public class PlayerMove : Player
         else if (collision.collider.CompareTag("Cloud"))
         {
             StartCoroutine(ItemSpawnManager.Instance.ItmeSpawn(PoolObjectType.CLOUD, collision.transform));
+        }
+        else if (collision.collider.CompareTag("BaseFloor"))
+        {
+            isMove = false;
         }
     }
 
@@ -252,6 +256,10 @@ public class PlayerMove : Player
         {
             playerpos = 5;
             playerScrollbar.maxValue = 30;
+        }
+        else if(collision.collider.CompareTag("BaseFloor"))
+        {
+            isMove = true;
         }
     }
 
