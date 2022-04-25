@@ -5,12 +5,21 @@ using UnityEngine;
 public class SeasonalDebuff : MonoBehaviour
 {
     private float value = 0f;
+    public float Value
+    {
+        get => value;
+    }
 
-    private SeasonState STATE;
+    private SeasonState state;
+    public SeasonState State
+    {
+        get => state;
+    }
 
-    private readonly int MAX_VALUE = 5;
+    public readonly int MAX_VALUE = 5;
 
     private bool isDebuff = false;
+    private bool isPosion = false;
     public bool IsDebuff
     {
         get
@@ -34,18 +43,25 @@ public class SeasonalDebuff : MonoBehaviour
         {
             if (!isDebuff)
             {
-                switch (STATE)
+                switch (state)
                 {
                     case SeasonState.SUMMER:
                     case SeasonState.WINTER:
                         value = isDown ? value - Time.deltaTime : value + Time.deltaTime;
-                        //value += Time.deltaTime;
                         break;
                     case SeasonState.SPRING:
-                    case SeasonState.FALL:
                         value = 0;
                         break;
+                    case SeasonState.FALL:
+                        if (isPosion)
+                            value = isDown ? value - Time.deltaTime : value + Time.deltaTime;
+                        else
+                            value = 0;
+
+                        break;
                 }
+
+                value = Mathf.Max(0, value);
             }
 
             Debuff();
@@ -63,11 +79,14 @@ public class SeasonalDebuff : MonoBehaviour
         if (value >= MAX_VALUE)
         {
             isDebuff = true;
-            switch (STATE)
+            switch (state)
             {
                 case SeasonState.SUMMER:
                     Debug.Log("기절");
                     // 여기서 cc에 맞는 애니메이션 출력
+                    break;
+                case SeasonState.FALL:
+                    Debug.Log("독 중독");
                     break;
                 case SeasonState.WINTER:
                     Debug.Log("빙결");
@@ -81,7 +100,7 @@ public class SeasonalDebuff : MonoBehaviour
 
     public void UpdateSeason(SeasonState state)
     {
-        STATE = state;
+        this.state = state;
     }
 
     void OnTriggerStay2D(Collider2D collision)

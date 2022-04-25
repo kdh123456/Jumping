@@ -181,9 +181,15 @@ public class PlayerMove : Player
     #endregion
 
     #region 앞에 있는거 삼키기
+    public void IsMoveTrue()
+    {
+        isMove = true;
+    }
+
     public void EnemySwallow()
     {
         animator.Play("Swallow");
+        isMove = false;
         if (hit.collider != null)
         {
             switch (hit.collider.gameObject.GetComponent<Ability_State>().abilityState)
