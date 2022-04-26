@@ -67,9 +67,4 @@ public class UIManager : MonoSingleton<UIManager>
     {
         timerText.gameObject.SetActive(active);
     }
-
-    public void SetScrollView()
-    {
-        //settingScrollView.
-    }
 }

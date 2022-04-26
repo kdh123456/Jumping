@@ -19,6 +19,7 @@ public class PlayerSkil : MonoBehaviour
         EventManager.StartListening("Fire", Fire);
         EventManager.StartListening("Umbrella", CreateUmbrella);
         EventManager.StartListening("Small", GetSmaller);
+        EventManager.StartListening("Herb", UseMedicinalHerb);
     }
 
     void Update()
@@ -52,7 +53,7 @@ public class PlayerSkil : MonoBehaviour
         umbrella.transform.SetParent(this.transform);
         umbrella.GetComponent<SpriteRenderer>().flipX = isFacing;
         isUmbrella = true;
-        playerMove.seasonalDebuff.UpdateDown(true);
+        playerMove.debuffManager.UpdateDown(true);
         StartCoroutine(DeleteUmbrella(umbrella));
     }
 
@@ -60,7 +61,7 @@ public class PlayerSkil : MonoBehaviour
     {
         yield return new WaitForSeconds(5);
         ObjectPool.Instance.ReturnObject(PoolObjectType.UMBRELLA, gameObject);
-        playerMove.seasonalDebuff.UpdateDown(false);
+        playerMove.debuffManager.UpdateDown(false);
         isUmbrella = true;
         PlayerStateManager.Instance.UpdateState(PlayerState.BASIC);
         playerMove.UpdateAnimator();
@@ -90,6 +91,20 @@ public class PlayerSkil : MonoBehaviour
         isSmall = false;
         PlayerStateManager.Instance.UpdateState(PlayerState.BASIC);
         playerMove.UpdateAnimator();
+    }
+    #endregion
+
+    #region 약초 먹기
+    void UseMedicinalHerb()
+    {
+        StartCoroutine(UseMedicinalHerbCoroutine());
+    }
+
+    IEnumerator UseMedicinalHerbCoroutine()
+    {
+        DebuffManager.Instance.UpdateDown(true);
+        yield return new WaitForSeconds(0.01f);
+        DebuffManager.Instance.UpdateDown(false);
     }
     #endregion
 }

@@ -8,5 +8,6 @@ public enum PoolObjectType
     FAINT_RING, // 기절했을때 머리워에 뜨는 링
     MUSHROOM, // 버섯
     ROPE, // 로프
-    CLOUD // 구름 블럭
+    CLOUD, // 구름 블럭
+    HERB, // 약초
 }

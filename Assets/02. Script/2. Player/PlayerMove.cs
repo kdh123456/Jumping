@@ -9,7 +9,7 @@ public class PlayerMove : Player
     private Vector3 direction;
     private Vector2 position;
     [HideInInspector]
-    public SeasonalDebuff seasonalDebuff = null;
+    public DebuffManager debuffManager = null;
     public GameObject itemButton = null;
     private float moveInput;
     private bool isScrollStart;
@@ -39,7 +39,7 @@ public class PlayerMove : Player
     {
         base.Start();
 
-        TryGetComponent(out seasonalDebuff);
+        TryGetComponent(out debuffManager);
 
         EventManager.StartListening("START", StartScroll);
         EventManager.StartListening("STOP", StopScrolling);
@@ -212,6 +212,16 @@ public class PlayerMove : Player
 
                     StartCoroutine(ItemSpawnManager.Instance.ItmeSpawn(PoolObjectType.MUSHROOM, hit.collider.transform));
                     break;
+                case AbilityState.FLY:
+                    // 파리를 먹었을 때 대희가 만들 코드 실행
+                    break;
+                case AbilityState.HERB:
+                    ObjectPool.Instance.ReturnObject(PoolObjectType.HERB, hit.collider.gameObject);
+                    EventManager.TriggerEvent("Herb");
+                    Debug.Log("허브 먹음");
+
+                    StartCoroutine(ItemSpawnManager.Instance.ItmeSpawn(PoolObjectType.HERB, hit.collider.transform));
+                    break;
             }
             UpdateAnimator();
         }
@@ -312,7 +322,7 @@ public class PlayerMove : Player
         yield return new WaitForSeconds(3);
         isMove = true;
         ObjectPool.Instance.ReturnObject(PoolObjectType.FAINT_RING, faintRing);
-        seasonalDebuff.IsDebuff = false;
+        debuffManager.IsDebuff = false;
     }
     #endregion
 

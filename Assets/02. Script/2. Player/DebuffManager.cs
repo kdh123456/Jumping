@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SeasonalDebuff : MonoBehaviour
+public class DebuffManager : MonoSingleton<DebuffManager>
 {
     private float value = 0f;
     public float Value
@@ -16,7 +16,8 @@ public class SeasonalDebuff : MonoBehaviour
         get => state;
     }
 
-    public readonly int MAX_VALUE = 5;
+    private readonly int MIN_VALUE = 0;
+    private readonly int MAX_VALUE = 5;
 
     private bool isDebuff = false;
     private bool isPosion = false;
@@ -47,21 +48,15 @@ public class SeasonalDebuff : MonoBehaviour
                 {
                     case SeasonState.SUMMER:
                     case SeasonState.WINTER:
-                        value = isDown ? value - Time.deltaTime : value + Time.deltaTime;
+                        value = Mathf.Clamp(isDown ? value - Time.deltaTime : value + Time.deltaTime, MIN_VALUE, MAX_VALUE);
                         break;
                     case SeasonState.SPRING:
                         value = 0;
                         break;
                     case SeasonState.FALL:
-                        if (isPosion)
-                            value = isDown ? value - Time.deltaTime : value + Time.deltaTime;
-                        else
-                            value = 0;
-
+                        value = Mathf.Clamp(isDown ? 0 : value + Time.deltaTime, MIN_VALUE, MAX_VALUE);
                         break;
                 }
-
-                value = Mathf.Max(0, value);
             }
 
             Debuff();
@@ -83,17 +78,20 @@ public class SeasonalDebuff : MonoBehaviour
             {
                 case SeasonState.SUMMER:
                     Debug.Log("기절");
+                    EventManager.TriggerEvent("Faint");
                     // 여기서 cc에 맞는 애니메이션 출력
                     break;
                 case SeasonState.FALL:
                     Debug.Log("독 중독");
+                    //EventManager.TriggerEvent("") 정의된 함수 가져오기
+                    // 점프력 감소 
                     break;
                 case SeasonState.WINTER:
                     Debug.Log("빙결");
+                    EventManager.TriggerEvent("Faint");
                     // 여기서 cc에 맞는 애니메이션 출력
                     break;
             }
-            EventManager.TriggerEvent("Faint");
             value = 0;
         }
     }
