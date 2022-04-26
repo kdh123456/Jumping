@@ -38,7 +38,6 @@ public class PlayerMove : Player
     protected override void Start()
     {
         base.Start();
-
         TryGetComponent(out seasonalDebuff);
 
         EventManager.StartListening("START", StartScroll);
@@ -46,6 +45,7 @@ public class PlayerMove : Player
         EventManager.StartListening("Swallow", EnemySwallow);
         EventManager.StartListening("Tunder", ChangeBool);
         EventManager.StartListening("Faint", PlayerFaint);
+        EventManager.StartListening("FloorCheck", ifFloor);
 
         UpdateAnimator();
     }
@@ -66,7 +66,7 @@ public class PlayerMove : Player
             ChangeFacing();
         }
 
-        if(isGrounded)
+        if (isGrounded)
         {
             isOneWall = true;
         }
@@ -147,7 +147,7 @@ public class PlayerMove : Player
     #region 점프 스크롤
     private void StartScroll()
     {
-        if(isGrounded || isWall)
+        if (isGrounded || isWall)
         {
             rigid.velocity = new Vector2(0.0f, rigid.velocity.y);
             isJumpStart = true;
@@ -157,7 +157,7 @@ public class PlayerMove : Player
 
     private void StopScrolling()
     {
-        if(isGrounded && isScrollStart || isWall)
+        if ((isGrounded && isScrollStart) || isWall)
         {
             rigid.bodyType = RigidbodyType2D.Dynamic;
             isWall = false;
@@ -212,7 +212,6 @@ public class PlayerMove : Player
     }
     #endregion
 
-    private float zrot;
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.CompareTag("LeftWall") && isOneWall)
@@ -233,6 +232,7 @@ public class PlayerMove : Player
         }
         else if (collision.collider.CompareTag("Floor"))
         {
+            isMove = true;
             SoundManager.Instance.SetEffectSoundClip(EffectSoundState.Land);
         }
         else if (collision.collider.CompareTag("Water"))
@@ -257,7 +257,7 @@ public class PlayerMove : Player
             playerpos = 5;
             playerScrollbar.maxValue = 30;
         }
-        else if(collision.collider.CompareTag("BaseFloor"))
+        else if (collision.collider.CompareTag("BaseFloor"))
         {
             isMove = true;
         }
@@ -318,5 +318,11 @@ public class PlayerMove : Player
     }
     #endregion
 
+
+    private void ifFloor()
+    {
+        isMove = false;
+        rigid.velocity = new Vector2(rigid.velocity.x/2, rigid.velocity.y/2);
+    }
     //?
 }
