@@ -65,7 +65,8 @@ public class PlayerSlider : Player
                 transform.localEulerAngles = Vector3.zero;
                 rigid.bodyType = RigidbodyType2D.Dynamic;
                 EventManager.TriggerEvent("Tunder");
-                thunder.SetActive(true);
+                //thunder.SetActive(true);
+                ObjectPool.Instance.GetObject(PoolObjectType.THUNDER);
                 thunderNum = 0;
             }
             if (playerScrollbar.value <= 0)

@@ -10,4 +10,5 @@ public enum PoolObjectType
     ROPE, // 로프
     CLOUD, // 구름 블럭
     HERB, // 약초
+    THUNDER // 번개
 }
