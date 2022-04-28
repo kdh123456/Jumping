@@ -160,15 +160,21 @@ public class PlayerMove : Player
         if ((isGrounded && isScrollStart) || isWall)
         {
             rigid.bodyType = RigidbodyType2D.Dynamic;
-            isWall = false;
+
             StartCoroutine(CreateDust());
+
             float tempx = moveInput * playerpos;
             float tempy = playerScrollbar.value;
+
             rigid.velocity = new Vector2(tempx, tempy);
+
             isScrollStart = false;
             transform.localEulerAngles = Vector3.zero;
             isJumpStart = false;
+
             SoundManager.Instance.SetEffectSoundClip(EffectSoundState.Jump);
+
+            isWall = false;
         }
     }
     #endregion
@@ -324,5 +330,4 @@ public class PlayerMove : Player
         isMove = false;
         rigid.velocity = new Vector2(rigid.velocity.x/2, rigid.velocity.y/2);
     }
-    //?
 }
