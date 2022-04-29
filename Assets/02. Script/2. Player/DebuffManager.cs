@@ -20,7 +20,6 @@ public class DebuffManager : MonoSingleton<DebuffManager>
     private readonly int MAX_VALUE = 5;
 
     private bool isDebuff = false;
-    private bool isPosion = false;
     public bool IsDebuff
     {
         get
@@ -33,10 +32,6 @@ public class DebuffManager : MonoSingleton<DebuffManager>
         }
     }
     private bool isDown = false;
-    void Start()
-    {
-        //UpdateSeason(SeasonState.SUMMER);
-    }
 
     void Update()
     {
@@ -119,4 +114,14 @@ public class DebuffManager : MonoSingleton<DebuffManager>
                 break;
         }
     }
+
+    //private void Test()
+    //{
+    //    Transform playerTr = GameManager.Instance.Player.transform;
+
+    //    // 만약 봄 끝 지점의 높이보다 낮으면 -> 봄
+    //    // 만약 여름 끝 지점의 높이보다 낮으면 -> 여름
+    //    // 만약 가을 끝 지점의 높이보다 낮으면 -> 가을
+    //    // 만약 겨울 끝 지점의 높이보다 낮으면 -> 겨울
+    //}
 }

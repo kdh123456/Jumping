@@ -8,8 +8,6 @@ public class PlayerMove : Player
     private RaycastHit2D hit;
     private Vector3 direction;
     private Vector2 position;
-    [HideInInspector]
-    public DebuffManager debuffManager = null;
     public GameObject itemButton = null;
     private float moveInput;
     private bool isScrollStart;
@@ -38,8 +36,6 @@ public class PlayerMove : Player
     protected override void Start()
     {
         base.Start();
-
-        TryGetComponent(out debuffManager);
 
         EventManager.StartListening("START", StartScroll);
         EventManager.StartListening("STOP", StopScrolling);
@@ -324,7 +320,7 @@ public class PlayerMove : Player
         yield return new WaitForSeconds(3);
         isMove = true;
         ObjectPool.Instance.ReturnObject(PoolObjectType.FAINT_RING, faintRing);
-        debuffManager.IsDebuff = false;
+        DebuffManager.Instance.IsDebuff = false;
     }
     #endregion
 

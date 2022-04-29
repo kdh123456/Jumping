@@ -13,8 +13,6 @@ public class UIManager : MonoSingleton<UIManager>
     private Text timerText = null;
     [SerializeField]
     private Text goalPercentText = null;
-    [SerializeField]
-    private ScrollRect settingScrollView = null;
 
     public Text[] txt;
     void Start()

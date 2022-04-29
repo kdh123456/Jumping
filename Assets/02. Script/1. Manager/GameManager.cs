@@ -38,7 +38,6 @@ public class GameManager : MonoSingleton<GameManager>
 
     #region 세이브에 쓰는 것들
     internal string SAVE_PATH = "";
-
     private readonly string SAVE_FILENAME = "/SaveFile.txt";
     #endregion
 

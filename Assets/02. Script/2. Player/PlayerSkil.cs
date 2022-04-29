@@ -53,7 +53,7 @@ public class PlayerSkil : MonoBehaviour
         umbrella.transform.SetParent(this.transform);
         umbrella.GetComponent<SpriteRenderer>().flipX = isFacing;
         isUmbrella = true;
-        playerMove.debuffManager.UpdateDown(true);
+        DebuffManager.Instance.UpdateDown(true);
         StartCoroutine(DeleteUmbrella(umbrella));
     }
 
@@ -61,7 +61,7 @@ public class PlayerSkil : MonoBehaviour
     {
         yield return new WaitForSeconds(5);
         ObjectPool.Instance.ReturnObject(PoolObjectType.UMBRELLA, gameObject);
-        playerMove.debuffManager.UpdateDown(false);
+        DebuffManager.Instance.UpdateDown(false);
         isUmbrella = true;
         PlayerStateManager.Instance.UpdateState(PlayerState.BASIC);
         playerMove.UpdateAnimator();

@@ -1017,7 +1017,7 @@ GameObject:
   - component: {fileID: 144557958}
   - component: {fileID: 144557957}
   m_Layer: 5
-  m_Name: sfx Scrollbar
+  m_Name: effect Scrollbar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1091,7 +1091,19 @@ MonoBehaviour:
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 664537635}
+        m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
+        m_MethodName: SoundValueSave
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &144557958
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1738,7 +1750,6 @@ MonoBehaviour:
   settingMenu: {fileID: 2110676415}
   timerText: {fileID: 965562638}
   goalPercentText: {fileID: 1983964114}
-  settingScrollView: {fileID: 357671056}
   txt:
   - {fileID: 1745773061}
   - {fileID: 118175652}
@@ -2232,7 +2243,19 @@ MonoBehaviour:
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 664537635}
+        m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
+        m_MethodName: SoundValueSave
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &355940479
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8510,7 +8533,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: ffbb0058d3af7b940ae9450874fda486, type: 3}
-    m_FontSize: 100
+    m_FontSize: 80
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -8755,7 +8778,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerScrollbar: {fileID: 792630952}
-  debuffManager: {fileID: 0}
   itemButton: {fileID: 2136885319}
   playerpos: 5
   frogAnimators:
@@ -17549,7 +17571,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1760554164}
   m_Layer: 5
-  m_Name: SFX Sound
+  m_Name: EFFECT Sound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17972,7 +17994,7 @@ GameObject:
   - component: {fileID: 1894577326}
   - component: {fileID: 1894577325}
   m_Layer: 5
-  m_Name: sfx Sound Text
+  m_Name: effect Sound Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18019,7 +18041,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: ffbb0058d3af7b940ae9450874fda486, type: 3}
-    m_FontSize: 100
+    m_FontSize: 80
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -18030,7 +18052,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: SFX
+  m_Text: EFFECT
 --- !u!222 &1894577326
 CanvasRenderer:
   m_ObjectHideFlags: 0

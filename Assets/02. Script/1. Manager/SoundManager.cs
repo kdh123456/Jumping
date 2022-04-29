@@ -19,10 +19,25 @@ public class SoundManager : MonoSingleton<SoundManager>
     [SerializeField]
     private Scrollbar effectScrollbar;
 
+    private SOUND_VALUE soundValue;
+    private readonly string SAVE_FILENAME = "/SoundValue.txt";
+
     void Awake()
     {
         TryGetComponent(out bgm);
         this.transform.GetChild(0).TryGetComponent(out effectSound);
+    }
+
+    void Start()
+    {
+        //GameManager.Instance.SaveJson<SOUND_VALUE>(GameManager.Instance.SAVE_PATH, SAVE_FILENAME, soundValue);
+        soundValue = GameManager.Instance.LoadJsonFile<SOUND_VALUE>(GameManager.Instance.SAVE_PATH, SAVE_FILENAME);
+
+        if (soundValue != null)
+        {
+            bgmScrollbar.value = soundValue.bgmSound;
+            effectScrollbar.value = soundValue.effectSound;
+        }
     }
 
     public void SetBackGroundSoundClip(BackGroundSoundState state)
@@ -46,6 +61,13 @@ public class SoundManager : MonoSingleton<SoundManager>
         effectSound.volume = effectScrollbar.value;
     }
     //볼륨값 저장
+
+    public void SoundValueSave()
+    {
+        soundValue.bgmSound = bgmScrollbar.value;
+        soundValue.effectSound = effectScrollbar.value;
+        GameManager.Instance.SaveJson<SOUND_VALUE>(GameManager.Instance.SAVE_PATH, SAVE_FILENAME, soundValue);
+    }
 
     void Update()
     {
