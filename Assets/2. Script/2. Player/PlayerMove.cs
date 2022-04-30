@@ -43,12 +43,13 @@ public class PlayerMove : Player
         EventManager.StartListening("START", StartScroll);
         EventManager.StartListening("STOP", StopScrolling);
         EventManager.StartListening("Swallow", EnemySwallow);
-        EventManager.StartListening("Tunder", ChangeBool);
+        EventManager.StartListening("Tunder", ChangeWallBool);
         EventManager.StartListening("Faint", PlayerFaint);
         EventManager.StartListening("FloorCheck", ifFloor);
 
         UpdateAnimator();
     }
+
     protected override void Update()
     {
         direction = spriteRenderer.flipX == true ? Vector3.left : Vector3.right;
@@ -57,7 +58,6 @@ public class PlayerMove : Player
         hit = Physics2D.Raycast(position, direction, 3, LayerMask.GetMask("Ability"));
         Debug.DrawRay(position, direction * 3, Color.green);
         base.Update();
-        //moveInput = Input.GetAxisRaw("Horizontal");
 
         PlayerAnimation();
 
@@ -66,10 +66,6 @@ public class PlayerMove : Player
             ChangeFacing();
         }
 
-        if (isGrounded)
-        {
-            isOneWall = true;
-        }
 
         if (hit.collider != null)
         {
@@ -111,21 +107,8 @@ public class PlayerMove : Player
 
     void FixedUpdate()
     {
-        if (Time.timeScale != 0)
-        {
-            if (!isJumpStart && !isWall && GameManager.Instance.IsGameStart)
-            {
-                if (Input.GetKey(KeySetting.keys[KeyAction.LEFT]))
-                    moveInput = -1f;
-                else if (Input.GetKey(KeySetting.keys[KeyAction.RIGHT]))
-                    moveInput = 1f;
-                else
-                    moveInput = 0;
-
-                if (isMove)
-                    rigid.velocity = new Vector3(moveInput * playerpos, rigid.velocity.y);
-            }
-        }
+        isGround();
+        Move();
     }
 
     #region 플레이어 에니메이션
@@ -220,37 +203,36 @@ public class PlayerMove : Player
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        //왼쪽 벽
         if (collision.collider.CompareTag("LeftWall") && isOneWall)
         {
             transform.localEulerAngles = new Vector3(0, 0, 90);
             rigid.bodyType = RigidbodyType2D.Static;
             isWall = true;
-            isOneWall = false;
+            //isOneWall = false;
             animator.Play("Idle");
         }
+        //오른쪽 벽
         else if (collision.collider.CompareTag("RightWall") && isOneWall)
         {
             transform.localEulerAngles = new Vector3(0, 0, -90);
             rigid.bodyType = RigidbodyType2D.Static;
             isWall = true;
-            isOneWall = false;
+            //isOneWall = false;
             animator.Play("Idle");
         }
-        else if (collision.collider.CompareTag("Floor"))
-        {
-            isMove = true;
-            SoundManager.Instance.SetEffectSoundClip(EffectSoundState.Land);
-        }
+        //물 블럭
         else if (collision.collider.CompareTag("Water"))
         {
             playerpos = 2;
             playerScrollbar.maxValue = 20;
         }
+        //구름 블럭
         else if (collision.collider.CompareTag("Cloud"))
         {
             StartCoroutine(ItemSpawnManager.Instance.ItmeSpawn(PoolObjectType.CLOUD, collision.transform));
         }
-        else if (collision.collider.CompareTag("BaseFloor"))
+        else if (collision.collider.CompareTag("BaseFloor") && !isGrounded)
         {
             isMove = false;
         }
@@ -262,10 +244,6 @@ public class PlayerMove : Player
         {
             playerpos = 5;
             playerScrollbar.maxValue = 30;
-        }
-        else if (collision.collider.CompareTag("BaseFloor"))
-        {
-            isMove = true;
         }
     }
 
@@ -284,10 +262,6 @@ public class PlayerMove : Player
     }
     #endregion
 
-    private void ChangeBool()
-    {
-        isWall = false;
-    }
 
     #region 플레이어 패치 변경(좌우 변경)
     private void ChangeFacing()
@@ -325,9 +299,50 @@ public class PlayerMove : Player
     #endregion
 
 
+    /// <summary>
+    /// 플레이어가 벽에 있을 때 벽에서 때어내주는 변수
+    /// </summary>
+    private void ChangeWallBool()
+    {
+        isWall = false;
+    }
+
+    /// <summary>
+    /// 땅에 떨어질때 충격을 완화해주는 함수
+    /// </summary>
     private void ifFloor()
     {
-        isMove = false;
-        rigid.velocity = new Vector2(rigid.velocity.x/2, rigid.velocity.y/2);
+        rigid.velocity = new Vector2(rigid.velocity.x / 3, rigid.velocity.y / 3);
+    }
+
+    /// <summary>
+    /// 땅인지 아닌지 판단해주는 함수
+    /// </summary>
+    private void isGround()
+    {
+        isMove = true;
+        isOneWall = true;
+    }
+
+    /// <summary>
+    /// 움직임을 구현해주는 함수
+    /// </summary>
+    private void Move()
+    {
+        if (Time.timeScale != 0)
+        {
+            if (!isJumpStart && !isWall && GameManager.Instance.IsGameStart)
+            {
+                if (Input.GetKey(KeySetting.keys[KeyAction.LEFT]))
+                    moveInput = -1f;
+                else if (Input.GetKey(KeySetting.keys[KeyAction.RIGHT]))
+                    moveInput = 1f;
+                else
+                    moveInput = 0;
+
+                if (isMove)
+                    rigid.velocity = new Vector3(moveInput * playerpos, rigid.velocity.y);
+            }
+        }
     }
 }

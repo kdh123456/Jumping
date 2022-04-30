@@ -45,7 +45,7 @@ public class PlayerSlider : Player
         if (isGrounded || isWall)
         {
             alpaValue(1);
-            float sliderPos = spriteRenderer.flipX == true ? 1.5f : -1.5f; // �����̴� ��ġ �������ִ� ��
+            float sliderPos = spriteRenderer.flipX == true ? 1.5f : -1.5f;
             Vector3 _playerScrollPos =
                 Camera.main.WorldToScreenPoint(new Vector3(transform.position.x + sliderPos, transform.position.y + 1, 0));
             GameManager.Instance.Pool.position = _playerScrollPos;

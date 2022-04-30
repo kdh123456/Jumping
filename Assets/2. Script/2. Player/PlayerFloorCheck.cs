@@ -8,7 +8,8 @@ public class PlayerFloorCheck : MonoBehaviour
     {
         if(collision.CompareTag("Floor"))
         {
+            SoundManager.Instance.SetEffectSoundClip(EffectSoundState.Land);
             EventManager.TriggerEvent("FloorCheck");
-        }    
+        }
     }
 }

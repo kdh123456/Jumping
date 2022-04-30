@@ -8,6 +8,9 @@ public class Player : MonoBehaviour
 {
     [SerializeField]
     protected Slider playerScrollbar;
+
+    protected BoxCollider2D floorCol;
+
     protected Rigidbody2D rigid;
     protected bool isGrounded;
     protected Animator animator;
@@ -23,9 +26,10 @@ public class Player : MonoBehaviour
         TryGetComponent(out animator);
         TryGetComponent(out spriteRenderer);
         TryGetComponent(out col);
+        floorCol = GetComponentInChildren(typeof(BoxCollider2D)) as BoxCollider2D;
     }
     protected virtual void Update()
     {
-        isGrounded = Physics2D.OverlapBox(new Vector2(gameObject.transform.position.x + col.offset.x, gameObject.transform.position.y + col.offset.y), new Vector2(col.size.x, col.size.y), 180f, LayerMask.GetMask("ground"));
+        isGrounded = Physics2D.OverlapBox(new Vector2(gameObject.transform.position.x + floorCol.offset.x, gameObject.transform.position.y + floorCol.offset.y), new Vector2(floorCol.size.x, floorCol.size.y), 180f, LayerMask.GetMask("ground"));
     }
 }
