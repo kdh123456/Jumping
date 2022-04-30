@@ -9,12 +9,13 @@ TagManager:
   - LeftWall
   - RightWall
   - Spring
-  - Summer
   - Fall
   - Winter
   - Water
   - BaseFloor
   - Cloud
+  - Summer_0
+  - Summer_1
   layers:
   - Default
   - TransparentFX

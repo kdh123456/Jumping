@@ -41,7 +41,8 @@ public class DebuffManager : MonoSingleton<DebuffManager>
             {
                 switch (state)
                 {
-                    case SeasonState.SUMMER:
+                    case SeasonState.SUMMER_0:
+                    case SeasonState.SUMMER_1:
                     case SeasonState.WINTER:
                         value = Mathf.Clamp(isDown ? value - Time.deltaTime : value + Time.deltaTime, MIN_VALUE, MAX_VALUE);
                         break;
@@ -71,7 +72,7 @@ public class DebuffManager : MonoSingleton<DebuffManager>
             isDebuff = true;
             switch (state)
             {
-                case SeasonState.SUMMER:
+                case SeasonState.SUMMER_0:
                     Debug.Log("기절");
                     EventManager.TriggerEvent("Faint");
                     // 여기서 cc에 맞는 애니메이션 출력
@@ -103,8 +104,9 @@ public class DebuffManager : MonoSingleton<DebuffManager>
             case "Spring":
                 UpdateSeason(SeasonState.SPRING);
                 break;
-            case "Summer":
-                UpdateSeason(SeasonState.SUMMER);
+            case "Summer_0":
+            case "Summer_1":
+                UpdateSeason(SeasonState.SUMMER_0);
                 break;
             case "Fall":
                 UpdateSeason(SeasonState.FALL);

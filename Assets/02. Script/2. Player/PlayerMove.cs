@@ -251,8 +251,15 @@ public class PlayerMove : Player
         }
         else if(collision.collider.CompareTag("Water"))
         {
-            playerpos = 2;
-            playerScrollbar.maxValue = 20;
+            if (DebuffManager.Instance.State == SeasonState.SUMMER_1)
+            {
+                DebuffManager.Instance.UpdateDown(true);
+            }
+            else if(DebuffManager.Instance.State == SeasonState.SUMMER_1)
+            {
+                playerpos = 2;
+                playerScrollbar.maxValue = 20;
+            }
         }
         else if (collision.collider.CompareTag("Cloud"))
         {
