@@ -18,7 +18,6 @@ public class Player : MonoBehaviour
     protected BoxCollider2D col;
 
     protected static bool isWall = false;
-    protected static bool isOneWall = false;
 
     protected virtual void Start()
     {

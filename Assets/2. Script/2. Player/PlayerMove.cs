@@ -30,6 +30,9 @@ public class PlayerMove : Player
     private bool isJumpStart = false;
     private bool isJump = false;
     private bool isMove = true;
+
+    private bool isOneWall = false;
+
     public bool IsMove { get { return isMove; } }
 
     [SerializeField, Tooltip("PlayerState은 순으로 넣어라 반드시")]
@@ -52,6 +55,7 @@ public class PlayerMove : Player
 
     protected override void Update()
     {
+
         direction = spriteRenderer.flipX == true ? Vector3.left : Vector3.right;
         position = new Vector2(transform.position.x, transform.position.y + .5f);
 
@@ -162,7 +166,7 @@ public class PlayerMove : Player
     }
     #endregion
 
-    #region 에니메이터 바꾸기
+    #region 애니메이터 바꾸기
     public void UpdateAnimator()
     {
         animator.runtimeAnimatorController = frogAnimators[(int)PlayerStateManager.Instance.PlayerState];
@@ -209,7 +213,6 @@ public class PlayerMove : Player
             transform.localEulerAngles = new Vector3(0, 0, 90);
             rigid.bodyType = RigidbodyType2D.Static;
             isWall = true;
-            //isOneWall = false;
             animator.Play("Idle");
         }
         //오른쪽 벽
@@ -218,7 +221,6 @@ public class PlayerMove : Player
             transform.localEulerAngles = new Vector3(0, 0, -90);
             rigid.bodyType = RigidbodyType2D.Static;
             isWall = true;
-            //isOneWall = false;
             animator.Play("Idle");
         }
         //물 블럭
@@ -232,7 +234,11 @@ public class PlayerMove : Player
         {
             StartCoroutine(ItemSpawnManager.Instance.ItmeSpawn(PoolObjectType.CLOUD, collision.transform));
         }
-        else if (collision.collider.CompareTag("BaseFloor") && !isGrounded)
+        else if (collision.collider.CompareTag("BaseFloor")&& !isGrounded)
+        {
+            isMove = false;
+        }
+        else if ((collision.collider.CompareTag("LeftWall") || collision.collider.CompareTag("RightWall")) && !isGrounded)
         {
             isMove = false;
         }
@@ -244,6 +250,10 @@ public class PlayerMove : Player
         {
             playerpos = 5;
             playerScrollbar.maxValue = 30;
+        }
+        else if(collision.collider.CompareTag("LeftWall") || collision.collider.CompareTag("RightWall"))
+        {
+            isOneWall = false;
         }
     }
 
@@ -262,7 +272,6 @@ public class PlayerMove : Player
     }
     #endregion
 
-
     #region 플레이어 패치 변경(좌우 변경)
     private void ChangeFacing()
     {
@@ -275,7 +284,6 @@ public class PlayerMove : Player
             facing = Facing.LEFT;
         }
         spriteRenderer.flipX = facing == Facing.RIGHT ? false : true;
-        //transform.localScale = new Vector3(scaleX, 1f, 1f);
     }
     #endregion
 
@@ -320,8 +328,11 @@ public class PlayerMove : Player
     /// </summary>
     private void isGround()
     {
-        isMove = true;
-        isOneWall = true;
+        if(isGrounded)
+        {
+            isOneWall = true;
+            isMove = true;
+        }
     }
 
     /// <summary>
