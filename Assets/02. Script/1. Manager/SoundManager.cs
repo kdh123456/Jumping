@@ -62,9 +62,14 @@ public class SoundManager : MonoSingleton<SoundManager>
     }
     //볼륨값 저장
 
-    public void SoundValueSave()
+    public void BgmValueSave()
     {
         soundValue.bgmSound = bgmScrollbar.value;
+        GameManager.Instance.SaveJson<SOUND_VALUE>(GameManager.Instance.SAVE_PATH, SAVE_FILENAME, soundValue);
+    }
+
+    public void EffectValueSave()
+    {
         soundValue.effectSound = effectScrollbar.value;
         GameManager.Instance.SaveJson<SOUND_VALUE>(GameManager.Instance.SAVE_PATH, SAVE_FILENAME, soundValue);
     }

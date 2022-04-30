@@ -10,7 +10,7 @@ public class KeyManager : MonoBehaviour
 {
     private KEY saveKey;
 
-    private readonly string SAVE_FILENAME = "/SaveKey";
+    private readonly string SAVE_FILENAME = "/SaveKey.txt";
 
     KeyCode[] defaultKeys = new KeyCode[] { KeyCode.A, KeyCode.D, KeyCode.Space, KeyCode.F, KeyCode.E };
     private void Awake()
