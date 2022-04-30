@@ -44,6 +44,9 @@ public class KeyInput : MonoBehaviour
                     case PlayerState.SMALL:
                         EventManager.TriggerEvent("Small");
                         break;
+                    case PlayerState.FLY:
+                        EventManager.TriggerEvent("Fly");
+                        break;
                 }
             }
         }

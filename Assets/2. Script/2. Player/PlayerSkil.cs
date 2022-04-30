@@ -19,11 +19,13 @@ public class PlayerSkil : MonoBehaviour
         EventManager.StartListening("Fire", Fire);
         EventManager.StartListening("Umbrella", CreateUmbrella);
         EventManager.StartListening("Small", GetSmaller);
+        EventManager.StartListening("Fly", EatFly);
     }
 
     void Update()
     {
         isFacing = (playerMove.facing == PlayerMove.Facing.LEFT) ? true : false;
+
     }
 
     #region 파이어 볼 쏘기
@@ -91,5 +93,20 @@ public class PlayerSkil : MonoBehaviour
         PlayerStateManager.Instance.UpdateState(PlayerState.BASIC);
         playerMove.UpdateAnimator();
     }
+    #endregion
+
+    #region 공중에 뜨기
+
+    private bool isAir = false;
+
+    public void EatFly()
+    {
+        Debug.Log("파리 삼킴");
+            // 플레이어 아래에 투명 충돌체 고정시키고
+            // 플레이어가 벗어나면 충돌체 없애기
+
+
+    }
+
     #endregion
 }

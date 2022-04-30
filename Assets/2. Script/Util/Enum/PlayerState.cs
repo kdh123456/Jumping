@@ -7,5 +7,7 @@ public enum PlayerState
     BASIC,
     FIREBALL,
     LADYBUG,
-    SMALL
+    SMALL,
+    FLY,
+    WATER
 }

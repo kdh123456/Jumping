@@ -206,6 +206,13 @@ public class PlayerMove : Player
 
                     StartCoroutine(ItemSpawnManager.Instance.ItmeSpawn(PoolObjectType.MUSHROOM, hit.collider.transform));
                     break;
+                case AbilityState.Fly:
+                    EventManager.TriggerEvent("Fly");
+                    ObjectPool.Instance.ReturnObject(PoolObjectType.FLY, hit.collider.gameObject);
+                    PlayerStateManager.Instance.UpdateState(PlayerState.FLY);
+                    StartCoroutine(ItemSpawnManager.Instance.ItmeSpawn(PoolObjectType.FLY, hit.collider.transform));
+                    break;
+
             }
             UpdateAnimator();
         }
