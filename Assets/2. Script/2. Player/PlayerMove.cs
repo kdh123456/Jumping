@@ -242,6 +242,7 @@ public class PlayerMove : Player
         {
             isMove = false;
         }
+
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -312,6 +313,7 @@ public class PlayerMove : Player
     /// </summary>
     private void ChangeWallBool()
     {
+        isScrollStart = false;
         isWall = false;
     }
 

@@ -25,6 +25,7 @@ public class PlayerSlider : Player
 
         base.Start();
         thunder.TryGetComponent(out effectAnimator);
+        EventManager.StartListening("Tunder", ChangeBool);
         EventManager.StartListening("START", StartScroll);
         EventManager.StartListening("STARTING", StartScrolling);
         EventManager.StartListening("STOP", StopScrolling);
@@ -102,5 +103,11 @@ public class PlayerSlider : Player
         Color handle = Handle.color;
         handle.a = a;
         Handle.color = handle;
+    }
+
+    private void ChangeBool()
+    {
+        alpaValue(0);
+        isScrollStart = false;
     }
 }

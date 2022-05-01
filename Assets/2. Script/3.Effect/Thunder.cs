@@ -23,7 +23,7 @@ public class Thunder : MonoBehaviour
         {
             Vector2 direction = obj.transform.position - transform.position;
 
-            obj.GetComponent<Rigidbody2D>().AddForce(direction * force);
+            obj.GetComponent<Rigidbody2D>().AddForce(direction*force);
         }
     }
 
