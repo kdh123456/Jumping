@@ -9,22 +9,30 @@ public class Thunder : MonoBehaviour
     public float force;
 
     public LayerMask LayerToHit;
-    void Update()
+
+    private void Start()
+    {
+        EventManager.StartListening("ThunderExplode", Explode);
+    }
+
+    private void OnEnable()
     {
         Explode();
     }
 
-
-    void Explode()
+    public void ThunderEnd()
     {
-        Collider2D[] objects = Physics2D.OverlapCircleAll(transform.position, fieldofImpact, LayerToHit);
+        this.gameObject.SetActive(false);
+    }
 
-        foreach(Collider2D obj in objects)
-        {
-            Vector2 direction = obj.transform.position - transform.position;
+    public void Explode()
+    {
+        Collider2D objects = Physics2D.OverlapCircle(transform.position, fieldofImpact, LayerToHit);
 
-            obj.GetComponent<Rigidbody2D>().AddForce(direction * force);
-        }
+        float random = Random.value;
+        Vector2 direction = random > .5f ? Vector2.left : Vector2.right;
+        if(objects.GetComponent<Rigidbody2D>() != null)
+         objects.GetComponent<Rigidbody2D>().AddForce(direction * force, ForceMode2D.Impulse);
     }
 
     void OnDrawGizmosSelected()
