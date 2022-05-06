@@ -209,6 +209,13 @@ public class PlayerMove : Player
                 case AbilityState.Fly:
                     EventManager.TriggerEvent("Fly");
                     ObjectPool.Instance.ReturnObject(PoolObjectType.FLY, hit.collider.gameObject);
+                    //ObjectPool.Instance.ReturnObject(PoolObjectType.FLY_EMPTY,hit.collider.gameObject);
+                    PlayerStateManager.Instance.UpdateState(PlayerState.FLY);
+                    StartCoroutine(ItemSpawnManager.Instance.ItmeSpawn(PoolObjectType.FLY, hit.collider.transform));
+                    break;
+                case AbilityState.Water:
+                    EventManager.TriggerEvent("Water");
+                    ObjectPool.Instance.ReturnObject(PoolObjectType.FLY, hit.collider.gameObject);
                     PlayerStateManager.Instance.UpdateState(PlayerState.FLY);
                     StartCoroutine(ItemSpawnManager.Instance.ItmeSpawn(PoolObjectType.FLY, hit.collider.transform));
                     break;

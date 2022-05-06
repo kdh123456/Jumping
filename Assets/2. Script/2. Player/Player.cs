@@ -13,6 +13,8 @@ public class Player : MonoBehaviour
     protected Animator animator;
     protected SpriteRenderer spriteRenderer;
     protected BoxCollider2D col;
+    protected bool isCanFly = false;
+
 
     protected static bool isWall = false;
     protected static bool isOneWall = false;

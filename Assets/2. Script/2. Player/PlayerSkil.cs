@@ -9,7 +9,7 @@ public class PlayerSkil : MonoBehaviour
     private bool isFacing = false;
     private BoxCollider2D playerCollider = null;
 
-    void Start()
+    protected void Start()
     {
         TryGetComponent(out playerMove);
         TryGetComponent(out playerCollider);
@@ -20,31 +20,32 @@ public class PlayerSkil : MonoBehaviour
         EventManager.StartListening("Umbrella", CreateUmbrella);
         EventManager.StartListening("Small", GetSmaller);
         EventManager.StartListening("Fly", EatFly);
+
     }
 
-    void Update()
+    protected void Update()
     {
         isFacing = (playerMove.facing == PlayerMove.Facing.LEFT) ? true : false;
-
     }
 
-    #region íŒŒì´ì–´ ë³¼ ì˜ê¸°
+    #region ?ŒŒ?´?–´ ë³? ?˜ê¸?
     public void Fire()
     {
         GameObject fireBall = ObjectPool.Instance.GetObject(PoolObjectType.FIREBALL_OBJECT);
         fireBall.transform.position = this.transform.position;
         fireBall.GetComponent<SpriteRenderer>().flipX = isFacing;
 
-        fireBall.transform.DOMove((isFacing ? Vector3.left : Vector3.right) * 10, 1) // ì•ìœ¼ë¡œ ì˜ê¸°
+        fireBall.transform.DOMove((isFacing ? Vector3.left : Vector3.right) * 10, 1) // ?•?œ¼ë¡? ?˜ê¸?
             .SetEase(Ease.Linear).SetRelative()
             .OnComplete(() => ObjectPool.Instance.ReturnObject(PoolObjectType.FIREBALL_OBJECT, fireBall));
 
         PlayerStateManager.Instance.UpdateState(PlayerState.BASIC);
         playerMove.UpdateAnimator();
+        Debug.Log("1");
     }
     #endregion
 
-    #region ìš°ì‚° ì“°ê¸°
+    #region ?š°?‚° ?“°ê¸?
     private bool isUmbrella = false;
     public void CreateUmbrella()
     {
@@ -69,13 +70,13 @@ public class PlayerSkil : MonoBehaviour
     }
     #endregion
 
-    #region ì‘ì•„ì§€ê¸°
+    #region ?‘?•„ì§?ê¸?
 
     private bool isSmall = false;
     private void GetSmaller()
     {
         if (isSmall) return;
-        // ì‘ì•„ì§€ê¸°
+        // ?‘?•„ì§?ê¸?
         //playerCollider.size = new Vector2(playerCollider.size.x * .5f, playerCollider.size.y * .5f);
         //playerCollider.offset = new Vector2(0, -.47f);
         this.transform.localScale = Vector3.one * .5f;
@@ -95,18 +96,30 @@ public class PlayerSkil : MonoBehaviour
     }
     #endregion
 
-    #region ê³µì¤‘ì— ëœ¨ê¸°
+    #region ?ŒŒë¦¬ëŠ¥? ¥
 
-    private bool isAir = false;
-
+    private bool isFlyEat = false;
     public void EatFly()
     {
-        Debug.Log("íŒŒë¦¬ ì‚¼í‚´");
-            // í”Œë ˆì´ì–´ ì•„ë˜ì— íˆ¬ëª… ì¶©ëŒì²´ ê³ ì •ì‹œí‚¤ê³ 
-            // í”Œë ˆì´ì–´ê°€ ë²—ì–´ë‚˜ë©´ ì¶©ëŒì²´ ì—†ì• ê¸°
-
-
+        isFlyEat = true;
+        if(isFlyEat)
+        {
+            GameObject fly_empty = ObjectPool.Instance.GetObject(PoolObjectType.FLY_EMPTY);
+            fly_empty.transform.position = transform.position + Vector3.down;
+            StartCoroutine(DeleteFly_Empty(fly_empty));
+        }
+    }
+    private IEnumerator DeleteFly_Empty(GameObject gameObject)
+    {
+        yield return new WaitForSeconds(5);
+        ObjectPool.Instance.ReturnObject(PoolObjectType.FLY_EMPTY, gameObject);
+        playerMove.seasonalDebuff.UpdateDown(false);
+        isFlyEat = false;
+        PlayerStateManager.Instance.UpdateState(PlayerState.BASIC);
+        playerMove.UpdateAnimator();
     }
 
+
     #endregion
+    
 }
