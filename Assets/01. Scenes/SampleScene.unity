@@ -8169,14 +8169,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 783281410}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 453f0f75ad6011f479432c2f4a22e6b2, type: 3}
+  m_Script: {fileID: 11500000, guid: addd775d2052319449919b1879d78b75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fieldofImpact: 0
-  force: 0
-  LayerToHit:
-    serializedVersion: 2
-    m_Bits: 0
+  thunder: {fileID: 66042997}
+  thunderLocation: {fileID: 2076597884}
+  thunderTime: 5
 --- !u!212 &783281412
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -17670,9 +17668,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1514036222}
   - component: {fileID: 1514036221}
-  - component: {fileID: 1514036220}
   - component: {fileID: 1514036224}
   - component: {fileID: 1514036223}
+  - component: {fileID: 1514036220}
   m_Layer: 0
   m_Name: MapleBlock
   m_TagString: Untagged
@@ -17689,7 +17687,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1514036219}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5f667620e7eda84eb28fa637e606af1, type: 3}
+  m_Script: {fileID: 11500000, guid: b6614734f817fd0499096ccebafb411f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!212 &1514036221
@@ -18174,9 +18172,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1581359283}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0044a656716267a47b64815549f091ba, type: 3}
+  m_Script: {fileID: 11500000, guid: f5248977d5a41e24ab6065291cb6b683, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  snake: {fileID: 662104858}
+  player: {fileID: 927499635}
+  force: 10
 --- !u!50 &1581359288
 Rigidbody2D:
   serializedVersion: 4
