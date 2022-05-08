@@ -127,7 +127,7 @@ public class PlayerSkil : MonoBehaviour
     {
         yield return new WaitForSeconds(5);
         ObjectPool.Instance.ReturnObject(PoolObjectType.FLY_EMPTY, gameObject);
-        playerMove.seasonalDebuff.UpdateDown(false);
+        //playerMove.seasonalDebuff.UpdateDown(false);
         isFlyEat = false;
         PlayerStateManager.Instance.UpdateState(PlayerState.BASIC);
         playerMove.UpdateAnimator();
