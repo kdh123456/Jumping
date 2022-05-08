@@ -39,11 +39,8 @@ public class PlayerMove : Player
     protected override void Start()
     {
         base.Start();
-<<<<<<< HEAD:Assets/2. Script/2. Player/PlayerMove.cs
-        TryGetComponent(out seasonalDebuff);
-=======
+        //TryGetComponent(out seasonalDebuff);
         //spriteRenderer = GetComponent<SpriteRenderer>();
->>>>>>> kjp:Assets/02. Script/2. Player/PlayerMove.cs
 
         EventManager.StartListening("START", StartScroll);
         EventManager.StartListening("STOP", StopScrolling);
