@@ -96,7 +96,7 @@ public class PlayerSkil : MonoBehaviour
     }
     #endregion
 
-    #region ?뙆由щ뒫?젰
+    #region 파리능력!
 
     private bool isFlyEat = false;
     public void EatFly()
