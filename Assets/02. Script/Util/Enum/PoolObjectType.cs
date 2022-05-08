@@ -10,7 +10,7 @@ public enum PoolObjectType
     ROPE, // 로프
     CLOUD, // 구름 블럭
     HERB, // 약초
-    THUNDER // 번개
+    THUNDER, // 번개
     FLY, // 파리 아이템
     FLY_EMPTY //파리 공중부양 위한 빈 오브젝트 콜라이더
 }
