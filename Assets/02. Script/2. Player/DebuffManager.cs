@@ -17,7 +17,11 @@ public class DebuffManager : MonoSingleton<DebuffManager>
     }
 
     private readonly int MIN_VALUE = 0;
-    private readonly int MAX_VALUE = 5;
+    private readonly int MAX_VALUE = 20;
+    public int MAXVALUE
+    {
+        get => MAX_VALUE;
+    }
 
     private bool isDebuff = false;
     public bool IsDebuff

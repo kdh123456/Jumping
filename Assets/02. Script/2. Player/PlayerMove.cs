@@ -36,6 +36,7 @@ public class PlayerMove : Player
     protected override void Start()
     {
         base.Start();
+        //spriteRenderer = GetComponent<SpriteRenderer>();
 
         EventManager.StartListening("START", StartScroll);
         EventManager.StartListening("STOP", StopScrolling);
@@ -56,6 +57,7 @@ public class PlayerMove : Player
         //moveInput = Input.GetAxisRaw("Horizontal");
 
         PlayerAnimation();
+        FrogColorChange();
 
         if (Time.timeScale != 0)
         {
@@ -173,6 +175,23 @@ public class PlayerMove : Player
     public void UpdateAnimator()
     {
         animator.runtimeAnimatorController = frogAnimators[(int)PlayerStateManager.Instance.PlayerState];
+    }
+    #endregion
+
+    #region 개구리 색깔 바꾸기
+    private void FrogColorChange()
+    {
+        float value = DebuffManager.Instance.Value;
+        float maxValue = DebuffManager.Instance.MAXVALUE;
+        SeasonState state = DebuffManager.Instance.State;
+        if (state == SeasonState.SUMMER_0 || state == SeasonState.SUMMER_1)
+        {
+            spriteRenderer.color = new Color(255f, 255f - (255f * value / maxValue * 100), 255f - (255f * value / maxValue * 100));
+        }
+        else if(state == SeasonState.FALL)
+        {
+            spriteRenderer.color = new Color(255f - (255f * value / maxValue * 100) * .5f, 255f - (255f * value / maxValue * 100), 255f);
+        }
     }
     #endregion
 
