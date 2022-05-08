@@ -42,7 +42,7 @@ public class EventManager : MonoBehaviour
         Action thisEvent;
         if (eventDictionary.TryGetValue(eventName, out thisEvent))
         {
-            thisEvent?.Invoke();
+            thisEvent?.Invoke();//없을 때 실행 x
         }
     }
 }

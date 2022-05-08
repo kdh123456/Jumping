@@ -224,6 +224,33 @@ public class PlayerMove : Player
 
                     StartCoroutine(ItemSpawnManager.Instance.ItmeSpawn(PoolObjectType.MUSHROOM, hit.collider.transform));
                     break;
+<<<<<<< HEAD:Assets/02. Script/2. Player/PlayerMove.cs
+                case AbilityState.FLY:
+                    // 파리를 먹었을 때 대희가 만들 코드 실행
+                    break;
+                case AbilityState.HERB:
+                    ObjectPool.Instance.ReturnObject(PoolObjectType.HERB, hit.collider.gameObject);
+                    EventManager.TriggerEvent("Herb");
+                    Debug.Log("허브 먹음");
+
+                    StartCoroutine(ItemSpawnManager.Instance.ItmeSpawn(PoolObjectType.HERB, hit.collider.transform));
+                    break;
+=======
+                case AbilityState.Fly:
+                    EventManager.TriggerEvent("Fly");
+                    ObjectPool.Instance.ReturnObject(PoolObjectType.FLY, hit.collider.gameObject);
+                    //ObjectPool.Instance.ReturnObject(PoolObjectType.FLY_EMPTY,hit.collider.gameObject);
+                    PlayerStateManager.Instance.UpdateState(PlayerState.FLY);
+                    StartCoroutine(ItemSpawnManager.Instance.ItmeSpawn(PoolObjectType.FLY, hit.collider.transform));
+                    break;
+                case AbilityState.Water:
+                    EventManager.TriggerEvent("Water");
+                    ObjectPool.Instance.ReturnObject(PoolObjectType.FLY, hit.collider.gameObject);
+                    PlayerStateManager.Instance.UpdateState(PlayerState.FLY);
+                    StartCoroutine(ItemSpawnManager.Instance.ItmeSpawn(PoolObjectType.FLY, hit.collider.transform));
+                    break;
+
+>>>>>>> origin/daehee:Assets/2. Script/2. Player/PlayerMove.cs
             }
             UpdateAnimator();
         }

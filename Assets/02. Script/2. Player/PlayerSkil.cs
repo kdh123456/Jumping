@@ -9,7 +9,7 @@ public class PlayerSkil : MonoBehaviour
     private bool isFacing = false;
     private BoxCollider2D playerCollider = null;
 
-    void Start()
+    protected void Start()
     {
         TryGetComponent(out playerMove);
         TryGetComponent(out playerCollider);
@@ -20,30 +20,33 @@ public class PlayerSkil : MonoBehaviour
         EventManager.StartListening("Umbrella", CreateUmbrella);
         EventManager.StartListening("Small", GetSmaller);
         EventManager.StartListening("Herb", UseMedicinalHerb);
+        EventManager.StartListening("Fly", EatFly);
+
     }
 
-    void Update()
+    protected void Update()
     {
         isFacing = (playerMove.facing == PlayerMove.Facing.LEFT) ? true : false;
     }
 
-    #region 파이어 볼 쏘기
+    #region ?��?��?�� �? ?���?
     public void Fire()
     {
         GameObject fireBall = ObjectPool.Instance.GetObject(PoolObjectType.FIREBALL_OBJECT);
         fireBall.transform.position = this.transform.position;
         fireBall.GetComponent<SpriteRenderer>().flipX = isFacing;
 
-        fireBall.transform.DOMove((isFacing ? Vector3.left : Vector3.right) * 10, 1) // 앞으로 쏘기
+        fireBall.transform.DOMove((isFacing ? Vector3.left : Vector3.right) * 10, 1) // ?��?���? ?���?
             .SetEase(Ease.Linear).SetRelative()
             .OnComplete(() => ObjectPool.Instance.ReturnObject(PoolObjectType.FIREBALL_OBJECT, fireBall));
 
         PlayerStateManager.Instance.UpdateState(PlayerState.BASIC);
         playerMove.UpdateAnimator();
+        Debug.Log("1");
     }
     #endregion
 
-    #region 우산 쓰기
+    #region ?��?�� ?���?
     private bool isUmbrella = false;
     public void CreateUmbrella()
     {
@@ -68,13 +71,13 @@ public class PlayerSkil : MonoBehaviour
     }
     #endregion
 
-    #region 작아지기
+    #region ?��?���?�?
 
     private bool isSmall = false;
     private void GetSmaller()
     {
         if (isSmall) return;
-        // 작아지기
+        // ?��?���?�?
         //playerCollider.size = new Vector2(playerCollider.size.x * .5f, playerCollider.size.y * .5f);
         //playerCollider.offset = new Vector2(0, -.47f);
         this.transform.localScale = Vector3.one * .5f;
@@ -107,4 +110,30 @@ public class PlayerSkil : MonoBehaviour
         DebuffManager.Instance.UpdateDown(false);
     }
     #endregion
+    #region �ĸ��ɷ�!
+
+    private bool isFlyEat = false;
+    public void EatFly()
+    {
+        isFlyEat = true;
+        if(isFlyEat)
+        {
+            GameObject fly_empty = ObjectPool.Instance.GetObject(PoolObjectType.FLY_EMPTY);
+            fly_empty.transform.position = transform.position + Vector3.down;
+            StartCoroutine(DeleteFly_Empty(fly_empty));
+        }
+    }
+    private IEnumerator DeleteFly_Empty(GameObject gameObject)
+    {
+        yield return new WaitForSeconds(5);
+        ObjectPool.Instance.ReturnObject(PoolObjectType.FLY_EMPTY, gameObject);
+        playerMove.seasonalDebuff.UpdateDown(false);
+        isFlyEat = false;
+        PlayerStateManager.Instance.UpdateState(PlayerState.BASIC);
+        playerMove.UpdateAnimator();
+    }
+
+
+    #endregion
+    
 }
