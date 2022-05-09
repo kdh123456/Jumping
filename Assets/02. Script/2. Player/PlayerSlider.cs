@@ -25,7 +25,7 @@ public class PlayerSlider : Player
     {
 
         base.Start();
-        thunder.TryGetComponent(out effectAnimator);
+        //thunder.TryGetComponent(out effectAnimator);
         EventManager.StartListening("Tunder", ChangeBool);
         EventManager.StartListening("START", StartScroll);
         EventManager.StartListening("STARTING", StartScrolling);
@@ -34,13 +34,13 @@ public class PlayerSlider : Player
     protected override void Update()
     {
         base.Update();
-        if (thunder.activeSelf == true)
-        {
-            if (effectAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
-            {
-                thunder.SetActive(false);
-            }
-        }
+        //if (thunder.activeSelf == true)
+        //{
+        //    if (effectAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
+        //    {
+        //        thunder.SetActive(false);
+        //    }
+        //}
     }
     private void StartScroll()
     {
