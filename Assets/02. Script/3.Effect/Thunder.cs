@@ -22,7 +22,8 @@ public class Thunder : MonoBehaviour
 
     public void ThunderEnd()
     {
-        this.gameObject.SetActive(false);
+        //this.gameObject.SetActive(false);
+        ObjectPool.Instance.ReturnObject(PoolObjectType.THUNDER, this.gameObject);
     }
 
     public void Explode()
