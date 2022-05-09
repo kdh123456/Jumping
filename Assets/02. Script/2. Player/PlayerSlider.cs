@@ -13,6 +13,7 @@ public class PlayerSlider : Player
     private Image Handle;
     [SerializeField]
     private float sliderpos = 1f;
+
     public int thunderNum = 0;
 
     public GameObject thunder;

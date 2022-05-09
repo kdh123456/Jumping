@@ -5,6 +5,24 @@ using UnityEngine;
 
 public class PlayerMove : Player
 {
+    [Header("플레이어 왼쪽 오른쪽 움직일때 주는 힘")]
+    [SerializeField]
+    private float playerpos = 0;
+
+    [Header("물에서 왼쪽 오른쪽 움직일때 주는 힘")]
+    [SerializeField]
+    private float waterplayerpos = 0;
+
+    [Header("물에서 주는 스크롤 최대값")]
+    [SerializeField]
+    private float waterplayerMaxValue = 0;
+
+    [SerializeField, Tooltip("PlayerState은 순으로 넣어라 반드시")]
+    private List<AnimatorOverrideController> frogAnimators = new List<AnimatorOverrideController>();
+
+    private float rPlayerpos = 0;
+    private float rPlayerMaxValue = 0;
+
     private RaycastHit2D hit;
     private Vector3 direction;
     private Vector2 position;
@@ -19,12 +37,8 @@ public class PlayerMove : Player
 
     public Facing facing { get; private set; }
 
-    [Header("플레이어 왼쪽 오른쪽 움직일때 주는 힘")]
-    [SerializeField]
-    private int playerpos = 0;
 
 
-    //private bool thisWall = false;
     private bool isJumpStart = false;
     private bool isJump = false;
     private bool isMove = true;
@@ -33,80 +47,27 @@ public class PlayerMove : Player
 
     public bool IsMove { get { return isMove; } }
 
-    [SerializeField, Tooltip("PlayerState은 순으로 넣어라 반드시")]
-    private List<AnimatorOverrideController> frogAnimators = new List<AnimatorOverrideController>();
 
     protected override void Start()
     {
         base.Start();
-        //TryGetComponent(out seasonalDebuff);
-        //spriteRenderer = GetComponent<SpriteRenderer>();
-
-        EventManager.StartListening("START", StartScroll);
-        EventManager.StartListening("STOP", StopScrolling);
-        EventManager.StartListening("Swallow", EnemySwallow);
-        EventManager.StartListening("Tunder", ChangeWallBool);
-        EventManager.StartListening("Faint", PlayerFaint);
-        EventManager.StartListening("FloorCheck", ifFloor);
 
         UpdateAnimator();
+        Init();
     }
 
     protected override void Update()
     {
-
-        direction = spriteRenderer.flipX == true ? Vector3.left : Vector3.right;
-        position = new Vector2(transform.position.x, transform.position.y + .5f);
-
-        hit = Physics2D.Raycast(position, direction, 3, LayerMask.GetMask("Ability"));
-        Debug.DrawRay(position, direction * 3, Color.green);
         base.Update();
+        MapExtent();
+        DrowRay();
 
         PlayerAnimation();
         FrogColorChange();
+        ChangeFacing();
+        Addicted();
 
-        if (Time.timeScale != 0)
-        {
-            ChangeFacing();
-        }
-
-
-        if (hit.collider != null)
-        {
-            if (hit.collider.TryGetComponent(out Ability_State ability_State))
-            {
-                itemButton.transform.position = this.transform.position + new Vector3((facing == Facing.LEFT ? -1.5f : 1.5f), .7f, 0);
-                itemButton.SetActive(true);
-            }
-            else
-            {
-                itemButton.SetActive(false);
-            }
-        }
-        else
-        {
-            itemButton.SetActive(false);
-        }
-
-        //범위에 나갔는지 판단
-        if (isGrounded == false)
-        {
-            //X의 맥스값
-            if (this.transform.position.x > GameManager.Instance.mxX)
-                this.transform.position = new Vector3(GameManager.Instance.mxX, transform.position.y, transform.position.z);
-
-            //X의 민값
-            if (this.transform.position.x < GameManager.Instance.mnX)
-                this.transform.position = new Vector3(GameManager.Instance.mnX, transform.position.y, transform.position.z);
-
-            //Y의 맥스값
-            if (this.transform.position.y > GameManager.Instance.mxY)
-                this.transform.position = new Vector3(transform.position.x, GameManager.Instance.mxY, transform.position.z);
-
-            //Y의 민값
-            if (this.transform.position.y < GameManager.Instance.mnY)
-                this.transform.position = new Vector3(transform.position.x, 4, transform.position.z);
-        }
+        Debug.Log(isWall);
     }
 
     void FixedUpdate()
@@ -150,7 +111,7 @@ public class PlayerMove : Player
 
             StartCoroutine(CreateDust());
 
-            float tempx = moveInput * playerpos;
+            float tempx = moveInput * rPlayerpos;
             float tempy = playerScrollbar.value;
 
             rigid.velocity = new Vector2(tempx, tempy);
@@ -183,7 +144,7 @@ public class PlayerMove : Player
         {
             spriteRenderer.color = new Color(255f, 255f - (255f * value / maxValue * 100), 255f - (255f * value / maxValue * 100));
         }
-        else if(state == SeasonState.FALL)
+        else if (state == SeasonState.FALL)
         {
             spriteRenderer.color = new Color(255f - (255f * value / maxValue * 100) * .5f, 255f - (255f * value / maxValue * 100), 255f);
         }
@@ -255,10 +216,10 @@ public class PlayerMove : Player
             {
                 DebuffManager.Instance.UpdateDown(true);
             }
-            else if(DebuffManager.Instance.State == SeasonState.SUMMER_1)
+            else if (DebuffManager.Instance.State == SeasonState.SUMMER_1)
             {
-                playerpos = 2;
-                playerScrollbar.maxValue = 20;
+                rPlayerpos = waterplayerpos;
+                playerScrollbar.maxValue = waterplayerMaxValue;
             }
         }
         //구름 블럭
@@ -266,7 +227,7 @@ public class PlayerMove : Player
         {
             StartCoroutine(ItemSpawnManager.Instance.ItmeSpawn(PoolObjectType.CLOUD, collision.transform));
         }
-        else if (collision.collider.CompareTag("BaseFloor")&& !isGrounded)
+        else if (collision.collider.CompareTag("BaseFloor") && !isGrounded)
         {
             isMove = false;
         }
@@ -281,10 +242,10 @@ public class PlayerMove : Player
     {
         if (collision.collider.CompareTag("Water"))
         {
-            playerpos = 5;
-            playerScrollbar.maxValue = 30;
+            rPlayerpos = playerpos;
+            playerScrollbar.maxValue = rPlayerMaxValue;
         }
-        else if(collision.collider.CompareTag("LeftWall") || collision.collider.CompareTag("RightWall"))
+        else if (collision.collider.CompareTag("LeftWall") || collision.collider.CompareTag("RightWall"))
         {
             isOneWall = false;
         }
@@ -306,17 +267,43 @@ public class PlayerMove : Player
     #endregion
 
     #region 플레이어 패치 변경(좌우 변경)
+    /// <summary>
+    /// 머리의 위치와 버튼 위치 조정
+    /// </summary>
     private void ChangeFacing()
     {
-        if (rigid.velocity.x > 1f)
+        //버튼 위치 조정
+        if (hit.collider != null)
         {
-            facing = Facing.RIGHT;
+            if (hit.collider.TryGetComponent(out Ability_State ability_State))
+            {
+                itemButton.transform.position = this.transform.position + new Vector3((facing == Facing.LEFT ? -1.5f : 1.5f), .7f, 0);
+                itemButton.SetActive(true);
+            }
+            else
+            {
+                itemButton.SetActive(false);
+            }
         }
-        else if (rigid.velocity.x < -1f)
+        else
         {
-            facing = Facing.LEFT;
+            itemButton.SetActive(false);
         }
-        spriteRenderer.flipX = facing == Facing.RIGHT ? false : true;
+
+        //머리 위치 조정
+        if (Time.timeScale != 0)
+        {
+            if (rigid.velocity.x > 1f)
+            {
+                facing = Facing.RIGHT;
+            }
+            else if (rigid.velocity.x < -1f)
+            {
+                facing = Facing.LEFT;
+            }
+            spriteRenderer.flipX = facing == Facing.RIGHT ? false : true;
+        }
+
     }
     #endregion
 
@@ -362,7 +349,7 @@ public class PlayerMove : Player
     /// </summary>
     private void isGround()
     {
-        if(isGrounded)
+        if (isGrounded)
         {
             isOneWall = true;
             isMove = true;
@@ -389,5 +376,69 @@ public class PlayerMove : Player
                     rigid.velocity = new Vector3(moveInput * playerpos, rigid.velocity.y);
             }
         }
+    }
+
+    /// <summary>
+    /// 중독상태일때 바꿔주기
+    /// </summary>
+    private void Addicted()
+    {
+        playerScrollbar.maxValue = rPlayerMaxValue - (int)DebuffManager.Instance.Value;
+
+        Debug.Log(playerScrollbar.maxValue);
+    }
+
+    /// <summary>
+    /// 레이캐스트를 그려주는 함수
+    /// </summary>
+    private void DrowRay()
+    {
+        direction = spriteRenderer.flipX == true ? Vector3.left : Vector3.right;
+        position = new Vector2(transform.position.x, transform.position.y + .5f);
+
+        hit = Physics2D.Raycast(position, direction, 3, LayerMask.GetMask("Ability"));
+        Debug.DrawRay(position, direction * 3, Color.green);
+    }
+
+    /// <summary>
+    /// 맵 나갔는지 아닌지 판단해주는 함수
+    /// </summary>
+    private void MapExtent()
+    {
+        //범위에 나갔는지 판단
+        if (isGrounded == false)
+        {
+            //X의 맥스값
+            if (this.transform.position.x > GameManager.Instance.mxX)
+                this.transform.position = new Vector3(GameManager.Instance.mxX, transform.position.y, transform.position.z);
+
+            //X의 민값
+            if (this.transform.position.x < GameManager.Instance.mnX)
+                this.transform.position = new Vector3(GameManager.Instance.mnX, transform.position.y, transform.position.z);
+
+            //Y의 맥스값
+            if (this.transform.position.y > GameManager.Instance.mxY)
+                this.transform.position = new Vector3(transform.position.x, GameManager.Instance.mxY, transform.position.z);
+
+            //Y의 민값
+            if (this.transform.position.y < GameManager.Instance.mnY)
+                this.transform.position = new Vector3(transform.position.x, 4, transform.position.z);
+        }
+    }
+
+    /// <summary>
+    /// 처음 시작할때 사용하는 함수
+    /// </summary>
+    private void Init()
+    {
+        rPlayerpos = playerpos;
+        rPlayerMaxValue = playerScrollbar.maxValue;
+
+        EventManager.StartListening("START", StartScroll);
+        EventManager.StartListening("STOP", StopScrolling);
+        EventManager.StartListening("Swallow", EnemySwallow);
+        EventManager.StartListening("Tunder", ChangeWallBool);
+        EventManager.StartListening("Faint", PlayerFaint);
+        EventManager.StartListening("FloorCheck", ifFloor);
     }
 }
