@@ -36,6 +36,7 @@ public class DebuffManager : MonoSingleton<DebuffManager>
         }
     }
     private bool isDown = false;
+    public bool IsDown { get => isDown; }
 
     void Update()
     {

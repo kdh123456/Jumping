@@ -64,7 +64,7 @@ public class PlayerMove : Player
         base.Update();
 
         PlayerAnimation();
-        FrogColorChange();
+        //FrogColorChange(); // 버그는 아닌데 의도한데로 안됨
 
         if (Time.timeScale != 0)
         {
@@ -116,7 +116,9 @@ public class PlayerMove : Player
         Move();
     }
 
-    #region 플레이어 에니메이션
+    /// <summary>
+    /// 플레이어 에니메이션
+    /// </summary>
     void PlayerAnimation()
     {
         animator.SetFloat("jump", rigid.velocity.y);
@@ -130,9 +132,10 @@ public class PlayerMove : Player
         animator.SetInteger("timeScale", (int)Time.timeScale);
         animator.SetBool("isMove", IsMove);
     }
-    #endregion
 
-    #region 점프 스크롤
+    /// <summary>
+    /// 점프 스크롤 시작
+    /// </summary>
     private void StartScroll()
     {
         if (isGrounded || isWall)
@@ -143,6 +146,9 @@ public class PlayerMove : Player
         }
     }
 
+    /// <summary>
+    /// 점프 스크롤 중단
+    /// </summary>
     private void StopScrolling()
     {
         if ((isGrounded && isScrollStart) || isWall)
@@ -165,33 +171,61 @@ public class PlayerMove : Player
             isWall = false;
         }
     }
-    #endregion
 
-    #region 애니메이터 바꾸기
+    /// <summary>
+    /// 애니메이터 바꾸기
+    /// </summary>
     public void UpdateAnimator()
     {
         animator.runtimeAnimatorController = frogAnimators[(int)PlayerStateManager.Instance.PlayerState];
     }
-    #endregion
 
-    #region 개구리 색깔 바꾸기
-    private void FrogColorChange()
+    /// <summary>
+    /// 개구리 색깔 바꾸기
+    /// </summary>
+    private void FrogColorChange() // ㅈ같네요...
     {
-        float value = DebuffManager.Instance.Value;
-        float maxValue = DebuffManager.Instance.MAXVALUE;
         SeasonState state = DebuffManager.Instance.State;
+        bool isDown = DebuffManager.Instance.IsDown;
         if (state == SeasonState.SUMMER_0 || state == SeasonState.SUMMER_1)
         {
-            spriteRenderer.color = new Color(255f, 255f - (255f * value / maxValue * 100), 255f - (255f * value / maxValue * 100));
+            Color color = spriteRenderer.color;
+            if (!isDown)
+            {
+                color.g -= 101;
+                color.b -= 101;
+            }
+            else
+            {
+                color.g += 101;
+                color.b += 101;
+            }
+            spriteRenderer.color = color;
+            //Debug.Log($"frong color : {spriteRenderer.color}");
         }
         else if(state == SeasonState.FALL)
         {
-            spriteRenderer.color = new Color(255f - (255f * value / maxValue * 100) * .5f, 255f - (255f * value / maxValue * 100), 255f);
+            Color color = spriteRenderer.color;
+            if (!isDown)
+            {
+                color.r = 255f;
+                color.g -= 101 * .5f;
+                color.b -= 101;
+            }
+            else
+            {
+                color.r = 255f;
+                color.g += 101 * .5f;
+                color.b += 101;
+            }
+            spriteRenderer.color = color;
         }
     }
-    #endregion
 
-    #region 앞에 있는거 삼키기
+    /// <summary>
+    /// isMove 변경 함수
+    /// </summary>
+    /// <param name="value"></param>
     public void ChangeIsMove(int value)
     {
         if (value == 0)
@@ -200,6 +234,9 @@ public class PlayerMove : Player
             isMove = true;
     }
 
+    /// <summary>
+    /// 앞에 있는거 삼키기
+    /// </summary>
     public void EnemySwallow()
     {
         animator.Play("Swallow");
@@ -229,7 +266,6 @@ public class PlayerMove : Player
             UpdateAnimator();
         }
     }
-    #endregion
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -324,11 +360,18 @@ public class PlayerMove : Player
         spriteRenderer.flipX = facing == Facing.RIGHT ? false : true;
     }
 
-    #region 플레이어 기절&이펙트
+    /// <summary>
+    /// 플레이어 기절 함수
+    /// </summary>
     public void PlayerFaint()
     {
         StartCoroutine(Faint());
     }
+
+    /// <summary>
+    /// 플레이어 기절 코루틴
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator Faint()
     {
         GameObject faintRing = ObjectPool.Instance.GetObject(PoolObjectType.FAINT_RING);
@@ -341,7 +384,6 @@ public class PlayerMove : Player
         ObjectPool.Instance.ReturnObject(PoolObjectType.FAINT_RING, faintRing);
         DebuffManager.Instance.IsDebuff = false;
     }
-    #endregion
 
 
     /// <summary>

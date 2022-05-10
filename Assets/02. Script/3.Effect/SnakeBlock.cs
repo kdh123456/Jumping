@@ -29,9 +29,9 @@ public class SnakeBlock : MonoBehaviour
         {
             snake = ObjectPool.Instance.GetObject(PoolObjectType.SNAKE);
             //snake.SetActive(true);
-            snakeOn = true;
-            snake.transform.position = transform.position;
+            snake.transform.position = transform.position + Vector3.up * 1.1f;
             snake.GetComponent<Rigidbody2D>().AddForce(Vector2.up * force, ForceMode2D.Impulse);
+            snakeOn = true;
         }
         else if (collision.CompareTag("Snake") && snakeOn == true)
         {
