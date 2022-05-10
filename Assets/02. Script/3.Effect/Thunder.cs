@@ -32,8 +32,11 @@ public class Thunder : MonoBehaviour
 
         float random = Random.value;
         Vector2 direction = random > .5f ? Vector2.left : Vector2.right;
-        if (objects.GetComponent<Rigidbody2D>() != null)
-            objects.GetComponent<Rigidbody2D>().AddForce(direction * force, ForceMode2D.Impulse);
+        if (objects != null)
+        {
+            if (objects.GetComponent<Rigidbody2D>() != null)
+                objects.GetComponent<Rigidbody2D>().AddForce(direction * force, ForceMode2D.Impulse);
+        }
     }
 
     void OnDrawGizmosSelected()

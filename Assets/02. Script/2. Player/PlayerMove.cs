@@ -27,6 +27,7 @@ public class PlayerMove : Player
     //private bool thisWall = false;
     private bool isJumpStart = false;
     private bool isJump = false;
+    private bool isFaint = false;
     private bool isMove = true;
 
     private bool isOneWall = false;
@@ -47,7 +48,7 @@ public class PlayerMove : Player
         EventManager.StartListening("Swallow", EnemySwallow);
         EventManager.StartListening("Tunder", ChangeWallBool);
         EventManager.StartListening("Faint", PlayerFaint);
-        EventManager.StartListening("FloorCheck", ifFloor);
+        EventManager.StartListening("FloorCheck", IfFloor);
 
         UpdateAnimator();
     }
@@ -111,7 +112,7 @@ public class PlayerMove : Player
 
     void FixedUpdate()
     {
-        isGround();
+        IsGround();
         Move();
     }
 
@@ -251,7 +252,7 @@ public class PlayerMove : Player
         //물 블럭
         else if (collision.collider.CompareTag("Water"))
         {
-            if (DebuffManager.Instance.State == SeasonState.SUMMER_1)
+            if (DebuffManager.Instance.State == SeasonState.SUMMER_0)
             {
                 DebuffManager.Instance.UpdateDown(true);
             }
@@ -290,7 +291,10 @@ public class PlayerMove : Player
         }
     }
 
-    #region 플레이어 점프 이펙트 생성
+    /// <summary>
+    /// 플레이어 점프 이펙트 생성
+    /// </summary>
+    /// <returns></returns>
     IEnumerator CreateDust()
     {
         if (!isWall)
@@ -303,9 +307,10 @@ public class PlayerMove : Player
             ObjectPool.Instance.ReturnObject(PoolObjectType.DUST, dust);
         }
     }
-    #endregion
 
-    #region 플레이어 패치 변경(좌우 변경)
+    /// <summary>
+    /// 플레이어 패치 변경(좌우 변경)
+    /// </summary>
     private void ChangeFacing()
     {
         if (rigid.velocity.x > 1f)
@@ -318,7 +323,6 @@ public class PlayerMove : Player
         }
         spriteRenderer.flipX = facing == Facing.RIGHT ? false : true;
     }
-    #endregion
 
     #region 플레이어 기절&이펙트
     public void PlayerFaint()
@@ -331,9 +335,9 @@ public class PlayerMove : Player
         float pos = facing == Facing.LEFT ? -.5f : .5f;
         faintRing.transform.position = transform.position + new Vector3(pos, 1, 0);
         faintRing.transform.SetParent(this.transform);
-        isMove = false;
+        isFaint = true;
         yield return new WaitForSeconds(3);
-        isMove = true;
+        isFaint = false;
         ObjectPool.Instance.ReturnObject(PoolObjectType.FAINT_RING, faintRing);
         DebuffManager.Instance.IsDebuff = false;
     }
@@ -352,7 +356,7 @@ public class PlayerMove : Player
     /// <summary>
     /// 땅에 떨어질때 충격을 완화해주는 함수
     /// </summary>
-    private void ifFloor()
+    private void IfFloor()
     {
         rigid.velocity = new Vector2(rigid.velocity.x / 3, rigid.velocity.y / 3);
     }
@@ -360,12 +364,15 @@ public class PlayerMove : Player
     /// <summary>
     /// 땅인지 아닌지 판단해주는 함수
     /// </summary>
-    private void isGround()
+    private void IsGround()
     {
         if(isGrounded)
         {
             isOneWall = true;
-            isMove = true;
+            if (isFaint)
+                isMove = false;
+            else
+                isMove = true;
         }
     }
 
