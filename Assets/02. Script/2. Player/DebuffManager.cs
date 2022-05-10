@@ -55,7 +55,7 @@ public class DebuffManager : MonoSingleton<DebuffManager>
                         value = 0;
                         break;
                     case SeasonState.FALL:
-                        value = Mathf.Clamp(isDown ? 0 : value + Time.deltaTime, MIN_VALUE, MAX_VALUE);
+                        value = Mathf.Clamp(isDown ? value + Time.deltaTime : 0, MIN_VALUE, MAX_VALUE);
                         break;
                 }
             }
@@ -110,8 +110,10 @@ public class DebuffManager : MonoSingleton<DebuffManager>
                 UpdateSeason(SeasonState.SPRING);
                 break;
             case "Summer_0":
-            case "Summer_1":
                 UpdateSeason(SeasonState.SUMMER_0);
+                break;
+            case "Summer_1":
+                UpdateSeason(SeasonState.SUMMER_1);
                 break;
             case "Fall":
                 UpdateSeason(SeasonState.FALL);

@@ -32,6 +32,7 @@ public class SnakeBlock : MonoBehaviour
             snake.transform.position = transform.position + Vector3.up * 1.1f;
             snake.GetComponent<Rigidbody2D>().AddForce(Vector2.up * force, ForceMode2D.Impulse);
             snakeOn = true;
+            DebuffManager.Instance.UpdateDown(true);
         }
         else if (collision.CompareTag("Snake") && snakeOn == true)
         {

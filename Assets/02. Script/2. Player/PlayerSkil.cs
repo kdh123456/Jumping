@@ -98,7 +98,7 @@ public class PlayerSkil : MonoBehaviour
     #endregion
 
     #region 약초 먹기
-    void UseMedicinalHerb()
+    public void UseMedicinalHerb()
     {
         StartCoroutine(UseMedicinalHerbCoroutine());
     }

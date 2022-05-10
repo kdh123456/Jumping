@@ -262,6 +262,12 @@ public class PlayerMove : Player
 
                     StartCoroutine(ItemSpawnManager.Instance.ItmeSpawn(PoolObjectType.MUSHROOM, hit.collider.transform));
                     break;
+                case AbilityState.HERB:
+                    ObjectPool.Instance.ReturnObject(PoolObjectType.HERB, hit.collider.gameObject);
+                    EventManager.TriggerEvent("Herb");
+
+                    StartCoroutine(ItemSpawnManager.Instance.ItmeSpawn(PoolObjectType.HERB, hit.collider.transform));
+                    break;
             }
             UpdateAnimator();
         }
@@ -318,8 +324,16 @@ public class PlayerMove : Player
     {
         if (collision.collider.CompareTag("Water"))
         {
-            playerpos = 5;
-            playerScrollbar.maxValue = 30;
+            if (DebuffManager.Instance.State == SeasonState.SUMMER_0)
+            {
+                DebuffManager.Instance.UpdateDown(false);
+            }
+            else if (DebuffManager.Instance.State == SeasonState.SUMMER_1)
+            {
+                playerpos = 5;
+                playerScrollbar.maxValue = 30;
+            }
+            
         }
         else if(collision.collider.CompareTag("LeftWall") || collision.collider.CompareTag("RightWall"))
         {
