@@ -16,7 +16,7 @@ public class PlayerSlider : Player
 
     public int thunderNum = 0;
 
-    public GameObject thunder;
+    private GameObject thunder;
     private Animator effectAnimator;
 
     private bool isScrollStart;
@@ -63,12 +63,12 @@ public class PlayerSlider : Player
             playerScrollbar.value += sliderpos * Time.deltaTime;
             if (thunderNum >= 2)
             {
+                thunder = ObjectPool.Instance.GetObject(PoolObjectType.THUNDER);
                 thunder.transform.position = new Vector2(transform.position.x + 1.5f, transform.position.y + 2);
                 transform.localEulerAngles = Vector3.zero;
                 rigid.bodyType = RigidbodyType2D.Dynamic;
                 EventManager.TriggerEvent("Tunder");
                 //thunder.SetActive(true);
-                ObjectPool.Instance.GetObject(PoolObjectType.THUNDER);
                 thunderNum = 0;
             }
             if (playerScrollbar.value <= 0)

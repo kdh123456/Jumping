@@ -67,7 +67,6 @@ public class PlayerMove : Player
         ChangeFacing();
         Addicted();
 
-        Debug.Log(isWall);
     }
 
     void FixedUpdate()

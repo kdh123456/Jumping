@@ -1111,7 +1111,7 @@ GameObject:
   - component: {fileID: 151683156}
   - component: {fileID: 151683159}
   - component: {fileID: 151683157}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Player Floor Check
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8942,7 +8942,6 @@ MonoBehaviour:
   Handle: {fileID: 579830546}
   sliderpos: 50
   thunderNum: 0
-  thunder: {fileID: 0}
 --- !u!114 &927499638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8956,13 +8955,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerScrollbar: {fileID: 792630952}
-  itemButton: {fileID: 2136885319}
   playerpos: 5
+  waterplayerpos: 0
+  waterplayerMaxValue: 0
   frogAnimators:
   - {fileID: 22100000, guid: 69baa149664c2fd49a229bb392a1a52b, type: 2}
   - {fileID: 22100000, guid: 9cc5fb9a69f9b1a4e8ac6898cb846ab0, type: 2}
   - {fileID: 22100000, guid: 69baa149664c2fd49a229bb392a1a52b, type: 2}
   - {fileID: 22100000, guid: 69baa149664c2fd49a229bb392a1a52b, type: 2}
+  itemButton: {fileID: 2136885319}
 --- !u!114 &927499639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19698,7 +19699,7 @@ Transform:
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 23
+  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1790865878
 PrefabInstance:
