@@ -3,14 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class PlayerSkil : MonoBehaviour
+public class PlayerSkil : Player
 {
     private PlayerMove playerMove = null;
     private bool isFacing = false;
     private BoxCollider2D playerCollider = null;
+    
+    private bool isEmpty = false;
 
-    protected void Start()
+    protected override void Start()
     {
+        base.Start();
+
         TryGetComponent(out playerMove);
         TryGetComponent(out playerCollider);
 
@@ -20,11 +24,23 @@ public class PlayerSkil : MonoBehaviour
         EventManager.StartListening("Umbrella", CreateUmbrella);
         EventManager.StartListening("Small", GetSmaller);
         EventManager.StartListening("Fly", EatFly);
+        EventManager.StartListening("Well", EatWell);
+        EventManager.StartListening("Water", Water);
 
     }
 
-    protected void Update()
+    private void OnCollisionEnter2D(Collision2D other) {
+        if(other.collider.CompareTag("Fly_Empty"))
+        {
+            isEmpty = true;
+            Debug.Log(1);
+        }
+    }
+
+    protected override void Update()
     {
+        base.Update();
+
         isFacing = (playerMove.facing == PlayerMove.Facing.LEFT) ? true : false;
     }
 
@@ -41,7 +57,6 @@ public class PlayerSkil : MonoBehaviour
 
         PlayerStateManager.Instance.UpdateState(PlayerState.BASIC);
         playerMove.UpdateAnimator();
-        Debug.Log("1");
     }
     #endregion
 
@@ -99,27 +114,91 @@ public class PlayerSkil : MonoBehaviour
     #region ÆÄ¸®´É·Â!
 
     private bool isFlyEat = false;
+
+    private void OnCollisionExit2D(Collision2D other) {
+        if(other.collider.CompareTag("Fly_Empty"))
+        {
+            isEmpty = false;
+        }
+    }
+
     public void EatFly()
     {
         isFlyEat = true;
         if(isFlyEat)
         {
+            rigid.velocity = Vector2.zero;
+            animator.Play("Idle");
             GameObject fly_empty = ObjectPool.Instance.GetObject(PoolObjectType.FLY_EMPTY);
             fly_empty.transform.position = transform.position + Vector3.down;
+            PlayerStateManager.Instance.UpdateState(PlayerState.BASIC);
             StartCoroutine(DeleteFly_Empty(fly_empty));
         }
+        isFlyEat = false;
     }
+    
     private IEnumerator DeleteFly_Empty(GameObject gameObject)
     {
-        yield return new WaitForSeconds(5);
-        ObjectPool.Instance.ReturnObject(PoolObjectType.FLY_EMPTY, gameObject);
-        playerMove.seasonalDebuff.UpdateDown(false);
-        isFlyEat = false;
-        PlayerStateManager.Instance.UpdateState(PlayerState.BASIC);
-        playerMove.UpdateAnimator();
+        while(true)
+        {
+            yield return null;
+            if(!isEmpty)
+            {
+                ObjectPool.Instance.ReturnObject(PoolObjectType.FLY_EMPTY, gameObject);
+            }
+        }
+        
     }
 
 
     #endregion
     
+    #region ? ??? ??
+
+    private bool isWater = false;
+
+
+    public void EatWell()
+    {
+        GameObject well = ObjectPool.Instance.GetObject(PoolObjectType.WELL);
+        isWater = true;
+        //StartCoroutine(DeleteWell(well));
+
+    }
+
+    /*private IEnumerator DeleteWell(GameObject gameObject)
+    {
+        yield return new WaitForSeconds(5);
+        ObjectPool.Instance.ReturnObject(PoolObjectType.WELL, gameObject);
+    }*/
+    
+    public void Water()
+    {
+        if(isWater)
+        {
+            GameObject waterball = ObjectPool.Instance.GetObject(PoolObjectType.WATERBALL);
+            waterball.transform.position = this.transform.position;
+            waterball.GetComponent<SpriteRenderer>().flipX = isFacing;
+
+            waterball.transform.DOMove((isFacing ? Vector3.left : Vector3.right) * 10, 1) // ?•ž?œ¼ë¡? ?˜ê¸?
+                .SetEase(Ease.Linear).SetRelative()
+                .OnComplete(() => ObjectPool.Instance.ReturnObject(PoolObjectType.WATERBALL, waterball));
+            GetComponent<Rigidbody2D>().AddForce((isFacing ? Vector3.right : Vector3.left)*10);
+
+            PlayerStateManager.Instance.UpdateState(PlayerState.BASIC);
+
+            StartCoroutine(DeleteWater(waterball));
+        }
+        
+
+    }
+    private IEnumerator DeleteWater(GameObject gameObject)
+    {
+        yield return new WaitForSeconds(5);
+        ObjectPool.Instance.ReturnObject(PoolObjectType.WATERBALL, gameObject);
+        isWater = false;
+    }
+
+    #endregion
+
 }

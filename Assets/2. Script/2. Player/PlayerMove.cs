@@ -207,7 +207,7 @@ public class PlayerMove : Player
                     StartCoroutine(ItemSpawnManager.Instance.ItmeSpawn(PoolObjectType.MUSHROOM, hit.collider.transform));
                     break;
                 case AbilityState.Fly:
-                    EventManager.TriggerEvent("Fly");
+                    //EventManager.TriggerEvent("Fly");
                     ObjectPool.Instance.ReturnObject(PoolObjectType.FLY, hit.collider.gameObject);
                     //ObjectPool.Instance.ReturnObject(PoolObjectType.FLY_EMPTY,hit.collider.gameObject);
                     PlayerStateManager.Instance.UpdateState(PlayerState.FLY);
@@ -215,9 +215,9 @@ public class PlayerMove : Player
                     break;
                 case AbilityState.Water:
                     EventManager.TriggerEvent("Water");
-                    ObjectPool.Instance.ReturnObject(PoolObjectType.FLY, hit.collider.gameObject);
-                    PlayerStateManager.Instance.UpdateState(PlayerState.FLY);
-                    StartCoroutine(ItemSpawnManager.Instance.ItmeSpawn(PoolObjectType.FLY, hit.collider.transform));
+                    ObjectPool.Instance.ReturnObject(PoolObjectType.WELL, hit.collider.gameObject);
+                    PlayerStateManager.Instance.UpdateState(PlayerState.WATER);
+                    StartCoroutine(ItemSpawnManager.Instance.ItmeSpawn(PoolObjectType.WATERBALL, hit.collider.transform));
                     break;
 
             }

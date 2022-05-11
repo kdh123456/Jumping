@@ -15,6 +15,9 @@ TagManager:
   - Water
   - BaseFloor
   - Cloud
+  - WaterBall
+  - WaterWell
+  - Fly_Empty
   layers:
   - Default
   - TransparentFX
