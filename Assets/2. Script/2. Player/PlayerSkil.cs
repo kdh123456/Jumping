@@ -11,6 +11,10 @@ public class PlayerSkil : Player
     
     private bool isEmpty = false;
 
+
+    private bool isCanMove = true;
+
+
     protected override void Start()
     {
         base.Start();
@@ -29,13 +33,7 @@ public class PlayerSkil : Player
 
     }
 
-    private void OnCollisionEnter2D(Collision2D other) {
-        if(other.collider.CompareTag("Fly_Empty"))
-        {
-            isEmpty = true;
-            Debug.Log(1);
-        }
-    }
+    
 
     protected override void Update()
     {
@@ -113,12 +111,31 @@ public class PlayerSkil : Player
 
     #region 파리능력!
 
+
+
+    private void OnCollisionEnter2D(Collision2D other) {
+        if(other.collider.CompareTag("Fly_Empty"))
+        {
+            isCanMove = false;
+            isEmpty = true;
+            if(!isCanMove)
+            {
+                rigid.constraints = RigidbodyConstraints2D.FreezePositionX;
+            }
+        }
+    }
     private bool isFlyEat = false;
 
     private void OnCollisionExit2D(Collision2D other) {
         if(other.collider.CompareTag("Fly_Empty"))
         {
             isEmpty = false;
+            isCanMove = true;
+            if(isCanMove)
+            {
+                rigid.constraints = RigidbodyConstraints2D.None;
+                rigid.constraints = RigidbodyConstraints2D.FreezeRotation;
+            }
         }
     }
 
@@ -132,6 +149,7 @@ public class PlayerSkil : Player
             GameObject fly_empty = ObjectPool.Instance.GetObject(PoolObjectType.FLY_EMPTY);
             fly_empty.transform.position = transform.position + Vector3.down;
             PlayerStateManager.Instance.UpdateState(PlayerState.BASIC);
+            
             StartCoroutine(DeleteFly_Empty(fly_empty));
         }
         isFlyEat = false;
