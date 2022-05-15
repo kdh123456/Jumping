@@ -42,6 +42,7 @@ public class PlayerMove : Player
     private bool isJumpStart = false;
     private bool isJump = false;
     private bool isMove = true;
+    private bool isThunder = false;
 
     private bool isOneWall = false;
 
@@ -196,6 +197,7 @@ public class PlayerMove : Player
         if (collision.collider.CompareTag("LeftWall") && isOneWall)
         {
             transform.localEulerAngles = new Vector3(0, 0, 90);
+            transform.transform.position = new Vector2(transform.position.x + 0.15f, transform.position.y);
             rigid.bodyType = RigidbodyType2D.Static;
             isWall = true;
             animator.Play("Idle");
@@ -204,6 +206,7 @@ public class PlayerMove : Player
         else if (collision.collider.CompareTag("RightWall") && isOneWall)
         {
             transform.localEulerAngles = new Vector3(0, 0, -90);
+            transform.transform.position = new Vector2(transform.position.x - 0.15f, transform.position.y);
             rigid.bodyType = RigidbodyType2D.Static;
             isWall = true;
             animator.Play("Idle");
@@ -333,6 +336,7 @@ public class PlayerMove : Player
     {
         isScrollStart = false;
         isWall = false;
+        StartCoroutine(Thunder());
     }
 
     /// <summary>
@@ -371,7 +375,7 @@ public class PlayerMove : Player
                 else
                     moveInput = 0;
 
-                if (isMove)
+                if (isMove && !isThunder)
                     rigid.velocity = new Vector3(moveInput * playerpos, rigid.velocity.y);
             }
         }
@@ -425,6 +429,13 @@ public class PlayerMove : Player
         }
     }
 
+    private IEnumerator Thunder()
+    {
+        isThunder = true;
+        yield return new WaitForSeconds(1f);
+        isThunder = false;
+    }
+
     /// <summary>
     /// 처음 시작할때 사용하는 함수
     /// </summary>
@@ -436,7 +447,8 @@ public class PlayerMove : Player
         EventManager.StartListening("START", StartScroll);
         EventManager.StartListening("STOP", StopScrolling);
         EventManager.StartListening("Swallow", EnemySwallow);
-        EventManager.StartListening("Tunder", ChangeWallBool);
+        EventManager.StartListening("Thunder", ChangeWallBool);
+        EventManager.StartListening("ThunderExplode", ChangeWallBool);
         EventManager.StartListening("Faint", PlayerFaint);
         EventManager.StartListening("FloorCheck", ifFloor);
     }
