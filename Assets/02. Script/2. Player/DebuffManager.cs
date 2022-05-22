@@ -55,7 +55,7 @@ public class DebuffManager : MonoSingleton<DebuffManager>
                         value = 0;
                         break;
                     case SeasonState.FALL:
-                        value = Mathf.Clamp(isDown ? value + Time.deltaTime : 0, MIN_VALUE, MAX_VALUE);
+                        value = Mathf.Clamp(isDown ? 0 : value + Time.deltaTime, MIN_VALUE, MAX_VALUE);
                         break;
                 }
             }
@@ -78,22 +78,23 @@ public class DebuffManager : MonoSingleton<DebuffManager>
             switch (state)
             {
                 case SeasonState.SUMMER_0:
-                    Debug.Log("기절");
+                    Debug.Log("湲곗젅");
                     EventManager.TriggerEvent("Faint");
-                    // 여기서 cc에 맞는 애니메이션 출력
+                    // cc맞는 애니 출력
                     break;
                 case SeasonState.FALL:
-                    Debug.Log("독 중독");
+                    Debug.Log("??以묐룆");
                     //EventManager.TriggerEvent("") 정의된 함수 가져오기
-                    // 점프력 감소 
+                    // ?먰봽??媛먯냼 
                     break;
                 case SeasonState.WINTER:
-                    Debug.Log("빙결");
+                    Debug.Log("鍮숆껐");
                     EventManager.TriggerEvent("Faint");
-                    // 여기서 cc에 맞는 애니메이션 출력
+                    // cc맞는 애니 출력
                     break;
             }
             value = 0;
+            isDebuff = false;
         }
     }
 

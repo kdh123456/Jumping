@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class PlayerMove : Player
 {
@@ -19,7 +20,7 @@ public class PlayerMove : Player
 
     public Facing facing { get; private set; }
 
-    [Header("플레이어 왼쪽 오른쪽 움직일때 주는 힘")]
+    [Header("?뚮젅?댁뼱 ?쇱そ ?ㅻⅨ履??吏곸씪??二쇰뒗 ??")]
     [SerializeField]
     private int playerpos = 0;
 
@@ -34,7 +35,7 @@ public class PlayerMove : Player
 
     public bool IsMove { get { return isMove; } }
 
-    [SerializeField, Tooltip("PlayerState은 순으로 넣어라 반드시")]
+    [SerializeField, Tooltip("PlayerState? ?쒖쑝濡??ｌ뼱??諛섎뱶??")]
     private List<AnimatorOverrideController> frogAnimators = new List<AnimatorOverrideController>();
 
     protected override void Start()
@@ -64,7 +65,7 @@ public class PlayerMove : Player
         base.Update();
 
         PlayerAnimation();
-        //FrogColorChange(); // 버그는 아닌데 의도한데로 안됨
+        //FrogColorChange(); // 踰꾧렇???꾨땶???섎룄?쒕뜲濡??덈맖
 
         if (Time.timeScale != 0)
         {
@@ -89,22 +90,22 @@ public class PlayerMove : Player
             itemButton.SetActive(false);
         }
 
-        //범위에 나갔는지 판단
+        //踰붿쐞???섍컮?붿? ?먮떒
         if (isGrounded == false)
         {
-            //X의 맥스값
+            //X??留μ뒪媛?
             if (this.transform.position.x > GameManager.Instance.mxX)
                 this.transform.position = new Vector3(GameManager.Instance.mxX, transform.position.y, transform.position.z);
 
-            //X의 민값
+            //X??誘쇨컪
             if (this.transform.position.x < GameManager.Instance.mnX)
                 this.transform.position = new Vector3(GameManager.Instance.mnX, transform.position.y, transform.position.z);
 
-            //Y의 맥스값
+            //Y??留μ뒪媛?
             if (this.transform.position.y > GameManager.Instance.mxY)
                 this.transform.position = new Vector3(transform.position.x, GameManager.Instance.mxY, transform.position.z);
 
-            //Y의 민값
+            //Y??誘쇨컪
             if (this.transform.position.y < GameManager.Instance.mnY)
                 this.transform.position = new Vector3(transform.position.x, 4, transform.position.z);
         }
@@ -117,7 +118,7 @@ public class PlayerMove : Player
     }
 
     /// <summary>
-    /// 플레이어 에니메이션
+    /// ?뚮젅?댁뼱 ?먮땲硫붿씠??
     /// </summary>
     void PlayerAnimation()
     {
@@ -134,7 +135,7 @@ public class PlayerMove : Player
     }
 
     /// <summary>
-    /// 점프 스크롤 시작
+    /// ?먰봽 ?ㅽ겕濡??쒖옉
     /// </summary>
     private void StartScroll()
     {
@@ -147,7 +148,7 @@ public class PlayerMove : Player
     }
 
     /// <summary>
-    /// 점프 스크롤 중단
+    /// ?먰봽 ?ㅽ겕濡?以묐떒
     /// </summary>
     private void StopScrolling()
     {
@@ -173,7 +174,7 @@ public class PlayerMove : Player
     }
 
     /// <summary>
-    /// 애니메이터 바꾸기
+    /// ?좊땲硫붿씠??諛붽씀湲?
     /// </summary>
     public void UpdateAnimator()
     {
@@ -181,49 +182,23 @@ public class PlayerMove : Player
     }
 
     /// <summary>
-    /// 개구리 색깔 바꾸기
+    /// 媛쒓뎄由??됯퉼 諛붽씀湲?
     /// </summary>
-    private void FrogColorChange() // ㅈ같네요...
+    private void FrogColorChange(bool isDown) // ?덇컳?ㅼ슂...
     {
-        SeasonState state = DebuffManager.Instance.State;
-        bool isDown = DebuffManager.Instance.IsDown;
-        if (state == SeasonState.SUMMER_0 || state == SeasonState.SUMMER_1)
+        transform.DOKill();
+        if (isDown)
         {
-            Color color = spriteRenderer.color;
-            if (!isDown)
-            {
-                color.g -= 101;
-                color.b -= 101;
-            }
-            else
-            {
-                color.g += 101;
-                color.b += 101;
-            }
-            spriteRenderer.color = color;
-            //Debug.Log($"frong color : {spriteRenderer.color}");
+            spriteRenderer.DOColor(Color.white, 20);
         }
-        else if(state == SeasonState.FALL)
+        else
         {
-            Color color = spriteRenderer.color;
-            if (!isDown)
-            {
-                color.r = 255f;
-                color.g -= 101 * .5f;
-                color.b -= 101;
-            }
-            else
-            {
-                color.r = 255f;
-                color.g += 101 * .5f;
-                color.b += 101;
-            }
-            spriteRenderer.color = color;
+            spriteRenderer.DOColor(new Color(255, 0, 0), 20);
         }
     }
 
     /// <summary>
-    /// isMove 변경 함수
+    /// isMove 蹂寃??⑥닔
     /// </summary>
     /// <param name="value"></param>
     public void ChangeIsMove(int value)
@@ -235,7 +210,7 @@ public class PlayerMove : Player
     }
 
     /// <summary>
-    /// 앞에 있는거 삼키기
+    /// ?욎뿉 ?덈뒗嫄??쇳궎湲?
     /// </summary>
     public void EnemySwallow()
     {
@@ -275,7 +250,7 @@ public class PlayerMove : Player
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //왼쪽 벽
+        //?쇱そ 踰?
         if (collision.collider.CompareTag("LeftWall") && isOneWall)
         {
             transform.localEulerAngles = new Vector3(0, 0, 90);
@@ -283,7 +258,7 @@ public class PlayerMove : Player
             isWall = true;
             animator.Play("Idle");
         }
-        //오른쪽 벽
+        //?ㅻⅨ履?踰?
         else if (collision.collider.CompareTag("RightWall") && isOneWall)
         {
             transform.localEulerAngles = new Vector3(0, 0, -90);
@@ -291,7 +266,7 @@ public class PlayerMove : Player
             isWall = true;
             animator.Play("Idle");
         }
-        //물 블럭
+        //臾?釉붾윮
         else if (collision.collider.CompareTag("Water"))
         {
             if (DebuffManager.Instance.State == SeasonState.SUMMER_0)
@@ -304,7 +279,7 @@ public class PlayerMove : Player
                 playerScrollbar.maxValue = 20;
             }
         }
-        //구름 블럭
+        //援щ쫫 釉붾윮
         else if (collision.collider.CompareTag("Cloud"))
         {
             StartCoroutine(ItemSpawnManager.Instance.ItmeSpawn(PoolObjectType.CLOUD, collision.transform));
@@ -342,7 +317,7 @@ public class PlayerMove : Player
     }
 
     /// <summary>
-    /// 플레이어 점프 이펙트 생성
+    /// ?뚮젅?댁뼱 ?먰봽 ?댄럺???앹꽦
     /// </summary>
     /// <returns></returns>
     IEnumerator CreateDust()
@@ -359,7 +334,7 @@ public class PlayerMove : Player
     }
 
     /// <summary>
-    /// 플레이어 패치 변경(좌우 변경)
+    /// ?뚮젅?댁뼱 ?⑥튂 蹂寃?醫뚯슦 蹂寃?
     /// </summary>
     private void ChangeFacing()
     {
@@ -375,7 +350,7 @@ public class PlayerMove : Player
     }
 
     /// <summary>
-    /// 플레이어 기절 함수
+    /// ?뚮젅?댁뼱 湲곗젅 ?⑥닔
     /// </summary>
     public void PlayerFaint()
     {
@@ -383,7 +358,7 @@ public class PlayerMove : Player
     }
 
     /// <summary>
-    /// 플레이어 기절 코루틴
+    /// ?뚮젅?댁뼱 湲곗젅 肄붾（??
     /// </summary>
     /// <returns></returns>
     private IEnumerator Faint()
@@ -401,7 +376,7 @@ public class PlayerMove : Player
 
 
     /// <summary>
-    /// 플레이어가 벽에 있을 때 벽에서 때어내주는 변수
+    /// ?뚮젅?댁뼱媛 踰쎌뿉 ?덉쓣 ??踰쎌뿉???뚯뼱?댁＜??蹂??
     /// </summary>
     private void ChangeWallBool()
     {
@@ -410,7 +385,7 @@ public class PlayerMove : Player
     }
 
     /// <summary>
-    /// 땅에 떨어질때 충격을 완화해주는 함수
+    /// ?낆뿉 ?⑥뼱吏덈븣 異⑷꺽???꾪솕?댁＜???⑥닔
     /// </summary>
     private void IfFloor()
     {
@@ -418,7 +393,7 @@ public class PlayerMove : Player
     }
 
     /// <summary>
-    /// 땅인지 아닌지 판단해주는 함수
+    /// ?낆씤吏 ?꾨땶吏 ?먮떒?댁＜???⑥닔
     /// </summary>
     private void IsGround()
     {
@@ -433,7 +408,7 @@ public class PlayerMove : Player
     }
 
     /// <summary>
-    /// 움직임을 구현해주는 함수
+    /// ?吏곸엫??援ы쁽?댁＜???⑥닔
     /// </summary>
     private void Move()
     {

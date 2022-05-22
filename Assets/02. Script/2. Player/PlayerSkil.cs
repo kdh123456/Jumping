@@ -29,14 +29,14 @@ public class PlayerSkil : MonoBehaviour
         isFacing = (playerMove.facing == PlayerMove.Facing.LEFT) ? true : false;
     }
 
-    #region ?��?��?�� �? ?���?
+    #region 파이어볼 쏘기
     public void Fire()
     {
         GameObject fireBall = ObjectPool.Instance.GetObject(PoolObjectType.FIREBALL_OBJECT);
         fireBall.transform.position = this.transform.position;
         fireBall.GetComponent<SpriteRenderer>().flipX = isFacing;
 
-        fireBall.transform.DOMove((isFacing ? Vector3.left : Vector3.right) * 10, 1) // ?��?���? ?���?
+        fireBall.transform.DOMove((isFacing ? Vector3.left : Vector3.right) * 10, 1) // ?占쏙옙?占쏙옙占? ?占쏙옙占?
             .SetEase(Ease.Linear).SetRelative()
             .OnComplete(() => ObjectPool.Instance.ReturnObject(PoolObjectType.FIREBALL_OBJECT, fireBall));
 
@@ -46,7 +46,7 @@ public class PlayerSkil : MonoBehaviour
     }
     #endregion
 
-    #region ?��?�� ?���?
+    #region 우산만들기
     private bool isUmbrella = false;
     public void CreateUmbrella()
     {
@@ -71,20 +71,22 @@ public class PlayerSkil : MonoBehaviour
     }
     #endregion
 
-    #region ?��?���?�?
-
+    #region 커지고 작아지기 // 사용하지 않음
+    [System.Obsolete]
     private bool isSmall = false;
+
+    [System.Obsolete]
     private void GetSmaller()
     {
         if (isSmall) return;
-        // ?��?���?�?
+        // ?占쏙옙?占쏙옙占?占?
         //playerCollider.size = new Vector2(playerCollider.size.x * .5f, playerCollider.size.y * .5f);
         //playerCollider.offset = new Vector2(0, -.47f);
         this.transform.localScale = Vector3.one * .5f;
         isSmall = true;
         StartCoroutine(GetBigger());
     }
-
+    [System.Obsolete]
     private IEnumerator GetBigger()
     {
         yield return new WaitForSeconds(3);
@@ -97,7 +99,7 @@ public class PlayerSkil : MonoBehaviour
     }
     #endregion
 
-    #region 약초 먹기
+    #region 허브 먹기
     public void UseMedicinalHerb()
     {
         StartCoroutine(UseMedicinalHerbCoroutine());
@@ -105,12 +107,13 @@ public class PlayerSkil : MonoBehaviour
 
     IEnumerator UseMedicinalHerbCoroutine()
     {
-        DebuffManager.Instance.UpdateDown(true);
-        yield return new WaitForSeconds(0.01f);
         DebuffManager.Instance.UpdateDown(false);
+        yield return new WaitForSeconds(0.01f);
+        DebuffManager.Instance.UpdateDown(true);
     }
     #endregion
-    #region �ĸ��ɷ�!
+
+    #region 파리 먹기
 
     private bool isFlyEat = false;
     public void EatFly()
