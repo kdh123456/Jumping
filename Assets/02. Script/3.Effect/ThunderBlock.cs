@@ -9,7 +9,7 @@ public class ThunderBlock : MonoBehaviour
     public float thunderTime = 5f;
     void Start()
     {
-        //è¸°ê¾§ë ‡ ?ì’–ë¿‰ ?ì¢Žë–† ??
+        //?•ê³Œ?????ë½?“  ??«ë¡«ë»???
         StartCoroutine(GetThunder());
     }
 

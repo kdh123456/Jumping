@@ -36,7 +36,15 @@ public class DebuffManager : MonoSingleton<DebuffManager>
         }
     }
     private bool isDown = false;
-    public bool IsDown { get => isDown; }
+    public bool IsDown
+    {
+        get => isDown;
+        private set
+        {
+            isDown = value;
+            EventManager.TriggerEvent("ColorChange");
+        }
+    }
 
     void Update()
     {
@@ -55,7 +63,7 @@ public class DebuffManager : MonoSingleton<DebuffManager>
                         value = 0;
                         break;
                     case SeasonState.FALL:
-                        value = Mathf.Clamp(isDown ? 0 : value + Time.deltaTime, MIN_VALUE, MAX_VALUE);
+                        value = Mathf.Clamp(isDown ? value + Time.deltaTime : 0, MIN_VALUE, MAX_VALUE);
                         break;
                 }
             }
@@ -66,7 +74,7 @@ public class DebuffManager : MonoSingleton<DebuffManager>
 
     public void UpdateDown(bool b)
     {
-        isDown = b;
+        IsDown = b;
     }
 
     void Debuff()
@@ -78,22 +86,24 @@ public class DebuffManager : MonoSingleton<DebuffManager>
             switch (state)
             {
                 case SeasonState.SUMMER_0:
-                    Debug.Log("湲곗젅");
+                    Debug.Log("????????");
                     EventManager.TriggerEvent("Faint");
-                    // cc맞는 애니 출력
+                    value = 0;
+                    GameManager.Instance.Player.GetComponent<SpriteRenderer>().color = Color.white;
+                    // cc?�ル?????????�늅?????�?�툓??
                     break;
                 case SeasonState.FALL:
-                    Debug.Log("??以묐룆");
-                    //EventManager.TriggerEvent("") 정의된 함수 가져오기
-                    // ?먰봽??媛먯냼 
+                    Debug.Log("???μ???�몭??袁㏉???");
+                    //EventManager.TriggerEvent("") ??�ル??��????????�?????�딆????�ル????몄쒜?�▲�???
+                    // ??�?���?��????????�봿????
                     break;
                 case SeasonState.WINTER:
-                    Debug.Log("鍮숆껐");
+                    Debug.Log("?????�쏅�??");
                     EventManager.TriggerEvent("Faint");
-                    // cc맞는 애니 출력
+                    value = 0;
+                    // cc?꿔꺂??????????�뒇????????????
                     break;
             }
-            value = 0;
             isDebuff = false;
         }
     }
@@ -129,9 +139,9 @@ public class DebuffManager : MonoSingleton<DebuffManager>
     //{
     //    Transform playerTr = GameManager.Instance.Player.transform;
 
-    //    // 만약 봄 끝 지점의 높이보다 낮으면 -> 봄
-    //    // 만약 여름 끝 지점의 높이보다 낮으면 -> 여름
-    //    // 만약 가을 끝 지점의 높이보다 낮으면 -> 가을
-    //    // 만약 겨울 끝 지점의 높이보다 낮으면 -> 겨울
+    //    // ?�ル???節?�쑏??????�ル?????????�?��꼨援???�쥉??�뉩????????좎떵?-> ??
+    //    // ?�ル???節?�쑏????????�ル?????????�?��꼨援???�쥉??�뉩????????좎떵?-> ????
+    //    // ?�ル???節?�쑏???좊읈??????�ル?????????�?��꼨援???�쥉??�뉩????????좎떵?-> ??좊읈???
+    //    // ?�ル???節?�쑏??濡る?�泳?????�ル?????????�?��꼨援???�쥉??�뉩????????좎떵?-> ?濡る?�泳??
     //}
 }
