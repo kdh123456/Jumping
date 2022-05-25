@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1026713721820399244}
   m_Layer: 3
   m_Name: Fly_Empty
-  m_TagString: Untagged
+  m_TagString: Fly_Empty
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -855,8 +855,18 @@ MonoBehaviour:
     - {fileID: 5656507913107934222, guid: cee85756b76e6504c89b5b731819f29a, type: 3}
     - {fileID: 1063761279057351565, guid: bbfeb5d9c22e01b48ba81a6e2ed0e9d2, type: 3}
     - {fileID: 1744560186666972498, guid: 1ba4ef0cd3977b040b6d31cc167f69bd, type: 3}
+<<<<<<< HEAD:Assets/01. Scenes/SampleScene.unity.orig
+    - {fileID: 6740278163030585760, guid: e127700a22a621642a27272d1799aae6, type: 3}
+    - {fileID: 4552445171302851666, guid: 869cd39c3005c33418eebad64df1270b, type: 3}
+    prefabCreateCounts: 0500000005000000050000000500000005000000050000000500000005000000050000000500000005000000
+=======
     - {fileID: 3324892690834422749, guid: bc1d1823e185ae647b4361133f5a0c0d, type: 3}
-    prefabCreateCounts: 05000000050000000500000005000000050000000500000005000000050000000500000005000000
+    - {fileID: 1026713721820399247, guid: cd56bd739dacd08478d0f25559c20409, type: 3}
+    - {fileID: 5405758893787564166, guid: 110215515935cfa4cacf5be6be5734ca, type: 3}
+    - {fileID: 9125785737108563460, guid: 9cbfb97e12de1354c8915c967bdb775a, type: 3}
+    - {fileID: 5405758893787564166, guid: 110215515935cfa4cacf5be6be5734ca, type: 3}
+    prefabCreateCounts: 0500000005000000050000000500000005000000050000000500000005000000050000000500000005000000050000000500000005000000
+>>>>>>> daehee:Assets/1. Scenes/SampleScene.unity
 --- !u!1 &100988552
 GameObject:
   m_ObjectHideFlags: 0
@@ -888,7 +898,15 @@ Transform:
   - {fileID: 84102844}
   - {fileID: 664537634}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+<<<<<<< HEAD:Assets/01. Scenes/SampleScene.unity.orig
+<<<<<<< HEAD:Assets/1. Scenes/SampleScene.unity
+  m_RootOrder: 11
+=======
+  m_RootOrder: 7
+>>>>>>> kjp:Assets/01. Scenes/SampleScene.unity
+=======
+  m_RootOrder: 9
+>>>>>>> daehee:Assets/1. Scenes/SampleScene.unity
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &118175650
 GameObject:
@@ -1549,7 +1567,15 @@ Transform:
   m_Children:
   - {fileID: 1877980045}
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+<<<<<<< HEAD:Assets/01. Scenes/SampleScene.unity.orig
+<<<<<<< HEAD:Assets/1. Scenes/SampleScene.unity
+  m_RootOrder: 18
+=======
+  m_RootOrder: 15
+>>>>>>> kjp:Assets/01. Scenes/SampleScene.unity
+=======
+  m_RootOrder: 17
+>>>>>>> daehee:Assets/1. Scenes/SampleScene.unity
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &230548971
 GameObject:
@@ -2650,7 +2676,15 @@ Transform:
   - {fileID: 1071237735}
   - {fileID: 341728748}
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+<<<<<<< HEAD:Assets/01. Scenes/SampleScene.unity.orig
+<<<<<<< HEAD:Assets/1. Scenes/SampleScene.unity
+  m_RootOrder: 16
+=======
+  m_RootOrder: 13
+>>>>>>> kjp:Assets/01. Scenes/SampleScene.unity
+=======
+  m_RootOrder: 15
+>>>>>>> daehee:Assets/1. Scenes/SampleScene.unity
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &391169104
 GameObject:
@@ -2687,7 +2721,15 @@ Transform:
   - {fileID: 2023651931}
   - {fileID: 158748894}
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+<<<<<<< HEAD:Assets/01. Scenes/SampleScene.unity.orig
+<<<<<<< HEAD:Assets/1. Scenes/SampleScene.unity
+  m_RootOrder: 21
+=======
+  m_RootOrder: 18
+>>>>>>> kjp:Assets/01. Scenes/SampleScene.unity
+=======
+  m_RootOrder: 21
+>>>>>>> daehee:Assets/1. Scenes/SampleScene.unity
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &393572918
 GameObject:
@@ -3648,7 +3690,15 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+<<<<<<< HEAD:Assets/01. Scenes/SampleScene.unity.orig
+<<<<<<< HEAD:Assets/1. Scenes/SampleScene.unity
+  m_RootOrder: 12
+=======
+  m_RootOrder: 8
+>>>>>>> kjp:Assets/01. Scenes/SampleScene.unity
+=======
+  m_RootOrder: 10
+>>>>>>> daehee:Assets/1. Scenes/SampleScene.unity
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &536577655
 BoxCollider2D:
@@ -6346,7 +6396,15 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+<<<<<<< HEAD:Assets/01. Scenes/SampleScene.unity.orig
+<<<<<<< HEAD:Assets/1. Scenes/SampleScene.unity
+  m_RootOrder: 15
+=======
+  m_RootOrder: 12
+>>>>>>> kjp:Assets/01. Scenes/SampleScene.unity
+=======
+  m_RootOrder: 14
+>>>>>>> daehee:Assets/1. Scenes/SampleScene.unity
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &636628989
 MonoBehaviour:
@@ -8691,7 +8749,15 @@ Transform:
   m_Children:
   - {fileID: 879924374}
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+<<<<<<< HEAD:Assets/01. Scenes/SampleScene.unity.orig
+<<<<<<< HEAD:Assets/1. Scenes/SampleScene.unity
+  m_RootOrder: 19
+=======
+  m_RootOrder: 16
+>>>>>>> kjp:Assets/01. Scenes/SampleScene.unity
+=======
+  m_RootOrder: 18
+>>>>>>> daehee:Assets/1. Scenes/SampleScene.unity
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &828842746
 GameObject:
@@ -9224,7 +9290,11 @@ MonoBehaviour:
   - {fileID: 22100000, guid: 9cc5fb9a69f9b1a4e8ac6898cb846ab0, type: 2}
   - {fileID: 22100000, guid: 69baa149664c2fd49a229bb392a1a52b, type: 2}
   - {fileID: 22100000, guid: 69baa149664c2fd49a229bb392a1a52b, type: 2}
+<<<<<<< HEAD:Assets/01. Scenes/SampleScene.unity.orig
+=======
   - {fileID: 22100000, guid: 69baa149664c2fd49a229bb392a1a52b, type: 2}
+  - {fileID: 22100000, guid: 69baa149664c2fd49a229bb392a1a52b, type: 2}
+>>>>>>> daehee:Assets/1. Scenes/SampleScene.unity
 --- !u!114 &927499639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9399,6 +9469,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6d4189adc56415489d3378bd72c6174, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD:Assets/01. Scenes/SampleScene.unity.orig
+<<<<<<< HEAD:Assets/1. Scenes/SampleScene.unity
+=======
+=======
+  playerScrollbar: {fileID: 0}
+>>>>>>> daehee:Assets/1. Scenes/SampleScene.unity
 --- !u!1 &933378146
 GameObject:
   m_ObjectHideFlags: 0
@@ -9520,7 +9596,11 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+<<<<<<< HEAD:Assets/01. Scenes/SampleScene.unity.orig
+  m_RootOrder: 10
+=======
+  m_RootOrder: 12
+>>>>>>> daehee:Assets/1. Scenes/SampleScene.unity
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!58 &933378151
 CircleCollider2D:
@@ -18189,7 +18269,15 @@ Transform:
   - {fileID: 25967996}
   - {fileID: 1318796450}
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+<<<<<<< HEAD:Assets/01. Scenes/SampleScene.unity.orig
+<<<<<<< HEAD:Assets/1. Scenes/SampleScene.unity
+  m_RootOrder: 20
+=======
+  m_RootOrder: 17
+>>>>>>> kjp:Assets/01. Scenes/SampleScene.unity
+=======
+  m_RootOrder: 19
+>>>>>>> daehee:Assets/1. Scenes/SampleScene.unity
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1546260497
 GameObject:
@@ -19386,7 +19474,15 @@ Transform:
   - {fileID: 721312002}
   - {fileID: 63813023}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+<<<<<<< HEAD:Assets/01. Scenes/SampleScene.unity.orig
+<<<<<<< HEAD:Assets/1. Scenes/SampleScene.unity
+  m_RootOrder: 13
+=======
+  m_RootOrder: 9
+>>>>>>> kjp:Assets/01. Scenes/SampleScene.unity
+=======
+  m_RootOrder: 11
+>>>>>>> daehee:Assets/1. Scenes/SampleScene.unity
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1894577323
 GameObject:
@@ -19777,7 +19873,15 @@ RectTransform:
   - {fileID: 2110676416}
   - {fileID: 357671055}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+<<<<<<< HEAD:Assets/01. Scenes/SampleScene.unity.orig
+<<<<<<< HEAD:Assets/1. Scenes/SampleScene.unity
+  m_RootOrder: 14
+=======
+  m_RootOrder: 11
+>>>>>>> kjp:Assets/01. Scenes/SampleScene.unity
+=======
+  m_RootOrder: 13
+>>>>>>> daehee:Assets/1. Scenes/SampleScene.unity
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -19957,7 +20061,15 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+<<<<<<< HEAD:Assets/01. Scenes/SampleScene.unity.orig
+<<<<<<< HEAD:Assets/1. Scenes/SampleScene.unity
+  m_RootOrder: 17
+=======
+  m_RootOrder: 14
+>>>>>>> kjp:Assets/01. Scenes/SampleScene.unity
+=======
+  m_RootOrder: 16
+>>>>>>> daehee:Assets/1. Scenes/SampleScene.unity
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1977558109
 MonoBehaviour:
