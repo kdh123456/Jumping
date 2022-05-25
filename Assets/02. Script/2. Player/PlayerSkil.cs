@@ -29,14 +29,14 @@ public class PlayerSkil : MonoBehaviour
         isFacing = (playerMove.facing == PlayerMove.Facing.LEFT) ? true : false;
     }
 
-    #region ???��??�????�린
+    #region ???뵠??????띾┛
     public void Fire()
     {
         GameObject fireBall = ObjectPool.Instance.GetObject(PoolObjectType.FIREBALL_OBJECT);
         fireBall.transform.position = this.transform.position;
         fireBall.GetComponent<SpriteRenderer>().flipX = isFacing;
 
-        fireBall.transform.DOMove((isFacing ? Vector3.left : Vector3.right) * 10, 1) // ??좎룞???좎룞??�뜝? ??좎룞??�뜝?
+        fireBall.transform.DOMove((isFacing ? Vector3.left : Vector3.right) * 10, 1) // ??醫롫짗???醫롫짗??용쐻? ??醫롫짗??용쐻?
             .SetEase(Ease.Linear).SetRelative()
             .OnComplete(() => ObjectPool.Instance.ReturnObject(PoolObjectType.FIREBALL_OBJECT, fireBall));
 
@@ -46,7 +46,7 @@ public class PlayerSkil : MonoBehaviour
     }
     #endregion
 
-    #region ?곗궛留뚮뱾湲?
+    #region ?怨쀪텦筌띾슢諭얏묾?
     private bool isUmbrella = false;
     public void CreateUmbrella()
     {
@@ -71,7 +71,7 @@ public class PlayerSkil : MonoBehaviour
     }
     #endregion
 
-    #region ?�ㅼ????묒븘吏�?// ?????? ??�쓬
+    #region ?뚣끉????臾믩툡筌왖疫?// ?????? ??놁벉
     [System.Obsolete]
     private bool isSmall = false;
 
@@ -79,7 +79,7 @@ public class PlayerSkil : MonoBehaviour
     private void GetSmaller()
     {
         if (isSmall) return;
-        // ??좎룞???좎룞??�뜝???
+        // ??醫롫짗???醫롫짗??용쐻???
         //playerCollider.size = new Vector2(playerCollider.size.x * .5f, playerCollider.size.y * .5f);
         //playerCollider.offset = new Vector2(0, -.47f);
         this.transform.localScale = Vector3.one * .5f;
@@ -99,7 +99,7 @@ public class PlayerSkil : MonoBehaviour
     }
     #endregion
 
-    #region ??�툕 ?�밴�?
+    #region ??덊닏 ?믩객由?
     public void UseMedicinalHerb()
     {
         StartCoroutine(UseMedicinalHerbCoroutine());
@@ -109,11 +109,11 @@ public class PlayerSkil : MonoBehaviour
     {
         DebuffManager.Instance.UpdateDown(true);
         yield return new WaitForSeconds(0.01f);
-        DebuffManager.Instance.UpdateDown(false);
+        //DebuffManager.Instance.UpdateDown(false);
     }
     #endregion
 
-    #region ???�� ?�밴�?
+    #region ???봺 ?믩객由?
 
     private bool isFlyEat = false;
     public void EatFly()

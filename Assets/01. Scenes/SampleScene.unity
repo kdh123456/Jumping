@@ -77235,6 +77235,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2682046779810397251, guid: 3965ce4b3a3446641aa61f4f926b3484, type: 3}
+      propertyPath: m_SortingLayer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2682046779810397251, guid: 3965ce4b3a3446641aa61f4f926b3484, type: 3}
+      propertyPath: m_SortingOrder
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2682046779810397251, guid: 3965ce4b3a3446641aa61f4f926b3484, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 1855293625
+      objectReference: {fileID: 0}
     - target: {fileID: 2682046779810397253, guid: 3965ce4b3a3446641aa61f4f926b3484, type: 3}
       propertyPath: m_Name
       value: MapleBlock
