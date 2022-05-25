@@ -103,13 +103,14 @@ public class PlayerSkil : MonoBehaviour
     public void UseMedicinalHerb()
     {
         StartCoroutine(UseMedicinalHerbCoroutine());
+        //DebuffManager.Instance.Reset();
     }
 
     IEnumerator UseMedicinalHerbCoroutine()
     {
+        DebuffManager.Instance.UpdateDown(false);
+        yield return new WaitForSeconds(1);
         DebuffManager.Instance.UpdateDown(true);
-        yield return new WaitForSeconds(0.01f);
-        //DebuffManager.Instance.UpdateDown(false);
     }
     #endregion
 
@@ -138,5 +139,4 @@ public class PlayerSkil : MonoBehaviour
 
 
     #endregion
-    
 }

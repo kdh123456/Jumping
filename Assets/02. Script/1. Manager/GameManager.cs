@@ -7,7 +7,7 @@ using DG.Tweening;
 
 public class GameManager : MonoSingleton<GameManager>
 {
-    [Header("???�?????")]
+    [Header("???嶺?????")]
     [SerializeField]
     private float maxY = 0f;
     [SerializeField]
@@ -37,7 +37,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     private readonly Vector2 resetPosition = new Vector2(-9f, 4f);
 
-    #region ??�ル????뼘????�?�츧???????�퓢????�▲�???�귙뢿沅?
+    #region ??꿔꺂????堉샕????Β?レ름???????댄뱼????β뼯援???곌퇈猶욘쾮?
     internal string SAVE_PATH = "";
     private readonly string SAVE_FILENAME = "/SaveFile.txt";
     #endregion
@@ -59,6 +59,8 @@ public class GameManager : MonoSingleton<GameManager>
         SAVE_PATH = Application.dataPath + "/Save";
         if (!Directory.Exists(SAVE_PATH))
             Directory.CreateDirectory(SAVE_PATH);
+
+        DOTween.Init().SetCapacity(500, 50);
     }
 
     void Start()
@@ -76,7 +78,7 @@ public class GameManager : MonoSingleton<GameManager>
             if (!UIManager.Instance.GetMenuPanelActive())
                     UIManager.Instance.SetSettingMenuActive();
 
-        if (isGameStart == true) //?????�?�퓡 ???????????????
+        if (isGameStart == true) //?????Β?ы뱻 ???????????????
         {
             timer += Time.deltaTime;
             UIManager.Instance.SetTimerActive(true);

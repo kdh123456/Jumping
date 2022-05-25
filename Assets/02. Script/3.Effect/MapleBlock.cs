@@ -27,7 +27,7 @@ public class MapleBlock : MonoBehaviour
         {
             //this.GetComponent<SpriteRenderer>().DOFade(0, .3f);
             //StartCoroutine(ShakeCoroutine());
-            seq.Play();
+            seq.Play().SetAutoKill();
         }
     }
 
@@ -42,7 +42,7 @@ public class MapleBlock : MonoBehaviour
         {
             //StartCoroutine(ShakeCoroutine());
             //this.GetComponent<SpriteRenderer>().DOFade(1, .3f);
-            seq.Play();
+            seq.Play().SetAutoKill();
         }
     }
 

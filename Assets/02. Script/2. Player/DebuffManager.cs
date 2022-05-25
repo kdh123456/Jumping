@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class DebuffManager : MonoSingleton<DebuffManager>
 {
@@ -89,6 +90,13 @@ public class DebuffManager : MonoSingleton<DebuffManager>
         IsDown = b;
     }
 
+    public void Reset()
+    {
+        value = 0f;
+        //spriteRenderer.DOColor(Color.white, .1f);
+        spriteRenderer.color = Color.white;
+    }
+
     void Debuff()
     {
         if (isDebuff) return;
@@ -132,9 +140,11 @@ public class DebuffManager : MonoSingleton<DebuffManager>
                 break;
             case "Summer_0":
                 UpdateSeason(SeasonState.SUMMER_0);
+                IsDown = false;
                 break;
             case "Summer_1":
                 UpdateSeason(SeasonState.SUMMER_1);
+                IsDown = false;
                 break;
             case "Fall":
                 UpdateSeason(SeasonState.FALL);
