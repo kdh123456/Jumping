@@ -7,9 +7,13 @@ public class ThunderBlock : MonoBehaviour
     //public GameObject thunder;
     public Transform thunderLocation;
     public float thunderTime = 5f;
+
+    private static WaitForSeconds waitForSecondsThunderTime;
     void Start()
     {
-        //?•ê³Œ?????ë½?“  ??«ë¡«ë»???
+        waitForSecondsThunderTime = new WaitForSeconds(thunderTime);
+
+        //?ï§?Â€?????ç­Œ?è«­????ãƒ¢ë‹ªç­Œ???
         StartCoroutine(GetThunder());
     }
 
@@ -17,7 +21,7 @@ public class ThunderBlock : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(thunderTime);
+            yield return waitForSecondsThunderTime;
             if (GameManager.Instance.IsGameStart)
             {
                 GameObject thunder = ObjectPool.Instance.GetObject(PoolObjectType.THUNDER);

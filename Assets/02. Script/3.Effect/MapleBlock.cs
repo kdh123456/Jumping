@@ -5,24 +5,11 @@ using DG.Tweening;
 
 public class MapleBlock : MonoBehaviour
 {
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            this.GetComponent<SpriteRenderer>().DOFade(0, .1f);
+            this.GetComponent<SpriteRenderer>().DOFade(0, .3f);
         }
     }
 
@@ -30,7 +17,7 @@ public class MapleBlock : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            this.GetComponent<SpriteRenderer>().DOFade(1, .1f);
+            this.GetComponent<SpriteRenderer>().DOFade(1, .3f);
         }
     }
 }

@@ -39,10 +39,11 @@ public class Thunder : MonoBehaviour
         }
     }
 
+#if UNITY_EDITOR
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, fieldofImpact);
     }
-
+#endif
 }

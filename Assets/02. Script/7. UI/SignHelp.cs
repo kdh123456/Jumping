@@ -37,8 +37,8 @@ public class SignHelp : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             Sequence seq = DOTween.Sequence();
-            seq.AppendCallback(() => text.gameObject.SetActive(false));
             seq.Append(text.DOFade(0, .1f));
+            seq.AppendCallback(() => text.gameObject.SetActive(false));
         }
     }
 }
