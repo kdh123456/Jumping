@@ -42,14 +42,14 @@ public class PlayerSkil : Player
         isFacing = (playerMove.facing == PlayerMove.Facing.LEFT) ? true : false;
     }
 
-    #region ?åå?ù¥?ñ¥ Î≥? ?èòÍ∏?
+    #region ?ÎôÜ?Ïî†?Îº± ËπÇ? ?Î£úÊπ≤?
     public void Fire()
     {
         GameObject fireBall = ObjectPool.Instance.GetObject(PoolObjectType.FIREBALL_OBJECT);
         fireBall.transform.position = this.transform.position;
         fireBall.GetComponent<SpriteRenderer>().flipX = isFacing;
 
-        fireBall.transform.DOMove((isFacing ? Vector3.left : Vector3.right) * 10, 1) // ?ïû?úºÎ°? ?èòÍ∏?
+        fireBall.transform.DOMove((isFacing ? Vector3.left : Vector3.right) * 10, 1) // ?Î∏µ?ÏëùÊø°? ?Î£úÊπ≤?
             .SetEase(Ease.Linear).SetRelative()
             .OnComplete(() => ObjectPool.Instance.ReturnObject(PoolObjectType.FIREBALL_OBJECT, fireBall));
 
@@ -58,7 +58,7 @@ public class PlayerSkil : Player
     }
     #endregion
 
-    #region ?ö∞?Ç∞ ?ì∞Í∏?
+    #region ?Ïä¶?Í∂õ ?Î≤êÊπ≤?
     private bool isUmbrella = false;
     public void CreateUmbrella()
     {
@@ -68,7 +68,7 @@ public class PlayerSkil : Player
         umbrella.transform.SetParent(this.transform);
         umbrella.GetComponent<SpriteRenderer>().flipX = isFacing;
         isUmbrella = true;
-        playerMove.seasonalDebuff.UpdateDown(true);
+        DebuffManager.Instance.UpdateDown(true);
         StartCoroutine(DeleteUmbrella(umbrella));
     }
 
@@ -76,20 +76,20 @@ public class PlayerSkil : Player
     {
         yield return new WaitForSeconds(5);
         ObjectPool.Instance.ReturnObject(PoolObjectType.UMBRELLA, gameObject);
-        playerMove.seasonalDebuff.UpdateDown(false);
+        DebuffManager.Instance.UpdateDown(false);
         isUmbrella = true;
         PlayerStateManager.Instance.UpdateState(PlayerState.BASIC);
         playerMove.UpdateAnimator();
     }
     #endregion
 
-    #region ?ûë?ïÑÏß?Í∏?
+    #region ?Ïòâ?Î∏òÔßû?Êπ≤?
 
     private bool isSmall = false;
     private void GetSmaller()
     {
         if (isSmall) return;
-        // ?ûë?ïÑÏß?Í∏?
+        // ?Ïòâ?Î∏òÔßû?Êπ≤?
         //playerCollider.size = new Vector2(playerCollider.size.x * .5f, playerCollider.size.y * .5f);
         //playerCollider.offset = new Vector2(0, -.47f);
         this.transform.localScale = Vector3.one * .5f;
@@ -109,7 +109,7 @@ public class PlayerSkil : Player
     }
     #endregion
 
-    #region ∆ƒ∏Æ¥…∑¬!
+    #region ÌååÎ¶¨Îä•Î†•!
 
 
 
@@ -198,7 +198,7 @@ public class PlayerSkil : Player
             waterball.transform.position = this.transform.position;
             waterball.GetComponent<SpriteRenderer>().flipX = isFacing;
 
-            waterball.transform.DOMove((isFacing ? Vector3.left : Vector3.right) * 10, 1) // ?ïû?úºÎ°? ?èòÍ∏?
+            waterball.transform.DOMove((isFacing ? Vector3.left : Vector3.right) * 10, 1) // ?Î∏µ?ÏëùÊø°? ?Î£úÊπ≤?
                 .SetEase(Ease.Linear).SetRelative()
                 .OnComplete(() => ObjectPool.Instance.ReturnObject(PoolObjectType.WATERBALL, waterball));
             GetComponent<Rigidbody2D>().AddForce((isFacing ? Vector3.right : Vector3.left)*10);
