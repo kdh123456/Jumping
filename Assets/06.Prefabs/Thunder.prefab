@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4552445171302851667}
   - component: {fileID: 4552445171302851662}
   - component: {fileID: 4552445171302851665}
+  - component: {fileID: 7241592804473541278}
   m_Layer: 0
   m_Name: Thunder
   m_TagString: Untagged
@@ -115,8 +116,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 453f0f75ad6011f479432c2f4a22e6b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fieldofImpact: 3
+  fieldofImpact: 4
   force: 300
   LayerToHit:
     serializedVersion: 2
     m_Bits: 128
+--- !u!58 &7241592804473541278
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4552445171302851666}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 4
