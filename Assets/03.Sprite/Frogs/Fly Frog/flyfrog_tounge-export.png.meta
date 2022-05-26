@@ -1,34 +1,31 @@
 fileFormatVersion: 2
-guid: e9ada57f84fef0e45a932a77e40af008
+guid: 7b4d6d426fde47540a27d21c29352e73
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 529193079196178030
-    second: flyfrog_tounge_0
+      213: 87159490049140490
+    second: flyfrog_tounge-export_0
   - first:
-      213: 6092361209825865684
-    second: flyfrog_tounge_1
+      213: -7408674381968865829
+    second: flyfrog_tounge-export_1
   - first:
-      213: -2351653985684835693
-    second: flyfrog_tounge_2
+      213: -1841573588991785492
+    second: flyfrog_tounge-export_2
   - first:
-      213: -3268404469123299840
-    second: flyfrog_tounge_3
+      213: 5855695203945143978
+    second: flyfrog_tounge-export_3
   - first:
-      213: 2763788312559785464
-    second: flyfrog_tounge_4
+      213: 121157052341628576
+    second: flyfrog_tounge-export_4
   - first:
-      213: -628614004264540779
-    second: flyfrog_tounge_5
+      213: 9171678015677488543
+    second: flyfrog_tounge-export_5
   - first:
-      213: 4888098782539017698
-    second: flyfrog_tounge_6
+      213: 8314606924037220959
+    second: flyfrog_tounge-export_6
   - first:
-      213: -4565321388143386364
-    second: flyfrog_tounge_7
-  - first:
-      213: -125487658480907641
-    second: flyfrog_tounge_8
+      213: 7879713574075340975
+    second: flyfrog_tounge-export_7
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -130,190 +127,169 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: flyfrog_tounge_0
+      name: flyfrog_tounge-export_0
       rect:
         serializedVersion: 2
-        x: 2
+        x: 0
         y: 0
-        width: 27
+        width: 71
         height: 29
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e66551f3d42185700800000000000000
-      internalID: 529193079196178030
+      spriteID: a07ee2b2817a53100800000000000000
+      internalID: 87159490049140490
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: flyfrog_tounge_1
+      name: flyfrog_tounge-export_1
       rect:
         serializedVersion: 2
-        x: 67
+        x: 71
         y: 0
-        width: 26
-        height: 22
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4df2a0bdd3a6c8450800000000000000
-      internalID: 6092361209825865684
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: flyfrog_tounge_2
-      rect:
-        serializedVersion: 2
-        x: 130
-        y: 0
-        width: 33
+        width: 71
         height: 29
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 392bf9cd82f3d5fd0800000000000000
-      internalID: -2351653985684835693
+      spriteID: bd5853607e91f2990800000000000000
+      internalID: -7408674381968865829
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: flyfrog_tounge_3
+      name: flyfrog_tounge-export_2
       rect:
         serializedVersion: 2
-        x: 195
+        x: 142
         y: 0
-        width: 48
-        height: 22
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0064b9bb37b44a2d0800000000000000
-      internalID: -3268404469123299840
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: flyfrog_tounge_4
-      rect:
-        serializedVersion: 2
-        x: 258
-        y: 0
-        width: 49
+        width: 71
         height: 29
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8f5908cb3d2fa5620800000000000000
-      internalID: 2763788312559785464
+      spriteID: ce54760f39a6176e0800000000000000
+      internalID: -1841573588991785492
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: flyfrog_tounge_5
+      name: flyfrog_tounge-export_3
       rect:
         serializedVersion: 2
-        x: 323
+        x: 213
         y: 0
-        width: 32
-        height: 22
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 595e9f6c4e6b647f0800000000000000
-      internalID: -628614004264540779
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: flyfrog_tounge_6
-      rect:
-        serializedVersion: 2
-        x: 386
-        y: 0
-        width: 27
+        width: 73
         height: 29
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2ede148c1f306d340800000000000000
-      internalID: 4888098782539017698
+      spriteID: aaedb1063cb934150800000000000000
+      internalID: 5855695203945143978
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: flyfrog_tounge_7
+      name: flyfrog_tounge-export_4
       rect:
         serializedVersion: 2
-        x: 450
+        x: 286
         y: 0
-        width: 27
+        width: 71
         height: 29
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4016836b268b4a0c0800000000000000
-      internalID: -4565321388143386364
+      spriteID: 0ae2bda72bf6ea100800000000000000
+      internalID: 121157052341628576
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: flyfrog_tounge_8
+      name: flyfrog_tounge-export_5
       rect:
         serializedVersion: 2
-        x: 515
+        x: 357
         y: 0
-        width: 52
-        height: 22
+        width: 69
+        height: 29
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 78acc84b3ad224ef0800000000000000
-      internalID: -125487658480907641
+      spriteID: f9d57b6cf88584f70800000000000000
+      internalID: 9171678015677488543
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flyfrog_tounge-export_6
+      rect:
+        serializedVersion: 2
+        x: 426
+        y: 0
+        width: 71
+        height: 29
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f5aed3ad1fa636370800000000000000
+      internalID: 8314606924037220959
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flyfrog_tounge-export_7
+      rect:
+        serializedVersion: 2
+        x: 497
+        y: 0
+        width: 71
+        height: 29
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fa895924fbd5a5d60800000000000000
+      internalID: 7879713574075340975
       vertices: []
       indices: 
       edges: []
