@@ -17,6 +17,7 @@ TagManager:
   - Summer_0
   - Summer_1
   - Snake
+  - Fly_Empty
   layers:
   - Default
   - TransparentFX
