@@ -13,10 +13,7 @@ public enum PoolObjectType
     THUNDER, // 번개
     FLY, // 파리 아이템
     FLY_EMPTY, //파리 공중부양 위한 빈 오브젝트 콜라이더
-<<<<<<< HEAD
     WELL,
-    WATERBALL // 파리 공중 옆 이동
-=======
+    WATERBALL, // 파리 공중 옆 이동
     SNAKE // 뱀
->>>>>>> kjp
 }

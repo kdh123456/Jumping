@@ -38,12 +38,6 @@ public class PlayerMove : Player
 
     public Facing facing { get; private set; }
 
-<<<<<<< HEAD
-=======
-    [Header("??????????????濡?씀?濾???????????????????????????繹먮끍????????癲?????????????椰????????????????????썹땟戮녹??諭???????")]
-    [SerializeField]
-    private int playerpos = 0;
->>>>>>> kjp
 
 
     private bool isJumpStart = false;
@@ -57,28 +51,10 @@ public class PlayerMove : Player
 
     public bool IsMove { get { return isMove; } }
 
-<<<<<<< HEAD
-=======
-    [SerializeField, Tooltip("PlayerState?? ????????거??????????????????????????????썹땟戮녹??諭?????⑸㎦????????????????")]
-    private List<AnimatorOverrideController> frogAnimators = new List<AnimatorOverrideController>();
->>>>>>> kjp
 
     protected override void Start()
     {
         base.Start();
-<<<<<<< HEAD
-=======
-        //TryGetComponent(out seasonalDebuff);
-        //spriteRenderer = GetComponent<SpriteRenderer>();
-
-        EventManager.StartListening("START", StartScroll);
-        EventManager.StartListening("STOP", StopScrolling);
-        EventManager.StartListening("Swallow", EnemySwallow);
-        EventManager.StartListening("Tunder", ChangeWallBool);
-        EventManager.StartListening("Faint", PlayerFaint);
-        EventManager.StartListening("FloorCheck", IfFloor);
-        EventManager.StartListening("ColorChange", () => FrogColorChange(DebuffManager.Instance.IsDown));
->>>>>>> kjp
 
         UpdateAnimator();
         Init();
@@ -86,70 +62,14 @@ public class PlayerMove : Player
 
     protected override void Update()
     {
-<<<<<<< HEAD
-=======
-        direction = spriteRenderer.flipX == true ? Vector3.left : Vector3.right;
-        position = new Vector2(transform.position.x, transform.position.y + .5f);
-
-        hit = Physics2D.Raycast(position, direction, 3, LayerMask.GetMask("Ability"));
-        Debug.DrawRay(position, direction * 3, Color.green);
->>>>>>> kjp
         base.Update();
         MapExtent();
         DrowRay();
 
         PlayerAnimation();
-<<<<<<< HEAD
-        FrogColorChange();
         ChangeFacing();
         Addicted();
 
-=======
-        //FrogColorChange(); // ??????????????????諛몃마嶺뚮?????????????硫λ젒???????????꿔꺂???⑸븶??????????????거?????????????????ㅼ뒧???怨??????????
-
-        if (Time.timeScale != 0)
-        {
-            ChangeFacing();
-        }
-
-
-        if (hit.collider != null)
-        {
-            if (hit.collider.TryGetComponent(out Ability_State ability_State))
-            {
-                itemButton.transform.position = this.transform.position + new Vector3((facing == Facing.LEFT ? -1.5f : 1.5f), .7f, 0);
-                itemButton.SetActive(true);
-            }
-            else
-            {
-                itemButton.SetActive(false);
-            }
-        }
-        else
-        {
-            itemButton.SetActive(false);
-        }
-
-        //???????????????????????筌???? ?????
-        if (isGrounded == false)
-        {
-            //X????????椰????????????????⑤벡?????
-            if (this.transform.position.x > GameManager.Instance.mxX)
-                this.transform.position = new Vector3(GameManager.Instance.mxX, transform.position.y, transform.position.z);
-
-            //X???????????????????????????꾨덱????
-            if (this.transform.position.x < GameManager.Instance.mnX)
-                this.transform.position = new Vector3(GameManager.Instance.mnX, transform.position.y, transform.position.z);
-
-            //Y????????椰????????????????⑤벡?????
-            if (this.transform.position.y > GameManager.Instance.mxY)
-                this.transform.position = new Vector3(transform.position.x, GameManager.Instance.mxY, transform.position.z);
-
-            //Y???????????????????????????꾨덱????
-            if (this.transform.position.y < GameManager.Instance.mnY)
-                this.transform.position = new Vector3(transform.position.x, 4, transform.position.z);
-        }
->>>>>>> kjp
     }
 
     void FixedUpdate()
@@ -230,16 +150,8 @@ public class PlayerMove : Player
         //transform.DOKill();
         DOTween.Kill(transform);
         SeasonState state = DebuffManager.Instance.State;
-<<<<<<< HEAD
-        if (state == SeasonState.SUMMER_0 || state == SeasonState.SUMMER_1)
-        {
-            spriteRenderer.color = new Color(255f, 255f - (255f * value / maxValue * 100), 255f - (255f * value / maxValue * 100));
-        }
-        else if (state == SeasonState.FALL)
-=======
 
         if (GameManager.Instance.IsGameStart)
->>>>>>> kjp
         {
             if (!isFaint)
             {
@@ -372,21 +284,18 @@ public class PlayerMove : Player
     {
         if (collision.collider.CompareTag("Water"))
         {
-<<<<<<< HEAD
             rPlayerpos = playerpos;
             playerScrollbar.maxValue = rPlayerMaxValue;
-=======
-            if (DebuffManager.Instance.State == SeasonState.SUMMER_0)
-            {
-                DebuffManager.Instance.UpdateDown(false);
-            }
-            else if (DebuffManager.Instance.State == SeasonState.SUMMER_1)
-            {
-                playerpos = 5;
-                playerScrollbar.maxValue = 30;
-            }
+            // if (DebuffManager.Instance.State == SeasonState.SUMMER_0)
+            // {
+            //     DebuffManager.Instance.UpdateDown(false);
+            // }
+            // else if (DebuffManager.Instance.State == SeasonState.SUMMER_1)
+            // {
+            //     playerpos = 5;
+            //     playerScrollbar.maxValue = 30;
+            // }
             
->>>>>>> kjp
         }
         else if (collision.collider.CompareTag("LeftWall") || collision.collider.CompareTag("RightWall"))
         {
@@ -411,14 +320,9 @@ public class PlayerMove : Player
         }
     }
 
-<<<<<<< HEAD
     #region 플레이어 패치 변경(좌우 변경)
     /// <summary>
     /// 머리의 위치와 버튼 위치 조정
-=======
-    /// <summary>
-    /// ??????????????濡?씀?濾???????????????????⑤벡???????????????????????⑤벡??????
->>>>>>> kjp
     /// </summary>
     private void ChangeFacing()
     {
@@ -455,7 +359,7 @@ public class PlayerMove : Player
         }
 
     }
-
+    #endregion
     /// <summary>
     /// ??????????????濡?씀?濾?????????????????
     /// </summary>
@@ -609,6 +513,7 @@ public class PlayerMove : Player
         EventManager.StartListening("Thunder", ChangeWallBool);
         EventManager.StartListening("ThunderExplode", ChangeWallBool);
         EventManager.StartListening("Faint", PlayerFaint);
-        EventManager.StartListening("FloorCheck", ifFloor);
+        EventManager.StartListening("FloorCheck", IfFloor);
+        EventManager.StartListening("ColorChange", () => FrogColorChange(DebuffManager.Instance.IsDown));
     }
 }
