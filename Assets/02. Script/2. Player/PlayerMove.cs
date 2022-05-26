@@ -227,6 +227,12 @@ public class PlayerMove : Player
 
                     StartCoroutine(ItemSpawnManager.Instance.ItmeSpawn(PoolObjectType.HERB, hit.collider.transform));
                     break;
+                    case AbilityState.WATER:
+                    StartCoroutine(ItemSpawnManager.Instance.WaterSpawn(hit.collider.gameObject));
+                    PlayerStateManager.Instance.UpdateState(PlayerState.WATER);
+
+                    //StartCoroutine(ItemSpawnManager.Instance.ItmeSpawn(PoolObjectType.WATERBALL, hit.collider.transform));
+                    break;
             }
             UpdateAnimator();
         }

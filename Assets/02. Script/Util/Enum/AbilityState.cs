@@ -6,5 +6,5 @@ public enum AbilityState
     FLY, // 파리 능력
     HERB, // 약초
     Fly, // 공중 체중 능력
-    Water // 공중 옆 이동?
+    WATER // 공중 옆 이동?
 }

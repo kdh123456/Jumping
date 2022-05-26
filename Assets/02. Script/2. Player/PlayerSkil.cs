@@ -28,8 +28,7 @@ public class PlayerSkil : Player
         EventManager.StartListening("Umbrella", CreateUmbrella);
         EventManager.StartListening("Small", GetSmaller);
         EventManager.StartListening("Fly", EatFly);
-        EventManager.StartListening("Well", EatWell);
-        EventManager.StartListening("Water", Water);
+        EventManager.StartListening("EatWell", EatWell);
 
     }
 
@@ -42,14 +41,14 @@ public class PlayerSkil : Player
         isFacing = (playerMove.facing == PlayerMove.Facing.LEFT) ? true : false;
     }
 
-    #region ?ë™†?ì” ?ë¼± è¹‚? ?ë£œæ¹²?
+    #region ??™†??” ?ë¼? è¹?? ?ë£œæ¹²?
     public void Fire()
     {
         GameObject fireBall = ObjectPool.Instance.GetObject(PoolObjectType.FIREBALL_OBJECT);
         fireBall.transform.position = this.transform.position;
         fireBall.GetComponent<SpriteRenderer>().flipX = isFacing;
 
-        fireBall.transform.DOMove((isFacing ? Vector3.left : Vector3.right) * 10, 1) // ??é†«ë¡«ì§—???é†«ë¡«ì§—??ìš©ì»? ??é†«ë¡«ì§—??ìš©ì»?
+        fireBall.transform.DOMove((isFacing ? Vector3.left : Vector3.right) * 10, 1) // ???†«ë¡«ì§—????†«ë¡«ì§—???š©?»? ???†«ë¡«ì§—???š©?»?
             .SetEase(Ease.Linear).SetRelative()
             .OnComplete(() => ObjectPool.Instance.ReturnObject(PoolObjectType.FIREBALL_OBJECT, fireBall));
 
@@ -58,7 +57,7 @@ public class PlayerSkil : Player
     }
     #endregion
 
-    #region ?æ€¨ì€ªí…¦ç­Œë¾ìŠ¢è«­ì–ë¬¾?
+    #region ???¨ì?ªí…¦ç­Œë¾?Š¢è«??–ë¬??
     private bool isUmbrella = false;
     public void CreateUmbrella()
     {
@@ -83,7 +82,7 @@ public class PlayerSkil : Player
     }
     #endregion
 
-    #region ?ëš£ë‰????è‡¾ë¯©íˆ¡ç­Œì™–Â€ç–«?// ?????? ??ë†ë²‰
+    #region ??š£?‰?????‡¾ë¯©íˆ¡ç­Œì™–???–«?// ?????? ???†ë²?
     [System.Obsolete]
     private bool isSmall = false;
 
@@ -91,7 +90,7 @@ public class PlayerSkil : Player
     private void GetSmaller()
     {
         if (isSmall) return;
-        // ??é†«ë¡«ì§—???é†«ë¡«ì§—??ìš©ì»???
+        // ???†«ë¡«ì§—????†«ë¡«ì§—???š©?»???
         //playerCollider.size = new Vector2(playerCollider.size.x * .5f, playerCollider.size.y * .5f);
         //playerCollider.offset = new Vector2(0, -.47f);
         this.transform.localScale = Vector3.one * .5f;
@@ -124,7 +123,7 @@ public class PlayerSkil : Player
             }
         }
     }
-    #region ??ëŠë‹ ?ë¯©ê°ç”±?
+    #region ???Š?‹ ?ë¯©ê°?”±?
     public void UseMedicinalHerb()
     {
         StartCoroutine(UseMedicinalHerbCoroutine());
@@ -185,48 +184,35 @@ public class PlayerSkil : Player
     
     #region ? ??? ??
 
-    private bool isWater = false;
+    
 
-
+    
     public void EatWell()
     {
         GameObject well = ObjectPool.Instance.GetObject(PoolObjectType.WELL);
-        isWater = true;
-        //StartCoroutine(DeleteWell(well));
+        Animator wellAnimator = well.GetComponent<Animator>();
+
+        wellAnimator.SetBool("isEat",true);
+        GameObject waterball = ObjectPool.Instance.GetObject(PoolObjectType.WATERBALL);
+        waterball.transform.position = this.transform.position;
+        waterball.GetComponent<SpriteRenderer>().flipX = isFacing;
+        waterball.transform.DOMove((isFacing ? Vector2.left : Vector2.right) * 10, 1) // ?ë¸???‘æ¿?? ?ë£œæ¹²?
+            .SetEase(Ease.Linear).SetRelative()
+            .OnComplete(() => ObjectPool.Instance.ReturnObject(PoolObjectType.WATERBALL, waterball));
+            EventManager.TriggerEvent("Thunder");
+            EventManager.TriggerEvent("ThunderExplode");
+        rigid.AddForce((isFacing ? Vector2.right : Vector2.left)*100,ForceMode2D.Impulse);
+        PlayerStateManager.Instance.UpdateState(PlayerState.BASIC);
+
+        StartCoroutine(reRoaingWell(well));
+
 
     }
-
-    /*private IEnumerator DeleteWell(GameObject gameObject)
+    private IEnumerator reRoaingWell(GameObject gameObject)
     {
+        Animator wellAnimator = gameObject.GetComponent<Animator>();
         yield return new WaitForSeconds(5);
-        ObjectPool.Instance.ReturnObject(PoolObjectType.WELL, gameObject);
-    }*/
-    
-    public void Water()
-    {
-        if(isWater)
-        {
-            GameObject waterball = ObjectPool.Instance.GetObject(PoolObjectType.WATERBALL);
-            waterball.transform.position = this.transform.position;
-            waterball.GetComponent<SpriteRenderer>().flipX = isFacing;
-
-            waterball.transform.DOMove((isFacing ? Vector3.left : Vector3.right) * 10, 1) // ?ë¸µ?ì‘æ¿¡? ?ë£œæ¹²?
-                .SetEase(Ease.Linear).SetRelative()
-                .OnComplete(() => ObjectPool.Instance.ReturnObject(PoolObjectType.WATERBALL, waterball));
-            GetComponent<Rigidbody2D>().AddForce((isFacing ? Vector3.right : Vector3.left)*10);
-
-            PlayerStateManager.Instance.UpdateState(PlayerState.BASIC);
-
-            StartCoroutine(DeleteWater(waterball));
-        }
-        
-
-    }
-    private IEnumerator DeleteWater(GameObject gameObject)
-    {
-        yield return new WaitForSeconds(5);
-        ObjectPool.Instance.ReturnObject(PoolObjectType.WATERBALL, gameObject);
-        isWater = false;
+        wellAnimator.SetBool("isEat",false);
     }
 
     #endregion
