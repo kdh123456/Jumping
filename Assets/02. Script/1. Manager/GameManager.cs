@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using UnityEngine;
+using DG.Tweening;
 
 public class GameManager : MonoSingleton<GameManager>
 {
-    [Header("맵 범위")]
+    [Header("???�?????")]
     [SerializeField]
     private float maxY = 0f;
     [SerializeField]
@@ -36,7 +37,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     private readonly Vector2 resetPosition = new Vector2(-9f, 4f);
 
-    #region 세이브에 쓰는 것들
+    #region ??꿔꺂?????�샕?????????�름????????�뱼????β�?��???곌퇈?�욘�?
     internal string SAVE_PATH = "";
     private readonly string SAVE_FILENAME = "/SaveFile.txt";
     #endregion
@@ -49,6 +50,8 @@ public class GameManager : MonoSingleton<GameManager>
     private Transform finish = null;
     private float goalDistance = 0f;
 
+    private static WaitForSeconds waitForSeconds10 = new WaitForSeconds(1);
+
     void Awake()
     {
         playerTr = GameObject.FindWithTag("Player").transform;
@@ -56,6 +59,8 @@ public class GameManager : MonoSingleton<GameManager>
         SAVE_PATH = Application.dataPath + "/Save";
         if (!Directory.Exists(SAVE_PATH))
             Directory.CreateDirectory(SAVE_PATH);
+
+        DOTween.Init().SetCapacity(500, 50);
     }
 
     void Start()
@@ -73,7 +78,7 @@ public class GameManager : MonoSingleton<GameManager>
             if (!UIManager.Instance.GetMenuPanelActive())
                     UIManager.Instance.SetSettingMenuActive();
 
-        if (isGameStart == true) //이게 타이머 기능
+        if (isGameStart == true) //?????????�????????????????
         {
             timer += Time.deltaTime;
             UIManager.Instance.SetTimerActive(true);
@@ -139,7 +144,7 @@ public class GameManager : MonoSingleton<GameManager>
         save = LoadJsonFile<SAVE>(SAVE_PATH, SAVE_FILENAME);
         while (true)
         {
-            yield return new WaitForSeconds(1);
+            yield return waitForSeconds10;
             if (isGameStart)
                 SavePositionAndTimer();
         }

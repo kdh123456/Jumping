@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class DebuffManager : MonoSingleton<DebuffManager>
 {
@@ -36,6 +37,24 @@ public class DebuffManager : MonoSingleton<DebuffManager>
         }
     }
     private bool isDown = false;
+    public bool IsDown
+    {
+        get => isDown;
+        private set
+        {
+            isDown = value;
+            EventManager.TriggerEvent("ColorChange");
+        }
+    }
+
+    private PlayerMove playerMove;
+    private SpriteRenderer spriteRenderer;
+
+    private void Start()
+    {
+        spriteRenderer = GameManager.Instance.Player.GetComponent<SpriteRenderer>();
+        playerMove = GetComponent<PlayerMove>();
+    }
 
     void Update()
     {
@@ -43,19 +62,22 @@ public class DebuffManager : MonoSingleton<DebuffManager>
         {
             if (!isDebuff)
             {
-                switch (state)
+                if (!playerMove.IsFaint)
                 {
-                    case SeasonState.SUMMER_0:
-                    case SeasonState.SUMMER_1:
-                    case SeasonState.WINTER:
-                        value = Mathf.Clamp(isDown ? value - Time.deltaTime : value + Time.deltaTime, MIN_VALUE, MAX_VALUE);
-                        break;
-                    case SeasonState.SPRING:
-                        value = 0;
-                        break;
-                    case SeasonState.FALL:
-                        value = Mathf.Clamp(isDown ? 0 : value + Time.deltaTime, MIN_VALUE, MAX_VALUE);
-                        break;
+                    switch (state)
+                    {
+                        case SeasonState.SUMMER_0:
+                        case SeasonState.SUMMER_1:
+                        case SeasonState.WINTER:
+                            value = Mathf.Clamp(isDown ? value - Time.deltaTime : value + Time.deltaTime, MIN_VALUE, MAX_VALUE);
+                            break;
+                        case SeasonState.SPRING:
+                            value = 0;
+                            break;
+                        case SeasonState.FALL:
+                            value = Mathf.Clamp(isDown ? value + Time.deltaTime : 0, MIN_VALUE, MAX_VALUE);
+                            break;
+                    }
                 }
             }
 
@@ -65,7 +87,14 @@ public class DebuffManager : MonoSingleton<DebuffManager>
 
     public void UpdateDown(bool b)
     {
-        isDown = b;
+        IsDown = b;
+    }
+
+    public void Reset()
+    {
+        value = 0f;
+        //spriteRenderer.DOColor(Color.white, .1f);
+        spriteRenderer.color = Color.white;
     }
 
     void Debuff()
@@ -77,22 +106,23 @@ public class DebuffManager : MonoSingleton<DebuffManager>
             switch (state)
             {
                 case SeasonState.SUMMER_0:
-                    Debug.Log("기절");
-                    EventManager.TriggerEvent("Faint");
-                    // 여기서 cc에 맞는 애니메이션 출력
+                    Debug.Log("????????");
+                    // cc??遺얘턁???????????????????????????
                     break;
                 case SeasonState.FALL:
-                    Debug.Log("독 중독");
-                    //EventManager.TriggerEvent("") 정의된 함수 가져오기
-                    // 점프력 감소 
+                    Debug.Log("??????????썼린?濾?????熬곥끇????");
+                    //EventManager.TriggerEvent("") ???遺얘턁???????????????????????ル??????遺얘턁???????꿔꺂????釉먯춱?癲됱빖???????
+                    // ??????釉랁닑????????????????????
                     break;
                 case SeasonState.WINTER:
-                    Debug.Log("빙결");
-                    EventManager.TriggerEvent("Faint");
-                    // 여기서 cc에 맞는 애니메이션 출력
+                    Debug.Log("????????썹땟戮녹??諭???");
+                    // cc????븐뼐????????????????????????????
                     break;
             }
+            EventManager.TriggerEvent("Faint");
             value = 0;
+            spriteRenderer.color = Color.white;
+            isDebuff = false;
         }
     }
 
@@ -109,8 +139,10 @@ public class DebuffManager : MonoSingleton<DebuffManager>
                 UpdateSeason(SeasonState.SPRING);
                 break;
             case "Summer_0":
-            case "Summer_1":
                 UpdateSeason(SeasonState.SUMMER_0);
+                break;
+            case "Summer_1":
+                UpdateSeason(SeasonState.SUMMER_1);
                 break;
             case "Fall":
                 UpdateSeason(SeasonState.FALL);
@@ -121,13 +153,22 @@ public class DebuffManager : MonoSingleton<DebuffManager>
         }
     }
 
-    //private void Test()
-    //{
-    //    Transform playerTr = GameManager.Instance.Player.transform;
-
-    //    // 만약 봄 끝 지점의 높이보다 낮으면 -> 봄
-    //    // 만약 여름 끝 지점의 높이보다 낮으면 -> 여름
-    //    // 만약 가을 끝 지점의 높이보다 낮으면 -> 가을
-    //    // 만약 겨울 끝 지점의 높이보다 낮으면 -> 겨울
-    //}
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        switch (collision.tag)
+        {
+            case "Spring":
+                break;
+            case "Summer_0":
+                IsDown = false;
+                break;
+            case "Summer_1":
+                IsDown = false;
+                break;
+            case "Fall":
+                break;
+            case "Winter":
+                break;
+        }
+    }
 }

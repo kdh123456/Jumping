@@ -42,14 +42,22 @@ public class PlayerSkil : Player
         isFacing = (playerMove.facing == PlayerMove.Facing.LEFT) ? true : false;
     }
 
+<<<<<<< HEAD
     #region ?뙆?씠?뼱 蹂? ?룜湲?
+=======
+    #region ???뵠??????띾┛
+>>>>>>> kjp
     public void Fire()
     {
         GameObject fireBall = ObjectPool.Instance.GetObject(PoolObjectType.FIREBALL_OBJECT);
         fireBall.transform.position = this.transform.position;
         fireBall.GetComponent<SpriteRenderer>().flipX = isFacing;
 
+<<<<<<< HEAD
         fireBall.transform.DOMove((isFacing ? Vector3.left : Vector3.right) * 10, 1) // ?븵?쑝濡? ?룜湲?
+=======
+        fireBall.transform.DOMove((isFacing ? Vector3.left : Vector3.right) * 10, 1) // ??醫롫짗???醫롫짗??용쐻? ??醫롫짗??용쐻?
+>>>>>>> kjp
             .SetEase(Ease.Linear).SetRelative()
             .OnComplete(() => ObjectPool.Instance.ReturnObject(PoolObjectType.FIREBALL_OBJECT, fireBall));
 
@@ -58,7 +66,11 @@ public class PlayerSkil : Player
     }
     #endregion
 
+<<<<<<< HEAD
     #region ?슦?궛 ?벐湲?
+=======
+    #region ?怨쀪텦筌띾슢諭얏묾?
+>>>>>>> kjp
     private bool isUmbrella = false;
     public void CreateUmbrella()
     {
@@ -83,20 +95,31 @@ public class PlayerSkil : Player
     }
     #endregion
 
+<<<<<<< HEAD
     #region ?옉?븘吏?湲?
 
+=======
+    #region ?뚣끉????臾믩툡筌왖疫?// ?????? ??놁벉
+    [System.Obsolete]
+>>>>>>> kjp
     private bool isSmall = false;
+
+    [System.Obsolete]
     private void GetSmaller()
     {
         if (isSmall) return;
+<<<<<<< HEAD
         // ?옉?븘吏?湲?
+=======
+        // ??醫롫짗???醫롫짗??용쐻???
+>>>>>>> kjp
         //playerCollider.size = new Vector2(playerCollider.size.x * .5f, playerCollider.size.y * .5f);
         //playerCollider.offset = new Vector2(0, -.47f);
         this.transform.localScale = Vector3.one * .5f;
         isSmall = true;
         StartCoroutine(GetBigger());
     }
-
+    [System.Obsolete]
     private IEnumerator GetBigger()
     {
         yield return new WaitForSeconds(3);
@@ -109,6 +132,7 @@ public class PlayerSkil : Player
     }
     #endregion
 
+<<<<<<< HEAD
     #region 파리능력!
 
 
@@ -123,9 +147,17 @@ public class PlayerSkil : Player
                 rigid.constraints = RigidbodyConstraints2D.FreezePositionX;
             }
         }
+=======
+    #region ??덊닏 ?믩객由?
+    public void UseMedicinalHerb()
+    {
+        StartCoroutine(UseMedicinalHerbCoroutine());
+        //DebuffManager.Instance.Reset();
+>>>>>>> kjp
     }
     private bool isFlyEat = false;
 
+<<<<<<< HEAD
     private void OnCollisionExit2D(Collision2D other) {
         if(other.collider.CompareTag("Fly_Empty"))
         {
@@ -138,6 +170,17 @@ public class PlayerSkil : Player
             }
         }
     }
+=======
+    IEnumerator UseMedicinalHerbCoroutine()
+    {
+        DebuffManager.Instance.UpdateDown(false);
+        yield return new WaitForSeconds(1);
+        DebuffManager.Instance.UpdateDown(true);
+    }
+    #endregion
+
+    #region ???봺 ?믩객由?
+>>>>>>> kjp
 
     public void EatFly()
     {
@@ -170,6 +213,7 @@ public class PlayerSkil : Player
 
 
     #endregion
+<<<<<<< HEAD
     
     #region ? ??? ??
 
@@ -219,4 +263,6 @@ public class PlayerSkil : Player
 
     #endregion
 
+=======
+>>>>>>> kjp
 }
