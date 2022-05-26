@@ -69,13 +69,13 @@ public class PlayerMove : Player
         PlayerAnimation();
         ChangeFacing();
         Addicted();
-
     }
 
     void FixedUpdate()
     {
         IsGround();
         Move();
+        Debug.Log(isWall);
     }
 
     /// <summary>
@@ -234,26 +234,8 @@ public class PlayerMove : Player
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //??????????????
-        if (collision.collider.CompareTag("LeftWall") && isOneWall)
-        {
-            transform.localEulerAngles = new Vector3(0, 0, 90);
-            transform.transform.position = new Vector2(transform.position.x + 0.15f, transform.position.y);
-            rigid.bodyType = RigidbodyType2D.Static;
-            isWall = true;
-            animator.Play("Idle");
-        }
-        //???????????濚밸Ŧ?????????????????
-        else if (collision.collider.CompareTag("RightWall") && isOneWall)
-        {
-            transform.localEulerAngles = new Vector3(0, 0, -90);
-            transform.transform.position = new Vector2(transform.position.x - 0.15f, transform.position.y);
-            rigid.bodyType = RigidbodyType2D.Static;
-            isWall = true;
-            animator.Play("Idle");
-        }
         //????????
-        else if (collision.collider.CompareTag("Water"))
+        if (collision.collider.CompareTag("Water"))
         {
             if (DebuffManager.Instance.State == SeasonState.SUMMER_0)
             {
@@ -295,7 +277,7 @@ public class PlayerMove : Player
             //     playerpos = 5;
             //     playerScrollbar.maxValue = 30;
             // }
-            
+
         }
         else if (collision.collider.CompareTag("LeftWall") || collision.collider.CompareTag("RightWall"))
         {
@@ -303,10 +285,27 @@ public class PlayerMove : Player
         }
     }
 
-    /// <summary>
-    /// ??????????????嚥???癲??????????????Β?щ엠??????????????????諛몃마嶺뚮?????????????硫λ젒????????????ш끽維뽳쭩?뱀땡???얩맪???????????
-    /// </summary>
-    /// <returns></returns>
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.collider.CompareTag("LeftWall") && isOneWall)
+        {
+            Debug.Log("?");
+            transform.localEulerAngles = new Vector3(0, 0, 90);
+            transform.transform.position = new Vector2(transform.position.x + 0.15f, transform.position.y);
+            rigid.bodyType = RigidbodyType2D.Static;
+            isWall = true;
+            animator.Play("Idle");
+        }
+        else if (collision.collider.CompareTag("RightWall") && isOneWall && !isScrollStart)
+        {
+            Debug.Log("?");
+            transform.localEulerAngles = new Vector3(0, 0, -90);
+            transform.transform.position = new Vector2(transform.position.x - 0.15f, transform.position.y);
+            rigid.bodyType = RigidbodyType2D.Static;
+            isWall = true;
+            animator.Play("Idle");
+        }
+    }
     IEnumerator CreateDust()
     {
         if (!isWall)
@@ -429,7 +428,7 @@ public class PlayerMove : Player
     {
         if (Time.timeScale != 0)
         {
-            if (!isJumpStart && !isWall && GameManager.Instance.IsGameStart)
+            if (!isJumpStart && GameManager.Instance.IsGameStart)
             {
                 if (Input.GetKey(KeySetting.keys[KeyAction.LEFT]))
                     moveInput = -1f;
@@ -449,7 +448,8 @@ public class PlayerMove : Player
     /// </summary>
     private void Addicted()
     {
-        playerScrollbar.maxValue = rPlayerMaxValue - (int)DebuffManager.Instance.Value;
+        if (DebuffManager.Instance.State == SeasonState.FALL)
+            playerScrollbar.maxValue = rPlayerMaxValue - (int)DebuffManager.Instance.Value;
 
         Debug.Log(playerScrollbar.maxValue);
     }
@@ -515,5 +515,21 @@ public class PlayerMove : Player
         EventManager.StartListening("Faint", PlayerFaint);
         EventManager.StartListening("FloorCheck", IfFloor);
         EventManager.StartListening("ColorChange", () => FrogColorChange(DebuffManager.Instance.IsDown));
+        EventManager.StartListening("RESET", Reset);
+    }
+
+    private void Reset()
+    {
+        playerpos = rPlayerpos;
+        isJumpStart = false;
+        isJump = false;
+        isFaint = false;
+        isMove = true;
+        isThunder = false;
+        isOneWall = false;
+        isScrollStart = false;
+
+        //색깔 리셋
+        //디버프 벨류도
     }
 }

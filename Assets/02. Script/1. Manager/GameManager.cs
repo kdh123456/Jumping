@@ -7,7 +7,7 @@ using DG.Tweening;
 
 public class GameManager : MonoSingleton<GameManager>
 {
-    [Header("???�?????")]
+    [Header("???癲?????")]
     [SerializeField]
     private float maxY = 0f;
     [SerializeField]
@@ -37,7 +37,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     private readonly Vector2 resetPosition = new Vector2(-9f, 4f);
 
-    #region ??꿔꺂?????�샕?????????�름????????�뱼????β�?��???곌퇈?�욘�?
+    #region ??轅붽틓?????됱깢?????????щ쫫????????꾨굴????棺堉?뤃???怨뚰뇠?띠슆苡?
     internal string SAVE_PATH = "";
     private readonly string SAVE_FILENAME = "/SaveFile.txt";
     #endregion
@@ -78,7 +78,7 @@ public class GameManager : MonoSingleton<GameManager>
             if (!UIManager.Instance.GetMenuPanelActive())
                     UIManager.Instance.SetSettingMenuActive();
 
-        if (isGameStart == true) //?????????�????????????????
+        if (isGameStart == true) //?????????諭????????????????
         {
             timer += Time.deltaTime;
             UIManager.Instance.SetTimerActive(true);
@@ -164,6 +164,7 @@ public class GameManager : MonoSingleton<GameManager>
         SaveJson<SAVE>(SAVE_PATH, SAVE_FILENAME, save);
 
         player.transform.rotation = Quaternion.identity;
+        EventManager.TriggerEvent("RESET");
     }
 
     #region Save&Load
