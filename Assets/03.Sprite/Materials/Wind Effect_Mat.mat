@@ -87,7 +87,7 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
-    - _WindIntensity: 0.5
+    - _WindIntensity: 0.1
     - _WindSpeed: 1
     - _ZWrite: 1
     m_Colors:
