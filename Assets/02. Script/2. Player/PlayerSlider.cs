@@ -64,7 +64,7 @@ public class PlayerSlider : Player
             if (thunderNum >= 2)
             {
                 thunder = ObjectPool.Instance.GetObject(PoolObjectType.THUNDER);
-                thunder.transform.position = new Vector2(transform.position.x + 1.5f, transform.position.y + 2);
+                thunder.transform.position = new Vector2(transform.position.x + 1.5f, transform.position.y + 1);
                 transform.localEulerAngles = Vector3.zero;
                 rigid.bodyType = RigidbodyType2D.Dynamic;
                 EventManager.TriggerEvent("Tunder");

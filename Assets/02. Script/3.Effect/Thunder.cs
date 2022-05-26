@@ -10,9 +10,17 @@ public class Thunder : MonoBehaviour
 
     public LayerMask LayerToHit;
 
+    private Collider2D objects;
+
     private void OnEnable()
     {
         Explode();
+    }
+
+    private void Update()
+    {
+        objects = Physics2D.OverlapCircle(transform.position, fieldofImpact, LayerToHit);
+
     }
 
     public void ThunderEnd()
@@ -23,13 +31,12 @@ public class Thunder : MonoBehaviour
 
     public void Explode()
     {
-        Collider2D objects = Physics2D.OverlapCircle(transform.position, fieldofImpact, LayerToHit);
-
         float random = Random.value;
         Vector2 direction = random > .5f ? Vector2.left : Vector2.right;
         if (objects != null)
         {
             EventManager.TriggerEvent("ThunderExplode");
+            Debug.Log(objects.name);
             objects.GetComponent<Rigidbody2D>().AddForce(direction * force, ForceMode2D.Impulse);
             if (objects.GetComponent<Rigidbody2D>() != null)
                 objects.GetComponent<Rigidbody2D>().AddForce(direction * force, ForceMode2D.Impulse);

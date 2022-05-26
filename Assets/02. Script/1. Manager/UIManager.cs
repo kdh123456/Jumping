@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static Define;
 
 public class UIManager : MonoSingleton<UIManager>
 {
@@ -13,11 +14,19 @@ public class UIManager : MonoSingleton<UIManager>
     private Text timerText = null;
     [SerializeField]
     private Text goalPercentText = null;
+    [SerializeField]
+    private Slider valueSlider = null;
 
     public Text[] txt;
     void Start()
     {
         UpdateKey();
+    }
+
+    private void Update()
+    {
+        Vector2 pos = MainCam.WorldToScreenPoint(GameManager.Instance.Player.transform.position + Vector3.up * 1.5f);
+        valueSlider.transform.position = pos;
     }
 
     public void UpdateKey()
@@ -64,5 +73,15 @@ public class UIManager : MonoSingleton<UIManager>
     public void SetTimerActive(bool active)
     {
         timerText.gameObject.SetActive(active);
+    }
+
+    public void ValueSliderActive(bool isAcvtive)
+    {
+        valueSlider.gameObject.SetActive(isAcvtive);
+    }
+
+    public void ValueSliderValue(float value)
+    {
+        valueSlider.value = value;
     }
 }
