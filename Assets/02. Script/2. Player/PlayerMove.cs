@@ -68,7 +68,7 @@ public class PlayerMove : Player
 
         PlayerAnimation();
         ChangeFacing();
-        Addicted();
+        //Addicted();
 
     }
 
