@@ -63,8 +63,11 @@ public class PlayerSlider : Player
             playerScrollbar.value += sliderpos * Time.deltaTime;
             if (thunderNum >= 2)
             {
+                thunder = null;
                 thunder = ObjectPool.Instance.GetObject(PoolObjectType.THUNDER);
-                thunder.transform.position = new Vector2(transform.position.x + 1.5f, transform.position.y + 1);
+                Vector3 pos = transform.position;
+                pos.y += 1.5f;
+                thunder.transform.position = pos;
                 transform.localEulerAngles = Vector3.zero;
                 rigid.bodyType = RigidbodyType2D.Dynamic;
                 EventManager.TriggerEvent("Tunder");
