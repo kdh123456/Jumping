@@ -9,7 +9,7 @@ public class KeyInput : MonoBehaviour
     private PlayerMove playerMove => GameObject.FindWithTag("Player").GetComponent<PlayerMove>();
     void Update()
     {
-        if (GameManager.Instance.IsGameStart && (Time.timeScale == 1) && playerMove.IsMove)
+        if (GameManager.Instance.IsGameStart && (Time.timeScale == 1))
         {
             if (Input.GetKeyDown(KeySetting.keys[KeyAction.JUMP]))
             {
@@ -24,29 +24,35 @@ public class KeyInput : MonoBehaviour
                 EventManager.TriggerEvent("STOP");
             }
 
-            if (Input.GetKeyDown(KeySetting.keys[KeyAction.SWALLOW]))
+            if(playerMove.IsMove)
             {
-                EventManager.TriggerEvent("Swallow");
-            }
-
-            if (Input.GetKeyDown(KeySetting.keys[KeyAction.SKILL]))
-            {
-                state = PlayerStateManager.Instance.PlayerState;
-
-                switch (state)
+                if (Input.GetKeyDown(KeySetting.keys[KeyAction.SWALLOW]))
                 {
-                    case PlayerState.FIREBALL:
-                        EventManager.TriggerEvent("Fire");
-                        break;
-                    case PlayerState.LADYBUG:
-                        EventManager.TriggerEvent("Umbrella");
-                        break;
-                    case PlayerState.SMALL:
-                        EventManager.TriggerEvent("Small");
-                        break;
-                    case PlayerState.FLY:
-                        EventManager.TriggerEvent("Fly");
-                        break;
+                    EventManager.TriggerEvent("Swallow");
+                }
+
+                if (Input.GetKeyDown(KeySetting.keys[KeyAction.SKILL]))
+                {
+                    state = PlayerStateManager.Instance.PlayerState;
+
+                    switch (state)
+                    {
+                        case PlayerState.FIREBALL:
+                            EventManager.TriggerEvent("Fire");
+                            break;
+                        case PlayerState.LADYBUG:
+                            EventManager.TriggerEvent("Umbrella");
+                            break;
+                        case PlayerState.SMALL:
+                            EventManager.TriggerEvent("Small");
+                            break;
+                        case PlayerState.FLY:
+                            EventManager.TriggerEvent("Fly");
+                            break;
+                        case PlayerState.WATER:
+                            EventManager.TriggerEvent("EatWell");
+                            break;
+                    }
                 }
             }
         }
