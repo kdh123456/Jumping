@@ -16,7 +16,7 @@ public class SignHelp : MonoBehaviour
 
     void Start()
     {
-        text.SetText(SignHelpString.Instance.signDictionary[state]);
+        text.SetText(SignHelpString.Instance.signDictionary[state].ToString());
         text.color = new Color(1, 1, 1, 0);
         text.gameObject.SetActive(false);
     }

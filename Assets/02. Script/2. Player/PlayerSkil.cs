@@ -41,14 +41,14 @@ public class PlayerSkil : Player
         isFacing = (playerMove.facing == PlayerMove.Facing.LEFT) ? true : false;
     }
 
-    #region ????????? ??룹뮀臾?
+    #region ????????? ??룹�???
     public void Fire()
     {
         GameObject fireBall = ObjectPool.Instance.GetObject(PoolObjectType.FIREBALL_OBJECT);
         fireBall.transform.position = this.transform.position;
         fireBall.GetComponent<SpriteRenderer>().flipX = isFacing;
 
-        fireBall.transform.DOMove((isFacing ? Vector3.left : Vector3.right) * 10, 1) // ????モ닪筌?????モ닪筌????밸㎍? ????モ닪筌????밸㎍?
+        fireBall.transform.DOMove((isFacing ? Vector3.left : Vector3.right) * 10, 1) // ??????���???????���????밸㎍? ??????���????밸㎍?
             .SetEase(Ease.Linear).SetRelative()
             .OnComplete(() => ObjectPool.Instance.ReturnObject(PoolObjectType.FIREBALL_OBJECT, fireBall));
 
@@ -57,7 +57,7 @@ public class PlayerSkil : Player
     }
     #endregion
 
-    #region ???Β?띾곤┼??뵯????琉왈?
+    #region ???????�곤┼??�????琉왈?
     private bool isUmbrella = false;
     public void CreateUmbrella()
     {
@@ -82,7 +82,7 @@ public class PlayerSkil : Player
     }
     #endregion
 
-    #region ??節뗪콬?????????먯땡?堉온??// ?????? ???怨룹쓱
+    #region ??節?�콬?????????�?��??�온???// ?????? ????�룹??
     [System.Obsolete]
     private bool isSmall = false;
 
@@ -90,7 +90,7 @@ public class PlayerSkil : Player
     private void GetSmaller()
     {
         if (isSmall) return;
-        // ????モ닪筌?????モ닪筌????밸㎍???
+        // ??????���???????���????밸㎍???
         //playerCollider.size = new Vector2(playerCollider.size.x * .5f, playerCollider.size.y * .5f);
         //playerCollider.offset = new Vector2(0, -.47f);
         this.transform.localScale = Vector3.one * .5f;
@@ -123,7 +123,7 @@ public class PlayerSkil : Player
             }
         }
     }
-    #region ????낅빘 ?沃섃뫕而??
+    #region ?????�빘 ?沃섃뫕�??
     public void UseMedicinalHerb()
     {
         StartCoroutine(UseMedicinalHerbCoroutine());
