@@ -117,7 +117,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fieldofImpact: 4
-  force: 300
+  force: 100
   LayerToHit:
     serializedVersion: 2
     m_Bits: 128
