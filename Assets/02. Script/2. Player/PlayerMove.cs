@@ -227,6 +227,12 @@ public class PlayerMove : Player
 
                     StartCoroutine(ItemSpawnManager.Instance.ItmeSpawn(PoolObjectType.HERB, hit.collider.transform));
                     break;
+                case AbilityState.FLY:
+                    ObjectPool.Instance.ReturnObject(PoolObjectType.FLY, hit.collider.gameObject);
+                    PlayerStateManager.Instance.UpdateState(PlayerState.FLY);
+
+                    StartCoroutine(ItemSpawnManager.Instance.ItmeSpawn(PoolObjectType.FLY, hit.collider.transform));
+                    break;
                 case AbilityState.WATER:
                     //StartCoroutine(ItemSpawnManager.Instance.WaterSpawn(hit.collider.gameObject));
                     Animator wellAnim = hit.collider.GetComponent<Animator>();
