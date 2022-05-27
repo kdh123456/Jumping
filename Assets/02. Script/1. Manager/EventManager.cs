@@ -11,7 +11,7 @@ public class EventManager : MonoBehaviour
     public static void StartListening(string eventName, Action listener)
     {
         Action thisEvent;
-        if (eventDictionary.TryGetValue(eventName, out thisEvent)) // 만약 eventName있어 thisEvent에 넣어서 반환, 없어 그럼
+        if (eventDictionary.TryGetValue(eventName, out thisEvent)) // 留뚯빟 eventName?덉뼱 thisEvent???ｌ뼱??諛섑솚, ?놁뼱 洹몃읆
         {
             thisEvent += listener;
             eventDictionary[eventName] = thisEvent;
@@ -42,7 +42,7 @@ public class EventManager : MonoBehaviour
         Action thisEvent;
         if (eventDictionary.TryGetValue(eventName, out thisEvent))
         {
-            thisEvent?.Invoke();//없을 때 실행 x
+            thisEvent?.Invoke();//?놁쓣 ???ㅽ뻾 x
         }
     }
 }

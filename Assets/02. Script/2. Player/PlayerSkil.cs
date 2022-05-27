@@ -10,7 +10,7 @@ public class PlayerSkil : Player
     private BoxCollider2D playerCollider = null;
     
     private bool isEmpty = false;
-
+    private bool isCheck = false;
 
     private bool isCanMove = true;
 
@@ -41,14 +41,14 @@ public class PlayerSkil : Player
         isFacing = (playerMove.facing == PlayerMove.Facing.LEFT) ? true : false;
     }
 
-    #region ????????? ??猷밸???
+    #region ????????? ???룸갭???
     public void Fire()
     {
         GameObject fireBall = ObjectPool.Instance.GetObject(PoolObjectType.FIREBALL_OBJECT);
         fireBall.transform.position = this.transform.position;
         fireBall.GetComponent<SpriteRenderer>().flipX = isFacing;
 
-        fireBall.transform.DOMove((isFacing ? Vector3.left : Vector3.right) * 10, 1) // ??????떔嶺???????떔嶺????諛멥럪? ??????떔嶺????諛멥럪?
+        fireBall.transform.DOMove((isFacing ? Vector3.left : Vector3.right) * 10, 1) // ???????뷂┼????????뷂┼????獄쏅ı?? ???????뷂┼????獄쏅ı??
             .SetEase(Ease.Linear).SetRelative()
             .OnComplete(() => ObjectPool.Instance.ReturnObject(PoolObjectType.FIREBALL_OBJECT, fireBall));
 
@@ -57,7 +57,7 @@ public class PlayerSkil : Player
     }
     #endregion
 
-    #region ???????씸怨ㅲ뵾??逾????筌뚯솃?
+    #region ????????맞?ⓦ뀼逾???????嶺뚮슣??
     private bool isUmbrella = false;
     public void CreateUmbrella()
     {
@@ -82,7 +82,7 @@ public class PlayerSkil : Player
     }
     #endregion
 
-    #region ??影?れ쉬?????????癒?븸??됱삩???// ?????? ????⑤９??
+    #region ??壤굿??뚯돩???????????釉???깆궔???// ?????? ?????ㅿ폎??
     [System.Obsolete]
     private bool isSmall = false;
 
@@ -90,7 +90,7 @@ public class PlayerSkil : Player
     private void GetSmaller()
     {
         if (isSmall) return;
-        // ??????떔嶺???????떔嶺????諛멥럪???
+        // ???????뷂┼????????뷂┼????獄쏅ı????
         //playerCollider.size = new Vector2(playerCollider.size.x * .5f, playerCollider.size.y * .5f);
         //playerCollider.offset = new Vector2(0, -.47f);
         this.transform.localScale = Vector3.one * .5f;
@@ -123,7 +123,7 @@ public class PlayerSkil : Player
             }
         }
     }
-    #region ?????낅튂 ?亦껋꼦維뺠??
+    #region ??????낇뒄 ?雅?퍔瑗?땟類졖??
     public void UseMedicinalHerb()
     {
         StartCoroutine(UseMedicinalHerbCoroutine());
@@ -132,7 +132,7 @@ public class PlayerSkil : Player
     private bool isFlyEat = false;
 
     private void OnCollisionExit2D(Collision2D other) {
-        if(other.collider.CompareTag("Fly_Empty"))
+        if(other.collider.CompareTag("Fly_Empty") && !isCheck)
         {
             isEmpty = false;
             isCanMove = true;
@@ -152,28 +152,26 @@ public class PlayerSkil : Player
 
     public void EatFly()
     {
-        isFlyEat = true;
+        isEmpty = true;
+        Debug.Log("isflly");
+        rigid.velocity = Vector2.zero;
         animator.Play("Idle");
         GameObject fly_empty = ObjectPool.Instance.GetObject(PoolObjectType.FLY_EMPTY);
-        rigid.velocity = Vector2.zero;
         fly_empty.transform.position = transform.position + Vector3.down;
-        playerMove.UpdateAnimator();
-        PlayerStateManager.Instance.UpdateState(PlayerState.FLY);
+        PlayerStateManager.Instance.UpdateState(PlayerState.BASIC);
 
         StartCoroutine(DeleteFly_Empty(fly_empty));
     }
 
     private IEnumerator DeleteFly_Empty(GameObject gameObject)
     {
-        
         while(true)
         {
             yield return null;
             if (!isEmpty)
             {
                 ObjectPool.Instance.ReturnObject(PoolObjectType.FLY_EMPTY, gameObject);
-                PlayerStateManager.Instance.UpdateState(PlayerState.BASIC);
-                playerMove.UpdateAnimator();
+                //PlayerStateManager.Instance.UpdateState(PlayerState.BASIC);
             }
         }
         
