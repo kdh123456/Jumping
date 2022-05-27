@@ -41,14 +41,14 @@ public class PlayerSkil : Player
         isFacing = (playerMove.facing == PlayerMove.Facing.LEFT) ? true : false;
     }
 
-    #region ????????? ??룹�???
+    #region ????????? ??猷밸???
     public void Fire()
     {
         GameObject fireBall = ObjectPool.Instance.GetObject(PoolObjectType.FIREBALL_OBJECT);
         fireBall.transform.position = this.transform.position;
         fireBall.GetComponent<SpriteRenderer>().flipX = isFacing;
 
-        fireBall.transform.DOMove((isFacing ? Vector3.left : Vector3.right) * 10, 1) // ??????���???????���????밸㎍? ??????���????밸㎍?
+        fireBall.transform.DOMove((isFacing ? Vector3.left : Vector3.right) * 10, 1) // ??????떔嶺???????떔嶺????諛멥럪? ??????떔嶺????諛멥럪?
             .SetEase(Ease.Linear).SetRelative()
             .OnComplete(() => ObjectPool.Instance.ReturnObject(PoolObjectType.FIREBALL_OBJECT, fireBall));
 
@@ -57,7 +57,7 @@ public class PlayerSkil : Player
     }
     #endregion
 
-    #region ???????�곤┼??�????琉왈?
+    #region ???????씸怨ㅲ뵾??逾????筌뚯솃?
     private bool isUmbrella = false;
     public void CreateUmbrella()
     {
@@ -82,7 +82,7 @@ public class PlayerSkil : Player
     }
     #endregion
 
-    #region ??節?�콬?????????�?��??�온???// ?????? ????�룹??
+    #region ??影?れ쉬?????????癒?븸??됱삩???// ?????? ????⑤９??
     [System.Obsolete]
     private bool isSmall = false;
 
@@ -90,7 +90,7 @@ public class PlayerSkil : Player
     private void GetSmaller()
     {
         if (isSmall) return;
-        // ??????���???????���????밸㎍???
+        // ??????떔嶺???????떔嶺????諛멥럪???
         //playerCollider.size = new Vector2(playerCollider.size.x * .5f, playerCollider.size.y * .5f);
         //playerCollider.offset = new Vector2(0, -.47f);
         this.transform.localScale = Vector3.one * .5f;
@@ -123,7 +123,7 @@ public class PlayerSkil : Player
             }
         }
     }
-    #region ?????�빘 ?沃섃뫕�??
+    #region ?????낅튂 ?亦껋꼦維뺠??
     public void UseMedicinalHerb()
     {
         StartCoroutine(UseMedicinalHerbCoroutine());
@@ -153,17 +153,14 @@ public class PlayerSkil : Player
     public void EatFly()
     {
         isFlyEat = true;
-        if(isFlyEat)
-        {
-            rigid.velocity = Vector2.zero;
-            animator.Play("Idle");
-            GameObject fly_empty = ObjectPool.Instance.GetObject(PoolObjectType.FLY_EMPTY);
-            fly_empty.transform.position = transform.position + Vector3.down;
-            PlayerStateManager.Instance.UpdateState(PlayerState.BASIC);
-            
-            StartCoroutine(DeleteFly_Empty(fly_empty));
-        }
-        isFlyEat = false;
+        animator.Play("Idle");
+        GameObject fly_empty = ObjectPool.Instance.GetObject(PoolObjectType.FLY_EMPTY);
+        rigid.velocity = Vector2.zero;
+        fly_empty.transform.position = transform.position + Vector3.down;
+        playerMove.UpdateAnimator();
+        PlayerStateManager.Instance.UpdateState(PlayerState.FLY);
+
+        StartCoroutine(DeleteFly_Empty(fly_empty));
     }
     
     private IEnumerator DeleteFly_Empty(GameObject gameObject)
@@ -174,6 +171,8 @@ public class PlayerSkil : Player
             if(!isEmpty)
             {
                 ObjectPool.Instance.ReturnObject(PoolObjectType.FLY_EMPTY, gameObject);
+                PlayerStateManager.Instance.UpdateState(PlayerState.BASIC);
+                playerMove.UpdateAnimator();
             }
         }
         
