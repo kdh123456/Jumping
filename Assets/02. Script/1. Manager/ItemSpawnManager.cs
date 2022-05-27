@@ -14,9 +14,9 @@ public class ItemSpawnManager : MonoSingleton<ItemSpawnManager>
         item.transform.position = transform.position;
     }
 
-    public IEnumerator WaterSpawn(GameObject animator){
+    public IEnumerator WaterSpawn(Animator animator){
         yield return new WaitForSeconds(5);
-        animator.GetComponent<Animator>().SetBool("isEat", false);
+        animator.SetBool("isEat", false);
     }
 
     public void RockAndRopeRespawn()

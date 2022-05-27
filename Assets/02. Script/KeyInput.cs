@@ -48,7 +48,7 @@ public class KeyInput : MonoBehaviour
                         EventManager.TriggerEvent("Fly");
                         break;
                     case PlayerState.WATER:
-                    EventManager.TriggerEvent("EatWell");
+                        EventManager.TriggerEvent("EatWell");
                     break;   
                 }
             }
