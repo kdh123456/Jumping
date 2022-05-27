@@ -33,6 +33,7 @@ public class KeyInput : MonoBehaviour
 
                 if (Input.GetKeyDown(KeySetting.keys[KeyAction.SKILL]))
                 {
+<<<<<<< HEAD
                     state = PlayerStateManager.Instance.PlayerState;
 
                     switch (state)
@@ -50,6 +51,23 @@ public class KeyInput : MonoBehaviour
                             EventManager.TriggerEvent("Fly");
                             break;
                     }
+=======
+                    case PlayerState.FIREBALL:
+                        EventManager.TriggerEvent("Fire");
+                        break;
+                    case PlayerState.LADYBUG:
+                        EventManager.TriggerEvent("Umbrella");
+                        break;
+                    case PlayerState.SMALL:
+                        EventManager.TriggerEvent("Small");
+                        break;
+                    case PlayerState.FLY:
+                        EventManager.TriggerEvent("Fly");
+                        break;
+                    case PlayerState.WATER:
+                        EventManager.TriggerEvent("EatWell");
+                    break;   
+>>>>>>> origin/daehee
                 }
             }
         }

@@ -14,6 +14,11 @@ public class ItemSpawnManager : MonoSingleton<ItemSpawnManager>
         item.transform.position = transform.position;
     }
 
+    public IEnumerator WaterSpawn(Animator animator){
+        yield return new WaitForSeconds(5);
+        animator.SetBool("isEat", false);
+    }
+
     public void RockAndRopeRespawn()
     {
         foreach (var item in ropes)
