@@ -1,11 +1,13 @@
 public enum SignHelpStringState
 {
-    Move, // ?吏곸엫
-    Jump, // ?먰봽
-    Swallow, // ?쇳궎湲?
-    Wall, // 踰?
-    Umb, // ?곗궛
-    Fly, // ?뚮━
-    Water, // 臾쇰퓶?붽굅
-    Herb
+    Move, // ??筌욊낯??
+    Jump, // ?癒곕늄
+    Swallow, // ??녠텕疫?
+    Wall, // 甕?
+    Umb, // ?怨쀪텦
+    Fly, // ???봺
+    Water, // ?얠눖??遺쎄탢
+    Herb,
+    Ladybug,
+    Fireball
 }
