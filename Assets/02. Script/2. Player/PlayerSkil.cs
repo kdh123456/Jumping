@@ -165,16 +165,18 @@ public class PlayerSkil : Player
 
     private IEnumerator DeleteFly_Empty(GameObject gameObject)
     {
+        
         while(true)
         {
             yield return null;
-            if(!isEmpty)
+            if (!isEmpty)
             {
                 ObjectPool.Instance.ReturnObject(PoolObjectType.FLY_EMPTY, gameObject);
                 PlayerStateManager.Instance.UpdateState(PlayerState.BASIC);
                 playerMove.UpdateAnimator();
             }
         }
+        
         
     }
 
