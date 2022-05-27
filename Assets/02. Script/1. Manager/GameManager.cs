@@ -165,6 +165,7 @@ public class GameManager : MonoSingleton<GameManager>
         SaveJson<SAVE>(SAVE_PATH, SAVE_FILENAME, save);
 
         isGameStart = true;
+        timer = 0;
         player.transform.rotation = Quaternion.identity;
         EventManager.TriggerEvent("RESET");
     }
