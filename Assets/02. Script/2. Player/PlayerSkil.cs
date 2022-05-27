@@ -152,16 +152,15 @@ public class PlayerSkil : Player
 
     public void EatFly()
     {
-        isEmpty = true;
-        Debug.Log("isflly");
-        rigid.velocity = Vector2.zero;
+        isFlyEat = true;
         animator.Play("Idle");
         GameObject fly_empty = ObjectPool.Instance.GetObject(PoolObjectType.FLY_EMPTY);
+        rigid.velocity = Vector2.zero;
         fly_empty.transform.position = transform.position + Vector3.down;
-        PlayerStateManager.Instance.UpdateState(PlayerState.BASIC);
+        playerMove.UpdateAnimator();
+        PlayerStateManager.Instance.UpdateState(PlayerState.FLY);
 
         StartCoroutine(DeleteFly_Empty(fly_empty));
-
     }
 
     private IEnumerator DeleteFly_Empty(GameObject gameObject)
@@ -172,6 +171,8 @@ public class PlayerSkil : Player
             if(!isEmpty)
             {
                 ObjectPool.Instance.ReturnObject(PoolObjectType.FLY_EMPTY, gameObject);
+                PlayerStateManager.Instance.UpdateState(PlayerState.BASIC);
+                playerMove.UpdateAnimator();
             }
         }
         

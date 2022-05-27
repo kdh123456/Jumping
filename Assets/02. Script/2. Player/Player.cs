@@ -33,4 +33,9 @@ public class Player : MonoBehaviour
     {
         isGrounded = Physics2D.OverlapBox(new Vector2(gameObject.transform.position.x + floorCol.offset.x, gameObject.transform.position.y + floorCol.offset.y), new Vector2(floorCol.size.x, floorCol.size.y), 180f, LayerMask.GetMask("ground"));
     }
+
+    protected virtual void Reset()
+    {
+
+    }
 }

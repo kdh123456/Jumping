@@ -37,7 +37,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     private readonly Vector2 resetPosition = new Vector2(-9f, 4f);
 
-    #region ??轅붽???????�깢??????????�????????꾨굴????棺堉?�????�뚰???�슆??
+    #region ??耀붾굝????????源껊쵂??????????藥????????熬곣몿?????黎앸럽??筌?????ㅼ뒭???醫롫뭺??
     internal string SAVE_PATH = "";
     private readonly string SAVE_FILENAME = "/SaveFile.txt";
     #endregion
@@ -78,7 +78,7 @@ public class GameManager : MonoSingleton<GameManager>
             if (!UIManager.Instance.GetMenuPanelActive())
                     UIManager.Instance.SetSettingMenuActive();
 
-        if (isGameStart == true) //?????????�????????????????
+        if (isGameStart == true) //??????????????????????????
         {
             timer += Time.deltaTime;
             UIManager.Instance.SetTimerActive(true);
@@ -106,6 +106,8 @@ public class GameManager : MonoSingleton<GameManager>
     public void NewGameCutSceen()
     {
         Reset();
+        save = LoadJsonFile<SAVE>(SAVE_PATH, SAVE_FILENAME);
+        playerTr.position = save.position;
         EventManager.TriggerEvent("First");
         UIManager.Instance.SetMenuPanelActive();
     }
@@ -113,8 +115,7 @@ public class GameManager : MonoSingleton<GameManager>
     {
         SetGameStart(true);
         ItemSpawnManager.Instance.RockAndRopeRespawn();
-        save = LoadJsonFile<SAVE>(SAVE_PATH, SAVE_FILENAME);
-        playerTr.position = save.position;
+        
         timer = save.timer;
     }
 
@@ -163,6 +164,7 @@ public class GameManager : MonoSingleton<GameManager>
         save.timer = 0f;
         SaveJson<SAVE>(SAVE_PATH, SAVE_FILENAME, save);
 
+        isGameStart = true;
         player.transform.rotation = Quaternion.identity;
         EventManager.TriggerEvent("RESET");
     }
