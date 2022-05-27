@@ -227,7 +227,7 @@ public class PlayerMove : Player
 
                     StartCoroutine(ItemSpawnManager.Instance.ItmeSpawn(PoolObjectType.HERB, hit.collider.transform));
                     break;
-                    case AbilityState.WATER:
+                case AbilityState.WATER:
                     //StartCoroutine(ItemSpawnManager.Instance.WaterSpawn(hit.collider.gameObject));
                     Animator wellAnim = hit.collider.GetComponent<Animator>();
                     if (!wellAnim.GetBool("isEat"))
@@ -236,7 +236,7 @@ public class PlayerMove : Player
                         StartCoroutine(ItemSpawnManager.Instance.WaterSpawn(wellAnim));
                         PlayerStateManager.Instance.UpdateState(PlayerState.WATER);
                     }
-                    
+
                     break;
             }
             UpdateAnimator();
