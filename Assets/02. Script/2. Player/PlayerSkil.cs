@@ -152,30 +152,29 @@ public class PlayerSkil : Player
 
     public void EatFly()
     {
-        isFlyEat = true;
-        if(isFlyEat)
-        {
-            rigid.velocity = Vector2.zero;
-            animator.Play("Idle");
-            GameObject fly_empty = ObjectPool.Instance.GetObject(PoolObjectType.FLY_EMPTY);
-            fly_empty.transform.position = transform.position + Vector3.down;
-            PlayerStateManager.Instance.UpdateState(PlayerState.BASIC);
-            
-            StartCoroutine(DeleteFly_Empty(fly_empty));
-        }
-        isFlyEat = false;
+        Debug.Log("isflly");
+        rigid.velocity = Vector2.zero;
+        animator.Play("Idle");
+        GameObject fly_empty = ObjectPool.Instance.GetObject(PoolObjectType.FLY_EMPTY);
+        fly_empty.transform.position = transform.position + Vector3.down;
+        PlayerStateManager.Instance.UpdateState(PlayerState.BASIC);
+
+        StartCoroutine(DeleteFly_Empty(fly_empty));
+
     }
     
     private IEnumerator DeleteFly_Empty(GameObject gameObject)
     {
+        
         while(true)
         {
             yield return null;
-            if(!isEmpty)
+            if (!isEmpty)
             {
                 ObjectPool.Instance.ReturnObject(PoolObjectType.FLY_EMPTY, gameObject);
             }
         }
+        
         
     }
 
