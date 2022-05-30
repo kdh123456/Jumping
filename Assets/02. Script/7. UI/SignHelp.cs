@@ -7,8 +7,7 @@ using DG.Tweening;
 public class SignHelp : MonoBehaviour
 {
     private TextMeshPro text;
-
-    public string value;
+    public SignHelpStringState state;
 
     private void Awake()
     {
@@ -17,7 +16,7 @@ public class SignHelp : MonoBehaviour
 
     void Start()
     {
-        text.SetText(value);
+        text.SetText(SignHelpString.Instance.signDictionary[state].ToString());
         text.color = new Color(1, 1, 1, 0);
         text.gameObject.SetActive(false);
     }

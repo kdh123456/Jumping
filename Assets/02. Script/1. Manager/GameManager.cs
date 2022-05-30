@@ -7,7 +7,7 @@ using DG.Tweening;
 
 public class GameManager : MonoSingleton<GameManager>
 {
-    [Header("???�?????")]
+    [Header("?????????")]
     [SerializeField]
     private float maxY = 0f;
     [SerializeField]
@@ -37,7 +37,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     private readonly Vector2 resetPosition = new Vector2(-9f, 4f);
 
-    #region ??꿔꺂?????�샕?????????�름????????�뱼????β�?��???곌퇈?�욘�?
+    #region ???遺얘턁????????繹먭퍓理????????????????????ш끽紐?????癲됱빖???嶺??????쇰뮡????ル∥萸??
     internal string SAVE_PATH = "";
     private readonly string SAVE_FILENAME = "/SaveFile.txt";
     #endregion
@@ -78,7 +78,7 @@ public class GameManager : MonoSingleton<GameManager>
             if (!UIManager.Instance.GetMenuPanelActive())
                     UIManager.Instance.SetSettingMenuActive();
 
-        if (isGameStart == true) //?????????�????????????????
+        if (isGameStart == true) //??????????????????????????
         {
             timer += Time.deltaTime;
             UIManager.Instance.SetTimerActive(true);
@@ -106,6 +106,8 @@ public class GameManager : MonoSingleton<GameManager>
     public void NewGameCutSceen()
     {
         Reset();
+        save = LoadJsonFile<SAVE>(SAVE_PATH, SAVE_FILENAME);
+        playerTr.position = save.position;
         EventManager.TriggerEvent("First");
         UIManager.Instance.SetMenuPanelActive();
     }
@@ -113,8 +115,7 @@ public class GameManager : MonoSingleton<GameManager>
     {
         SetGameStart(true);
         ItemSpawnManager.Instance.RockAndRopeRespawn();
-        save = LoadJsonFile<SAVE>(SAVE_PATH, SAVE_FILENAME);
-        playerTr.position = save.position;
+        
         timer = save.timer;
     }
 
@@ -161,9 +162,12 @@ public class GameManager : MonoSingleton<GameManager>
     {
         save.position = resetPosition;
         save.timer = 0f;
-        SaveJson<SAVE>(SAVE_PATH, SAVE_FILENAME, save);
 
+        isGameStart = true;
+        timer = 0;
         player.transform.rotation = Quaternion.identity;
+        SaveJson<SAVE>(SAVE_PATH, SAVE_FILENAME, save);
+        EventManager.TriggerEvent("RESET");
     }
 
     #region Save&Load

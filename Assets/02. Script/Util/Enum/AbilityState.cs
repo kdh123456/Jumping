@@ -1,10 +1,10 @@
 public enum AbilityState
 {
-    FIREBALL, // 불쏘는 능력
-    LADYBUG, // 무당벌레
-    SMALL, // 작아지는 능력
-    FLY, // 파리 능력
-    HERB, // 약초
-    Fly, // 공중 체중 능력
-    Water // 공중 옆 이동?
+    FIREBALL, // 遺덉룜???λ젰
+    LADYBUG, // 臾대떦踰뚮젅
+    SMALL, // ?묒븘吏???λ젰
+    FLY, // ?뚮━ ?λ젰
+    HERB, // ?쎌큹
+    Fly, // 怨듭쨷 泥댁쨷 ?λ젰
+    WATER // 怨듭쨷 ???대룞?
 }

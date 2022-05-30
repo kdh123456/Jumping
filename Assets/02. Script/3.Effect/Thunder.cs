@@ -10,29 +10,32 @@ public class Thunder : MonoBehaviour
 
     public LayerMask LayerToHit;
 
-    private void OnEnable()
+    private Collider2D objects;
+
+    private void Start()
     {
-        Explode();
+        objects = GetComponent<Collider2D>();
     }
 
     public void ThunderEnd()
     {
-        //this.gameObject.SetActive(false);
         ObjectPool.Instance.ReturnObject(PoolObjectType.THUNDER, this.gameObject);
     }
 
-    public void Explode()
+    public void Explode(Rigidbody2D collider)
     {
-        Collider2D objects = Physics2D.OverlapCircle(transform.position, fieldofImpact, LayerToHit);
+        float random = Random.Range(0f, 1f);
+        Vector2 direction = random > 0.5f ? new Vector2(1,0) : new Vector2(-1, 0);
 
-        float random = Random.value;
-        Vector2 direction = random > .5f ? Vector2.left : Vector2.right;
-        if (objects != null)
+        EventManager.TriggerEvent("ThunderExplode");
+        collider.AddForce(direction * force, ForceMode2D.Impulse);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
         {
-            EventManager.TriggerEvent("ThunderExplode");
-            objects.GetComponent<Rigidbody2D>().AddForce(direction * force, ForceMode2D.Impulse);
-            if (objects.GetComponent<Rigidbody2D>() != null)
-                objects.GetComponent<Rigidbody2D>().AddForce(direction * force, ForceMode2D.Impulse);
+            Explode(collision.attachedRigidbody);
         }
     }
 

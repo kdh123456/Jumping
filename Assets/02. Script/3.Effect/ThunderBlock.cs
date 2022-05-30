@@ -13,7 +13,7 @@ public class ThunderBlock : MonoBehaviour
     {
         waitForSecondsThunderTime = new WaitForSeconds(thunderTime);
 
-        //?ç­???????ï¦?????????”ï¦«???
+        //????????????????????‰ê·˜ëµ???
         StartCoroutine(GetThunder());
     }
 
@@ -25,7 +25,7 @@ public class ThunderBlock : MonoBehaviour
             if (GameManager.Instance.IsGameStart)
             {
                 GameObject thunder = ObjectPool.Instance.GetObject(PoolObjectType.THUNDER);
-                thunder.transform.position = new Vector2(thunderLocation.position.x, thunderLocation.position.y);
+                thunder.transform.position = thunderLocation.position;
                 //EventManager.TriggerEvent("Tunder");
                 //EventManager.TriggerEvent("ThunderExplode");
             }

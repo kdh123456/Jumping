@@ -1,19 +1,19 @@
 public enum PoolObjectType
 {
-    FIREBALL_ITEM, // 불쏘는 능력을 얻는 아이템
-    FIREBALL_OBJECT, // 파이어볼 그자체
-    DUST, // 점프 이펙트
-    LADYBUG, // 무당벌레 아이템
-    UMBRELLA, // 우산
-    FAINT_RING, // 기절했을때 머리워에 뜨는 링
-    MUSHROOM, // 버섯
-    ROPE, // 로프
-    CLOUD, // 구름 블럭
-    HERB, // 약초
-    THUNDER, // 번개
-    FLY, // 파리 아이템
-    FLY_EMPTY, //파리 공중부양 위한 빈 오브젝트 콜라이더
+    FIREBALL_ITEM, // 遺덉룜???λ젰???삳뒗 ?꾩씠??
+    FIREBALL_OBJECT, // ?뚯씠?대낵 洹몄옄泥?
+    DUST, // ?먰봽 ?댄럺??
+    LADYBUG, // 臾대떦踰뚮젅 ?꾩씠??
+    UMBRELLA, // ?곗궛
+    FAINT_RING, // 湲곗젅?덉쓣??癒몃━?뚯뿉 ?⑤뒗 留?
+    MUSHROOM, // 踰꾩꽢
+    ROPE, // 濡쒗봽
+    CLOUD, // 援щ쫫 釉붾윮
+    HERB, // ?쎌큹
+    THUNDER, // 踰덇컻
+    FLY, // ?뚮━ ?꾩씠??
+    FLY_EMPTY, //?뚮━ 怨듭쨷遺???꾪븳 鍮??ㅻ툕?앺듃 肄쒕씪?대뜑
     WELL,
-    WATERBALL, // 파리 공중 옆 이동
-    SNAKE // 뱀
+    WATERBALL, // ?뚮━ 怨듭쨷 ???대룞
+    SNAKE // 諭
 }
