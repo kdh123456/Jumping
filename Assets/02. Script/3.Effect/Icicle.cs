@@ -4,21 +4,32 @@ using UnityEngine;
 
 public class Icicle : MonoBehaviour
 {
-    public int playerLayerMask = 7;
-    private Rigidbody2D rb;
+    Vector2 basicTransform;
+    Rigidbody2D rb;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        basicTransform = new Vector2(transform.position.x, transform.position.y);
     }
-    // Update is called once per frame
-    void Update()
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 10f, playerLayerMask);
-        if (hit)
+        if (collision.CompareTag("Player")==true||collision.CompareTag("Floor")==true)
         {
-            rb.gravityScale = 1f;
+            rb.velocity = new Vector2(0, 0);
+            transform.position = basicTransform;
+            gameObject.SetActive(false);
         }
-         
+    }
+
+    void Spawn()
+    {
+        gameObject.SetActive(true);
+    }
+
+    private void OnDisable()
+    {
+        Invoke("Spawn", 3f);
     }
 }
