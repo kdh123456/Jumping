@@ -11,11 +11,17 @@ public class UIManager : MonoSingleton<UIManager>
     [SerializeField]
     private GameObject settingMenu = null;
     [SerializeField]
+    private GameObject settingScrollRect = null;
+    [SerializeField]
     private Text timerText = null;
     [SerializeField]
     private Text goalPercentText = null;
     [SerializeField]
     private Slider valueSlider = null;
+    [SerializeField]
+    private Toggle toggle = null;
+    [SerializeReference]
+    private GameObject backPanel = null;
 
     public Text[] txt;
     void Start()
@@ -27,6 +33,18 @@ public class UIManager : MonoSingleton<UIManager>
     {
         Vector2 pos = MainCam.WorldToScreenPoint(GameManager.Instance.Player.transform.position + Vector3.up * 1.5f);
         valueSlider.transform.position = pos;
+
+        if (GameManager.Instance.IsGameStart)
+        {
+            if (settingMenu.activeSelf || GetSettingPanelActive())
+            {
+                backPanel.SetActive(true);
+            }
+            else
+            {
+                backPanel.SetActive(false);
+            }
+        }
     }
 
     public void UpdateKey()
@@ -52,11 +70,18 @@ public class UIManager : MonoSingleton<UIManager>
         menuPanel.SetActive(!menuPanel.activeSelf);
         if (Time.timeScale == 0)
             Time.timeScale = 1;
+
+        settingScrollRect.SetActive(false);
     }
 
     public bool GetMenuPanelActive()
     {
         return menuPanel.activeSelf;
+    }
+
+    public bool GetSettingPanelActive()
+    {
+        return settingScrollRect.activeSelf;
     }
 
     public void SetSettingMenuActive()
@@ -83,5 +108,10 @@ public class UIManager : MonoSingleton<UIManager>
     public void ValueSliderValue(float value)
     {
         valueSlider.value = value;
+    }
+
+    public void TimerTextActive()
+    {
+        timerText.gameObject.SetActive(toggle.isOn);
     }
 }
