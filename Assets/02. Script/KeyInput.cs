@@ -43,10 +43,10 @@ public class KeyInput : MonoBehaviour
                         case PlayerState.LADYBUG:
                             EventManager.TriggerEvent("Umbrella");
                             break;
-                        case PlayerState.SMALL:
-                            EventManager.TriggerEvent("Small");
-                            break;
-                        case PlayerState.FLY:
+                        //case PlayerState.SMALL:
+                        //    EventManager.TriggerEvent("Small");
+                        //    break;
+                        case PlayerState.FLY_READY:
                             EventManager.TriggerEvent("Fly");
                             break;
                         case PlayerState.WATER:

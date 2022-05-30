@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -2143572882482470070}
   - component: {fileID: -8489307313222816563}
   - component: {fileID: 2349236246743272562}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: water well_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,12 +74,12 @@ SpriteRenderer:
   m_SortingLayerID: 1388900915
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: 8357759254118035923, guid: 39f177319bdf61c45a708950cdf9250e, type: 3}
+  m_Sprite: {fileID: -2065984041467941068, guid: d71c484f1534043499efe863120b5c29, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.64, y: 0.64}
+  m_Size: {x: 3.8333333, y: 1.8333334}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -108,21 +108,21 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.5}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 2, y: 2}
-    newSize: {x: 0.64, y: 0.64}
+    newSize: {x: 3.8333333, y: 1.8333334}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2, y: 2}
+  m_Size: {x: 2, y: 3}
   m_EdgeRadius: 0
 --- !u!95 &2349236246743272562
 Animator:
