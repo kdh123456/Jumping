@@ -45,13 +45,18 @@ public class CloudBlock : ItemEffect
         seq.AppendCallback(() => spriteRenderer.color = new Color(1, 1, 1, 0));
         seq.AppendCallback(() => col.enabled = true);
         seq.Join(spriteRenderer.DOFade(1, 1f));
+
+        seq.Play();
     }
 
     public override void DestroyEffect()
     {
         Sequence seq = DOTween.Sequence();
+
         seq.AppendCallback(() => col.enabled = false);
         seq.Join(spriteRenderer.DOFade(0, 1f));
+
+        seq.Play();
         //seq.AppendCallback(() => ObjectPool.Instance.ReturnObject(PoolObjectType.CLOUD, this.transform.parent.gameObject));
     }
 }
