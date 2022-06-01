@@ -276,10 +276,10 @@ public class PlayerMove : Player
         {
             isMove = false;
         }
-        //else if ((collision.collider.CompareTag("LeftWall") || collision.collider.CompareTag("RightWall")) && !isGrounded)
-        //{
-        //    isMove = false;
-        //}
+        else if ((collision.collider.CompareTag("LeftWall") || collision.collider.CompareTag("RightWall")) && !isGrounded)
+        {
+            isMove = false;
+        }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -302,6 +302,7 @@ public class PlayerMove : Player
         else if (collision.collider.CompareTag("LeftWall") || collision.collider.CompareTag("RightWall"))
         {
             isOneWall = false;
+            isMove = true;
         }
     }
 

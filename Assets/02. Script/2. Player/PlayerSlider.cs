@@ -58,6 +58,12 @@ public class PlayerSlider : Player
 
     private void StartScrolling()
     {
+        if(!isGrounded)
+        {
+            alpaValue(0);
+            playerScrollbar.value = 0;
+        }
+
         if (isGrounded && isScrollStart || isWall)
         {
             playerScrollbar.value += sliderpos * Time.deltaTime;
@@ -99,6 +105,7 @@ public class PlayerSlider : Player
 
     private void alpaValue(int a)
     {
+        Debug.Log(a);
         Color bk = Bk.color;
         bk.a = a;
         Bk.color = bk;
