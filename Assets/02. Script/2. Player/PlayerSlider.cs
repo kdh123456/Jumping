@@ -58,7 +58,7 @@ public class PlayerSlider : Player
 
     private void StartScrolling()
     {
-        if(!isGrounded)
+        if(!isGrounded && !isWall)
         {
             alpaValue(0);
             playerScrollbar.value = 0;
