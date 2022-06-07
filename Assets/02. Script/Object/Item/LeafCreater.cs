@@ -4,36 +4,43 @@ using UnityEngine;
 
 public class LeafCreater : MonoBehaviour
 {
-    public Transform[] createPoints;
+    [HideInInspector]
+    public List<Transform> createPoints;
 
     public float delay = 5f;
     public float delayRandomness;
-
-    private static WaitForSeconds waitForSeconds;
 
     private Coroutine leafCoroutine;
 
     private void Start()
     {
-        waitForSeconds = new WaitForSeconds(delay);
+        //GetComponentsInChildren<Transform>(createPoints);
+        for(int i = 0; i < transform.childCount; i++)
+        {
+            createPoints.Add(transform.GetChild(i).transform);
+        }
 
         leafCoroutine = StartCoroutine(SpawnLeaf());
     }
 
     private IEnumerator SpawnLeaf()
     {
-        yield return waitForSeconds;
+        yield return new WaitForSeconds(delay);
 
         while (true)
         {
-            foreach (Transform pos in createPoints)
+            if (GameManager.Instance.IsGameStart)
             {
-                GameObject leaf = ObjectPool.Instance.GetObject(PoolObjectType.LEAF); // KeyNotFoundException Bug
-                leaf.transform.position = pos.position;
-                leaf.GetComponent<ItemEffect>().CreateEffect();
+                foreach (Transform pos in createPoints)
+                {
+                    GameObject leaf = ObjectPool.Instance.GetObject(PoolObjectType.LEAF);
+                    Vector3 position = pos.position;
+                    position.z = 0f;
+                    leaf.transform.position = position;
+                }
             }
 
-            yield return waitForSeconds;
+            yield return new WaitForSeconds(delay + Random.Range(-delayRandomness, delayRandomness));
         }
     }
 }

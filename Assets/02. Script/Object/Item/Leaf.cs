@@ -7,20 +7,24 @@ public class Leaf : ItemEffect
 {
     private SpriteRenderer spriteRenderer;
 
+    private void OnEnable()
+    {
+        CreateEffect();
+    }
+
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-
-        spriteRenderer.color = new Color(1, 1, 1, 0);
     }
 
     public override void CreateEffect()
     {
-        Sequence seq = DOTween.Sequence();
+        if (spriteRenderer == null)
+            spriteRenderer = GetComponent<SpriteRenderer>();
 
-        seq.Append(spriteRenderer.DOFade(1, .2f));
-
-        seq.Play();
+        if (spriteRenderer.color.a == 1)
+            spriteRenderer.color = new Color(1, 1, 1, 0);
+        spriteRenderer.DOFade(1, .2f);
     }
 
     public override void DestroyEffect()
