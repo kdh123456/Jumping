@@ -38,7 +38,9 @@ public class PlayerMove : Player
 
     public Facing facing { get; private set; }
 
+    private bool isFacing = false;
 
+    private bool isFacingIce = false;
 
     private bool isJumpStart = false;
     private bool isJump = false;
@@ -58,6 +60,8 @@ public class PlayerMove : Player
 
         UpdateAnimator();
         Init();
+        isFacing = (facing == Facing.LEFT) ? true : false;
+
     }
 
     protected override void Update()
@@ -69,13 +73,14 @@ public class PlayerMove : Player
         PlayerAnimation();
         ChangeFacing();
         Addicted();
+        isFacing = (facing == Facing.LEFT) ? true : false;
     }
 
     void FixedUpdate()
     {
         IsGround();
         Move();
-        Debug.Log(isWall);
+        //Debug.Log(isWall);
     }
 
     /// <summary>
@@ -96,7 +101,7 @@ public class PlayerMove : Player
     }
 
     /// <summary>
-    /// ??????????????????????????????????밸븶筌�?????????????멥렑???????????????????�????????????????
+    /// ??????????????????????????????????밸븶筌�?????????????멥렑??????????????????�????????????????
     /// </summary>
     private void StartScroll()
     {
@@ -250,6 +255,13 @@ public class PlayerMove : Player
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (collision.collider.CompareTag("IceFloor"))
+        {
+            Debug.Log("iceice");
+            isFacingIce = true;
+            rigid.AddForce((isFacing ? Vector2.left : Vector2.right) * 180, ForceMode2D.Impulse);
+        }
+
         //????????
         if (collision.collider.CompareTag("Water"))
         {
@@ -280,6 +292,12 @@ public class PlayerMove : Player
 
     private void OnCollisionExit2D(Collision2D collision)
     {
+        if (collision.collider.CompareTag("IceFloor"))
+        {
+            Debug.Log("iceice");
+            isFacingIce = false;
+        }
+
         if (collision.collider.CompareTag("Water"))
         {
             rPlayerpos = playerpos;
@@ -300,6 +318,8 @@ public class PlayerMove : Player
             isOneWall = false;
         }
     }
+    
+    
 
     private void OnCollisionStay2D(Collision2D collision)
     {
@@ -454,7 +474,7 @@ public class PlayerMove : Player
                 else
                     moveInput = 0;
 
-                if (isMove && !isThunder)
+                if (isMove && !isThunder && !isFacingIce)
                     rigid.velocity = new Vector3(moveInput * playerpos, rigid.velocity.y);
             }
         }
