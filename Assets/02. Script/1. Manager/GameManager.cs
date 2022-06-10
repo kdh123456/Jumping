@@ -4,6 +4,7 @@ using System.IO;
 using System.Text;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.Experimental.Rendering.Universal;
 
 public class GameManager : MonoSingleton<GameManager>
 {
@@ -37,7 +38,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     private readonly Vector2 resetPosition = new Vector2(-9f, 4f);
 
-    #region ???遺얘턁????????繹먭퍓理????????????????????ш끽紐?????癲됱빖???嶺??????쇰뮡????ル∥萸??
+    #region ??????�먮???????????�싲�?��?蹂⒱�????????????????????????�춻????????留⑶?????????????????????????
     internal string SAVE_PATH = "";
     private readonly string SAVE_FILENAME = "/SaveFile.txt";
     #endregion
@@ -75,7 +76,7 @@ public class GameManager : MonoSingleton<GameManager>
     {
 
         if (Input.GetKeyDown(KeyCode.Escape))
-            if (!UIManager.Instance.GetMenuPanelActive())
+            if (!UIManager.Instance.GetMenuPanelActive() && !UIManager.Instance.GetSettingPanelActive())
                     UIManager.Instance.SetSettingMenuActive();
 
         if (isGameStart == true) //??????????????????????????
@@ -166,6 +167,8 @@ public class GameManager : MonoSingleton<GameManager>
         isGameStart = true;
         timer = 0;
         player.transform.rotation = Quaternion.identity;
+        PlayerStateManager.Instance.UpdateState(PlayerState.BASIC);
+        player.GetComponent<PlayerMove>().UpdateAnimator();
         SaveJson<SAVE>(SAVE_PATH, SAVE_FILENAME, save);
         EventManager.TriggerEvent("RESET");
     }

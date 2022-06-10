@@ -8,6 +8,7 @@ public enum PlayerState
     FIREBALL,
     LADYBUG,
     SMALL,
+    FLY_READY,
     FLY,
     WATER
 }

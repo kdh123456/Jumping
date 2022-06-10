@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -44,6 +44,7 @@ public class ObjectPool : MonoBehaviour
             var obj = Instance.poolObjectMap[type].Dequeue();
             obj.transform.SetParent(transform);
             obj.gameObject.SetActive(true);
+            //obj.GetComponent<ItemEffect>()?.CreateEffect();
             return obj;
         }
         else
