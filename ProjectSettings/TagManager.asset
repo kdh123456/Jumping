@@ -18,6 +18,9 @@ TagManager:
   - Summer_1
   - Snake
   - Fly_Empty
+  - WaterWell
+  - WaterBall
+  - IceFloor
   layers:
   - Default
   - TransparentFX
@@ -29,7 +32,7 @@ TagManager:
   - Player
   - Wall
   - Rope
-  - 
+  - IceFloor
   - 
   - 
   - 

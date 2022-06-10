@@ -154,9 +154,9 @@ public class PlayerSkil : Player
     {
         isEmpty = true;
         Debug.Log("isflly");
-        rigid.velocity = Vector2.zero;
         animator.Play("Idle");
         GameObject fly_empty = ObjectPool.Instance.GetObject(PoolObjectType.FLY_EMPTY);
+        rigid.velocity = Vector2.zero;
         fly_empty.transform.position = transform.position + Vector3.down;
         PlayerStateManager.Instance.UpdateState(PlayerState.BASIC);
 
