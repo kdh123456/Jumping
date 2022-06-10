@@ -22,6 +22,8 @@ public class UIManager : MonoSingleton<UIManager>
     private Toggle toggle = null;
     [SerializeReference]
     private GameObject backPanel = null;
+    [SerializeField]
+    private Text continueText = null;
 
     public Text[] txt;
     void Start()
@@ -44,6 +46,15 @@ public class UIManager : MonoSingleton<UIManager>
             {
                 backPanel.SetActive(false);
             }
+        }
+
+        if(GameManager.Instance.Save.isFirst == true)
+        {
+            continueText.gameObject.SetActive(false);
+        }
+        else
+        {
+            continueText.gameObject.SetActive(true);
         }
     }
 

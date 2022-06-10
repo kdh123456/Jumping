@@ -38,12 +38,13 @@ public class GameManager : MonoSingleton<GameManager>
 
     private readonly Vector2 resetPosition = new Vector2(-9f, 4f);
 
-    #region ??????�먮???????????�싲�?��?蹂⒱�????????????????????????�춻????????留⑶?????????????????????????
+    #region ??????됰Ŧ???????????μ떜媛?슙?癰귘뮦瑗????????????????????????덉떻????????筌띯뫔?????????????????????????
     internal string SAVE_PATH = "";
     private readonly string SAVE_FILENAME = "/SaveFile.txt";
     #endregion
 
     private SAVE save;
+    public SAVE Save { get => save; }
 
     private float timer;
     public float Timer { get { return timer; } }
@@ -68,7 +69,7 @@ public class GameManager : MonoSingleton<GameManager>
     {
         finish = GameObject.FindWithTag("Finish").transform;
 
-        StartCoroutine(Save());
+        StartCoroutine(SaveCoroutine());
         SoundManager.Instance.SetBackGroundSoundClip(BackGroundSoundState.Basic);
     }
 
@@ -114,6 +115,11 @@ public class GameManager : MonoSingleton<GameManager>
     }
     public void NewGame()
     {
+        if(save.isFirst == true)
+        {
+            save.isFirst = false;
+            SaveJson<SAVE>(SAVE_PATH, SAVE_FILENAME, save);
+        }
         SetGameStart(true);
         ItemSpawnManager.Instance.RockAndRopeRespawn();
         
@@ -141,7 +147,7 @@ public class GameManager : MonoSingleton<GameManager>
         Time.timeScale = num;
     }
 
-    IEnumerator Save()
+    IEnumerator SaveCoroutine()
     {
         save = LoadJsonFile<SAVE>(SAVE_PATH, SAVE_FILENAME);
         while (true)
