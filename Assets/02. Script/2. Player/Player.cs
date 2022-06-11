@@ -21,6 +21,7 @@ public class Player : MonoBehaviour
 
     protected static bool isWall = false;
 
+
     protected virtual void Start()
     {
         TryGetComponent(out rigid);
@@ -28,11 +29,10 @@ public class Player : MonoBehaviour
         TryGetComponent(out spriteRenderer);
         TryGetComponent(out col);
         floorCol = GetComponentInChildren(typeof(BoxCollider2D)) as BoxCollider2D;
-        Debug.Log(new Vector2(gameObject.transform.position.x + floorCol.offset.x, gameObject.transform.position.y + floorCol.offset.y));
     }
     protected virtual void Update()
     {
-        isGrounded = Physics2D.OverlapBox(new Vector2(gameObject.transform.position.x, gameObject.transform.position.y-1), new Vector2(floorCol.size.x-0.3f, floorCol.size.y), 180f, LayerMask.GetMask("ground"));
+        isGrounded = Physics2D.OverlapBox(new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 1), new Vector2(floorCol.size.x - 0.3f, floorCol.size.y), 180f, LayerMask.GetMask("ground"));
     }
 
     protected virtual void Reset()

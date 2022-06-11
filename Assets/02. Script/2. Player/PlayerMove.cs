@@ -53,6 +53,8 @@ public class PlayerMove : Player
 
     public bool IsMove { get { return isMove; } }
 
+    private bool isStop = true;
+
 
     protected override void Start()
     {
@@ -88,6 +90,8 @@ public class PlayerMove : Player
     /// </summary>
     void PlayerAnimation()
     {
+        if (isStop)
+            return;
         animator.SetFloat("jump", rigid.velocity.y);
 
         isJump = ((isGrounded != true) || isScrollStart);
@@ -105,7 +109,7 @@ public class PlayerMove : Player
     /// </summary>
     private void StartScroll()
     {
-        if (isGrounded || isWall)
+        if ((isGrounded || isWall) && !isStop)
         {
             rigid.velocity = new Vector2(0.0f, rigid.velocity.y);
             isJumpStart = true;
@@ -454,7 +458,6 @@ public class PlayerMove : Player
         if (rigid.velocity.y < 0)
             rigid.velocity = new Vector2(rigid.velocity.x / 3, rigid.velocity.y / 3);
     }
-
     /// <summary>
     /// ???????????????????????????????????? ??????????????�∥???�몃�????�?�????�∥?????????????????轅붽????�떊????�∥??????????????????????? ????????????????????????????
     /// </summary>
@@ -486,10 +489,20 @@ public class PlayerMove : Player
                 else
                     moveInput = 0;
 
-                if (isMove && !isThunder && !isFacingIce)
+                if (isMove && !isThunder && !isFacingIce && !isStop)
                     rigid.velocity = new Vector3(moveInput * playerpos, rigid.velocity.y);
             }
         }
+    }
+
+    private void Stop()
+    {
+        isStop = true;
+    }
+
+    public void MoveOn()
+    {
+        isStop = false;
     }
 
     /// <summary>
@@ -499,8 +512,6 @@ public class PlayerMove : Player
     {
         if (DebuffManager.Instance.State == SeasonState.FALL)
             playerScrollbar.maxValue = rPlayerMaxValue - (int)DebuffManager.Instance.Value;
-
-        Debug.Log(playerScrollbar.maxValue);
     }
 
     /// <summary>
@@ -565,6 +576,7 @@ public class PlayerMove : Player
         EventManager.StartListening("FloorCheck", IfFloor);
         EventManager.StartListening("ColorChange", () => FrogColorChange(DebuffManager.Instance.IsDown));
         EventManager.StartListening("RESET", Reset);
+        EventManager.StartListening("Stop", Stop);
     }
 
     protected override void Reset()
