@@ -45,6 +45,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     private SAVE save;
     public CUTSCENE cUTSCENE;
+    public SAVE Save { get => save; }
 
     private float timer;
     public float Timer { get { return timer; } }
@@ -69,7 +70,7 @@ public class GameManager : MonoSingleton<GameManager>
     {
         finish = GameObject.FindWithTag("Finish").transform;
 
-        StartCoroutine(Save());
+        StartCoroutine(SaveCoroutine());
         SoundManager.Instance.SetBackGroundSoundClip(BackGroundSoundState.Basic);
     }
 
@@ -114,6 +115,11 @@ public class GameManager : MonoSingleton<GameManager>
     }
     public void NewGame()
     {
+        if(save.isFirst == true)
+        {
+            save.isFirst = false;
+            SaveJson<SAVE>(SAVE_PATH, SAVE_FILENAME, save);
+        }
         SetGameStart(true);
         ItemSpawnManager.Instance.RockAndRopeRespawn();
         timer = save.timer;
@@ -140,7 +146,7 @@ public class GameManager : MonoSingleton<GameManager>
         Time.timeScale = num;
     }
 
-    IEnumerator Save()
+    IEnumerator SaveCoroutine()
     {
         save = LoadJsonFile<SAVE>(SAVE_PATH, SAVE_FILENAME);
         while (true)
