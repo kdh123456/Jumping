@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thunderLocation: {fileID: 1543300214860779617}
-  thunderTime: 5
+  thunderTime: 40
 --- !u!1 &1543300214860779622
 GameObject:
   m_ObjectHideFlags: 0
