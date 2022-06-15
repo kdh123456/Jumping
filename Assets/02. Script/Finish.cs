@@ -1,10 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using DG.Tweening;
 using System;
+using UnityEngine.Playables;
 
 public class Finish : MonoBehaviour
 {
+    [SerializeField]
+    Image image;
+    [SerializeField]
+    float time;
+    [SerializeField]
+    PlayableDirector playable;
+
     private void Start()
     {
         GameManager.Instance.Save = GameManager.Instance.LoadJsonFile<SAVE>(GameManager.Instance.SAVE_PATH, GameManager.Instance.SAVE_FILENAME);
@@ -14,10 +24,12 @@ public class Finish : MonoBehaviour
     {
         if (collider.CompareTag("Player"))
         {
+            EventManager.TriggerEvent("Stop");
             GameManager.Instance.SaveJson<SAVE>(GameManager.Instance.SAVE_PATH, GameManager.Instance.SAVE_FILENAME, GameManager.Instance.Save);
-
-            UIManager.Instance.SetMenuPanelActive();
-            GameManager.Instance.SetGameStart(false);
+            image.DOFade(1,time).OnComplete(()=>{
+                playable.Play();
+                image.DOFade(0,time);
+            });
         }
     }
 
@@ -60,5 +72,12 @@ public class Finish : MonoBehaviour
     void Sort()
     {
         Array.Sort(GameManager.Instance.Save.timeList);
+    }
+
+    public void end()
+    {
+        UIManager.Instance.SetMenuPanelActive();
+        GameManager.Instance.SetGameStart(false);
+        EventManager.TriggerEvent("RESET");
     }
 }
