@@ -16,5 +16,6 @@ public enum PoolObjectType
     WELL, // well
     WATERBALL, // water ball
     SNAKE, // snake
-    LEAF // leaf
+    LEAF, // leaf
+    BOARD // board
 }

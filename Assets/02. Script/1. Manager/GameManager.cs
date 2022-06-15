@@ -33,18 +33,25 @@ public class GameManager : MonoSingleton<GameManager>
     public Player Player { get { return player; } }
 
     private bool isGameStart = false;
+    private bool isCutscene = false;
+    public bool IsCutscene
+    {
+        get => isCutscene;
+        set => isCutscene = value;
+    }
 
     public bool IsGameStart { get { return isGameStart; } }
 
     private readonly Vector2 resetPosition = new Vector2(-9f, 4f);
 
-    #region ??????�먮???????????�싲�?��?蹂⒱�????????????????????????�춻????????留⑶?????????????????????????
+    #region Save
     internal string SAVE_PATH = "";
-    private readonly string SAVE_FILENAME = "/SaveFile.txt";
+    internal readonly string SAVE_FILENAME = "/SaveFile.txt";
     #endregion
 
     private SAVE save;
-    public SAVE Save { get => save; }
+    public CUTSCENE cUTSCENE;
+    public SAVE Save { get => save; set => save = value; }
 
     private float timer;
     public float Timer { get { return timer; } }
@@ -80,15 +87,15 @@ public class GameManager : MonoSingleton<GameManager>
             if (!UIManager.Instance.GetMenuPanelActive() && !UIManager.Instance.GetSettingPanelActive())
                     UIManager.Instance.SetSettingMenuActive();
 
-        if (isGameStart == true) //??????????????????????????
+        if (isGameStart == true && isCutscene == false) // ???????�??? ??????껊땽??
         {
             timer += Time.deltaTime;
-            UIManager.Instance.SetTimerActive(true);
+            //UIManager.Instance.SetTimerActive(true);
             UIManager.Instance.TimerText();
         }
         else
         {
-            UIManager.Instance.SetTimerActive(false);
+            //UIManager.Instance.SetTimerActive(false);
         }
 
         goalDistance = playerTr.position.y / (finish.position.y) * 100;
@@ -100,6 +107,7 @@ public class GameManager : MonoSingleton<GameManager>
         SetGameStart(true);
         UIManager.Instance.SetMenuPanelActive();
         ItemSpawnManager.Instance.RockAndRopeRespawn();
+        player.GetComponent<PlayerMove>().Reset();
         save = LoadJsonFile<SAVE>(SAVE_PATH, SAVE_FILENAME);
         playerTr.position = save.position;
         timer = save.timer;
@@ -108,9 +116,11 @@ public class GameManager : MonoSingleton<GameManager>
     public void NewGameCutSceen()
     {
         Reset();
+        player.GetComponent<PlayerMove>().Reset();
         save = LoadJsonFile<SAVE>(SAVE_PATH, SAVE_FILENAME);
         playerTr.position = save.position;
         UIManager.Instance.SetMenuPanelActive();
+        //isCutscene = false;
     }
     public void NewGame()
     {
