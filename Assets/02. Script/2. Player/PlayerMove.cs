@@ -511,8 +511,8 @@ public class PlayerMove : Player
     /// </summary>
     private void Addicted()
     {
-        if (DebuffManager.Instance.State == SeasonState.FALL)
-            playerScrollbar.maxValue = rPlayerMaxValue - (int)DebuffManager.Instance.Value;
+        //if (DebuffManager.Instance.State == SeasonState.FALL)
+        //    playerScrollbar.maxValue = rPlayerMaxValue - (int)DebuffManager.Instance.Value;
     }
 
     /// <summary>
