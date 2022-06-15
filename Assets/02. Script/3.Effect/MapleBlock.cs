@@ -18,10 +18,9 @@ public class MapleBlock : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        
-
         if (collision.gameObject.CompareTag("Player"))
         {
+            SoundManager.Instance.SetEffectSoundClip(EffectSoundState.WaterSplat);
             Sequence seq = DOTween.Sequence();
             seq.AppendCallback(() => StartCoroutine(ShakeCoroutine()));
             seq.SetDelay(.1f);
