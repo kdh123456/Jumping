@@ -44,7 +44,6 @@ public class GameManager : MonoSingleton<GameManager>
     #endregion
 
     private SAVE save;
-    public CUTSCENE cUTSCENE;
     public SAVE Save { get => save; }
 
     private float timer;
