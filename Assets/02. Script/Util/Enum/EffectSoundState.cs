@@ -3,5 +3,7 @@ public enum EffectSoundState
 {
     Jump,
     Walk,
-    Land
+    Land,
+    WaterSplat,
+    Maple
 }
