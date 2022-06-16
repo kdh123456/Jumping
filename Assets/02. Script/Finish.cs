@@ -67,11 +67,13 @@ public class Finish : MonoBehaviour
 
     public void end()
     {
+        GameManager.Instance.Save.isFirst = true;
         UIManager.Instance.SetMenuPanelActive();
         GameManager.Instance.SetGameStart(false);
         GameManager.Instance.Player.GetComponent<PlayerMove>().Reset();
         timeList = GameManager.Instance.LoadJsonFile<TIMELIST>(GameManager.Instance.SAVE_PATH, SAVE_FILENAME);
         Add();
         GameManager.Instance.SaveJson<TIMELIST>(GameManager.Instance.SAVE_PATH, SAVE_FILENAME, timeList);
+        GameManager.Instance.SaveJson<SAVE>(GameManager.Instance.SAVE_PATH, GameManager.Instance.SAVE_FILENAME, GameManager.Instance.Save);
     }
 }
