@@ -284,11 +284,6 @@ public class PlayerMove : Player
                 playerScrollbar.maxValue = waterplayerMaxValue;
             }
         }
-        //?????????????
-        //else if (collision.collider.CompareTag("Cloud"))
-        //{
-        //    StartCoroutine(ItemSpawnManager.Instance.ItmeSpawn(PoolObjectType.CLOUD, collision.transform));
-        //}
         else if (collision.collider.CompareTag("BaseFloor") && !isGrounded)
         {
             isMove = false;
@@ -311,15 +306,6 @@ public class PlayerMove : Player
         {
             rPlayerpos = playerpos;
             playerScrollbar.maxValue = rPlayerMaxValue;
-            // if (DebuffManager.Instance.State == SeasonState.SUMMER_0)
-            // {
-            //     DebuffManager.Instance.UpdateDown(false);
-            // }
-            // else if (DebuffManager.Instance.State == SeasonState.SUMMER_1)
-            // {
-            //     playerpos = 5;
-            //     playerScrollbar.maxValue = 30;
-            // }
 
         }
         else if (collision.collider.CompareTag("LeftWall") || collision.collider.CompareTag("RightWall"))
@@ -335,9 +321,7 @@ public class PlayerMove : Player
     {
         if (collision.collider.CompareTag("LeftWall") && isOneWall)
         {
-            Debug.Log("?");
             transform.localEulerAngles = new Vector3(0, 0, 90);
-            transform.transform.position = new Vector2(transform.position.x + 0.15f, transform.position.y);
             rigid.bodyType = RigidbodyType2D.Static;
             isWall = true;
             animator.Play("Idle");
@@ -345,7 +329,6 @@ public class PlayerMove : Player
         else if (collision.collider.CompareTag("RightWall") && isOneWall && !isScrollStart)
         {
             transform.localEulerAngles = new Vector3(0, 0, -90);
-            transform.transform.position = new Vector2(transform.position.x - 0.15f, transform.position.y);
             rigid.bodyType = RigidbodyType2D.Static;
             isWall = true;
             animator.Play("Idle");
