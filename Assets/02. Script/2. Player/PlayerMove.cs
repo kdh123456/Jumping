@@ -479,7 +479,9 @@ public class PlayerMove : Player
 
     private void Stop()
     {
+        animator.Play("Idle");
         isStop = true;
+        rigid.velocity = new Vector2(0, 0);
     }
 
     public void MoveOn()
