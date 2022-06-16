@@ -8,33 +8,40 @@ public class CutScene : MonoBehaviour
     private Vector3[] objvector;
     private void Start()
     {
+        EventManager.StartListening("CUTSCENE", CUT);
         EventManager.StartListening("RESET", Reset);
         if (objvector.Length > CutSceneManager.Instance.twoCount)
         {
             this.gameObject.transform.position = objvector[CutSceneManager.Instance.twoCount];
         }
     }
-    private void OnTriggerEnter2D(Collider2D other)
+
+    private void OnTriggerStay2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && GameManager.Instance.IsGameStart)
         {
-            EventManager.TriggerEvent("MoveStop");
-            EventManager.TriggerEvent("UPDOWNCUTSCENE");
-            EventManager.TriggerEvent("ChangeCameraVector");
-            EventManager.TriggerEvent("CUTSCENEPLUS");
-            if (objvector.Length > CutSceneManager.Instance.twoCount)
-            {
-                this.gameObject.transform.position = objvector[CutSceneManager.Instance.twoCount];
-            }
-            else
-            {
-                this.gameObject.transform.position = Vector2.zero;
-            }
+            CUT();
         }
     }
 
     private void Reset()
     {
         this.gameObject.transform.position = objvector[0];
+    }
+
+    private void CUT()
+    {
+        EventManager.TriggerEvent("Stop");
+        EventManager.TriggerEvent("UPDOWNCUTSCENE");
+        EventManager.TriggerEvent("ChangeCameraVector");
+        EventManager.TriggerEvent("CUTSCENEPLUS");
+        if (objvector.Length > CutSceneManager.Instance.twoCount)
+        {
+            this.gameObject.transform.position = objvector[CutSceneManager.Instance.twoCount];
+        }
+        else
+        {
+            this.gameObject.transform.position = Vector2.zero;
+        }
     }
 }

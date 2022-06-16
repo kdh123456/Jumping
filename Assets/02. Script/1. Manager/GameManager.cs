@@ -87,7 +87,7 @@ public class GameManager : MonoSingleton<GameManager>
             if (!UIManager.Instance.GetMenuPanelActive() && !UIManager.Instance.GetSettingPanelActive())
                     UIManager.Instance.SetSettingMenuActive();
 
-        if (isGameStart == true && isCutscene == false) // ???????�??? ??????껊땽??
+        if (isGameStart == true && isCutscene == false) // ???????鶯??? ??????猿딅빟??
         {
             timer += Time.deltaTime;
             //UIManager.Instance.SetTimerActive(true);
@@ -173,7 +173,7 @@ public class GameManager : MonoSingleton<GameManager>
         SaveJson(SAVE_PATH, SAVE_FILENAME, save);
     }
 
-    void Reset()
+    public void Reset()
     {
         save.position = resetPosition;
         save.timer = 0f;
