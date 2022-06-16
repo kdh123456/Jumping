@@ -344,7 +344,6 @@ public class PlayerMove : Player
         }
         else if (collision.collider.CompareTag("RightWall") && isOneWall && !isScrollStart)
         {
-            Debug.Log("?");
             transform.localEulerAngles = new Vector3(0, 0, -90);
             transform.transform.position = new Vector2(transform.position.x - 0.15f, transform.position.y);
             rigid.bodyType = RigidbodyType2D.Static;
@@ -560,7 +559,7 @@ public class PlayerMove : Player
     }
 
     /// <summary>
-    /// ?饔낅떽???壤굿??좎뜫嫄????????좎뜦?????????좎럥萸???????????좎뜦??嶸????????좎뜦????
+    /// 
     /// </summary>
     private void Init()
     {
