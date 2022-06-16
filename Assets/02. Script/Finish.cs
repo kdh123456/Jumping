@@ -14,19 +14,28 @@ public class Finish : MonoBehaviour
     float time;
     [SerializeField]
     PlayableDirector playable;
+    private TIMELIST timeList;
+
+    private readonly string SAVE_FILENAME = "TimeList.txt";
 
     private void Start()
     {
-        GameManager.Instance.Save = GameManager.Instance.LoadJsonFile<SAVE>(GameManager.Instance.SAVE_PATH, GameManager.Instance.SAVE_FILENAME);
+        timeList = GameManager.Instance.LoadJsonFile<TIMELIST>(GameManager.Instance.SAVE_PATH, SAVE_FILENAME);
     }
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.CompareTag("Player"))
+        if (collider.CompareTag("Player") && GameManager.Instance.IsGameStart)
         {
             EventManager.TriggerEvent("Stop");
             GameManager.Instance.SaveJson<SAVE>(GameManager.Instance.SAVE_PATH, GameManager.Instance.SAVE_FILENAME, GameManager.Instance.Save);
             image.DOFade(1,time).OnComplete(()=>{
+            GameManager.Instance.Player.GetComponent<PlayerMove>().Reset();
+            timeList = GameManager.Instance.LoadJsonFile<TIMELIST>(GameManager.Instance.SAVE_PATH, SAVE_FILENAME);
+            Add();
+            GameManager.Instance.SaveJson<TIMELIST>(GameManager.Instance.SAVE_PATH, SAVE_FILENAME, timeList);
+            UIManager.Instance.SetMenuPanelActive();
+            GameManager.Instance.SetGameStart(false);
                 playable.Play();
                 image.DOFade(0,time);
             });
@@ -35,43 +44,30 @@ public class Finish : MonoBehaviour
 
     private void Add()
     {
-        if (IsEmpty())
+        for (int i = 0; i < timeList.timeList.Length; i++)
         {
-            for (int i = 0; i < GameManager.Instance.Save.timeList.Length; i++)
+            if (timeList.timeList[i] == 0)
             {
-                if (GameManager.Instance.Save.timeList[i] != 0)
-                {
-                    GameManager.Instance.Save.timeList[i] = GameManager.Instance.Timer;
-                    return;
-                }
+                timeList.timeList[i] = GameManager.Instance.Timer;
+
+                Sort();
+
+                GameManager.Instance.SaveJson<TIMELIST>(GameManager.Instance.SAVE_PATH, SAVE_FILENAME, timeList);
+                return;
             }
         }
-        else
-        {
-            GameManager.Instance.Save.timeList[9] = GameManager.Instance.Timer;
-        }
+
+        timeList.timeList[0] = GameManager.Instance.Timer;
 
         Sort();
 
-        GameManager.Instance.SaveJson<SAVE>(GameManager.Instance.SAVE_PATH, GameManager.Instance.SAVE_FILENAME, GameManager.Instance.Save);
-    }
-
-    bool IsEmpty()
-    {
-        for(int i = 0; i < GameManager.Instance.Save.timeList.Length; i++)
-        {
-            if (GameManager.Instance.Save.timeList[i] == 0)
-                return true;
-            else
-                return false;
-        }
-
-        return false;
+        GameManager.Instance.SaveJson<TIMELIST>(GameManager.Instance.SAVE_PATH, SAVE_FILENAME, timeList);
     }
 
     void Sort()
     {
-        Array.Sort(GameManager.Instance.Save.timeList);
+        Array.Sort(timeList.timeList);
+        Array.Reverse(timeList.timeList);
     }
 
     public void end()
