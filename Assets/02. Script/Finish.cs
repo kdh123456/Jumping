@@ -22,7 +22,8 @@ public class Finish : MonoBehaviour
 
             timeList = GameManager.Instance.LoadJsonFile<TIMELIST>(GameManager.Instance.SAVE_PATH, SAVE_FILENAME);
             Add();
-
+            GameManager.Instance.Save.isFirst = true;
+            GameManager.Instance.SaveJson<SAVE>(GameManager.Instance.SAVE_PATH, GameManager.Instance.SAVE_FILENAME, GameManager.Instance.Save);
             GameManager.Instance.SaveJson<TIMELIST>(GameManager.Instance.SAVE_PATH, SAVE_FILENAME, timeList);
 
             UIManager.Instance.SetMenuPanelActive();
