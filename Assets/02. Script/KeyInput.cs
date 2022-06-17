@@ -51,6 +51,7 @@ public class KeyInput : MonoBehaviour
                             break;
                         case PlayerState.WATER:
                             EventManager.TriggerEvent("EatWell");
+                            SoundManager.Instance.SetEffectSoundClip(EffectSoundState.WaterSplat);
                             break;
                     }
                 }

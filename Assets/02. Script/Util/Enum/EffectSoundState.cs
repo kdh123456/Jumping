@@ -5,5 +5,5 @@ public enum EffectSoundState
     Walk,
     Land,
     WaterSplat,
-    Maple
+    Maple,
 }

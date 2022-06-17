@@ -20,7 +20,7 @@ public class MapleBlock : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            SoundManager.Instance.SetEffectSoundClip(EffectSoundState.WaterSplat);
+            SoundManager.Instance.SetEffectSoundClip(EffectSoundState.Maple);
             Sequence seq = DOTween.Sequence();
             seq.AppendCallback(() => StartCoroutine(ShakeCoroutine()));
             seq.SetDelay(.1f);

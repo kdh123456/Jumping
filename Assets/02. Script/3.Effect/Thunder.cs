@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Thunder : MonoBehaviour
 {
+    public AudioSource audioSource;
     public float fieldofImpact;
 
     public float force;
@@ -11,10 +12,15 @@ public class Thunder : MonoBehaviour
     public LayerMask LayerToHit;
 
     private Collider2D objects;
-
+    private void Awake()
+    {
+        if (SoundManager.Instance != null)
+            audioSource.volume = SoundManager.Instance.GetEffectVolume();
+    }
     private void Start()
     {
         objects = GetComponent<Collider2D>();
+        audioSource.Play();
     }
 
     public void ThunderEnd()
@@ -25,7 +31,7 @@ public class Thunder : MonoBehaviour
     public void Explode(Rigidbody2D collider)
     {
         float random = Random.Range(0f, 1f);
-        Vector2 direction = random > 0.5f ? new Vector2(1,0) : new Vector2(-1, 0);
+        Vector2 direction = random > 0.5f ? new Vector2(1, 0) : new Vector2(-1, 0);
 
         EventManager.TriggerEvent("ThunderExplode");
         collider.AddForce(direction * force, ForceMode2D.Impulse);

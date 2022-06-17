@@ -79,4 +79,9 @@ public class SoundManager : MonoSingleton<SoundManager>
         bgmSetVolume();
         effetSetVolume();
     }
+
+    public float GetEffectVolume()
+    {
+        return soundValue.effectSound;
+    }
 }
