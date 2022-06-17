@@ -14,7 +14,7 @@ public class Thunder : MonoBehaviour
     private Collider2D objects;
     private void Awake()
     {
-        if (SoundManager.Instance != null)
+        //if (SoundManager.Instance != null)
             audioSource.volume = SoundManager.Instance.GetEffectVolume();
     }
     private void Start()

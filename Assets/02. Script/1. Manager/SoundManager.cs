@@ -26,13 +26,12 @@ public class SoundManager : MonoSingleton<SoundManager>
     {
         TryGetComponent(out bgm);
         this.transform.GetChild(0).TryGetComponent(out effectSound);
+        soundValue = GameManager.Instance.LoadJsonFile<SOUND_VALUE>(GameManager.Instance.SAVE_PATH, SAVE_FILENAME);
     }
 
     void Start()
     {
         //GameManager.Instance.SaveJson<SOUND_VALUE>(GameManager.Instance.SAVE_PATH, SAVE_FILENAME, soundValue);
-        soundValue = GameManager.Instance.LoadJsonFile<SOUND_VALUE>(GameManager.Instance.SAVE_PATH, SAVE_FILENAME);
-
         if (soundValue != null)
         {
             bgmScrollbar.value = soundValue.bgmSound;
@@ -60,7 +59,7 @@ public class SoundManager : MonoSingleton<SoundManager>
     {
         effectSound.volume = effectScrollbar.value;
     }
-    //볼륨값 저장
+    //蹂쇰ⅷ媛????
 
     public void BgmValueSave()
     {
@@ -82,6 +81,9 @@ public class SoundManager : MonoSingleton<SoundManager>
 
     public float GetEffectVolume()
     {
+        if (soundValue == null)
+            soundValue = GameManager.Instance.LoadJsonFile<SOUND_VALUE>(GameManager.Instance.SAVE_PATH, SAVE_FILENAME);
+
         return soundValue.effectSound;
     }
 }
