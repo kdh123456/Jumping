@@ -12,15 +12,11 @@ public class Thunder : MonoBehaviour
     public LayerMask LayerToHit;
 
     private Collider2D objects;
-    private void Awake()
-    {
-        //if (SoundManager.Instance != null)
-            audioSource.volume = SoundManager.Instance.GetEffectVolume();
-    }
+
     private void Start()
     {
         objects = GetComponent<Collider2D>();
-        audioSource.Play();
+        audioSource.volume = SoundManager.Instance.GetEffectVolume();
     }
 
     public void ThunderEnd()
