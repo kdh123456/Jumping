@@ -37,6 +37,8 @@ public class SoundManager : MonoSingleton<SoundManager>
             bgmScrollbar.value = soundValue.bgmSound;
             effectScrollbar.value = soundValue.effectSound;
         }
+
+        EventManager.StartListening("RESET", Reset);
     }
 
     public void SetBackGroundSoundClip(BackGroundSoundState state)
@@ -85,5 +87,10 @@ public class SoundManager : MonoSingleton<SoundManager>
             soundValue = GameManager.Instance.LoadJsonFile<SOUND_VALUE>(GameManager.Instance.SAVE_PATH, SAVE_FILENAME);
 
         return soundValue.effectSound;
+    }
+
+    private void Reset()
+    {
+        SetBackGroundSoundClip(BackGroundSoundState.Basic);
     }
 }

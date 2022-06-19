@@ -1,4 +1,5 @@
 public enum BackGroundSoundState
 {
-    Basic
+    Basic,
+    Ending
 }

@@ -31,6 +31,7 @@ public class Finish : MonoBehaviour
             GameManager.Instance.SaveJson<SAVE>(GameManager.Instance.SAVE_PATH, GameManager.Instance.SAVE_FILENAME, GameManager.Instance.Save);
             image.DOFade(1, time).OnComplete(() =>
             {
+                SoundManager.Instance.SetBackGroundSoundClip(BackGroundSoundState.Ending);
                 playable.Play();
                 image.DOFade(0, time);
             });
