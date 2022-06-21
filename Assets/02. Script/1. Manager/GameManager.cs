@@ -76,7 +76,8 @@ public class GameManager : MonoSingleton<GameManager>
     {
         finish = GameObject.FindWithTag("Finish").transform;
 
-        StartCoroutine(SaveCoroutine());
+        //StartCoroutine(SaveCoroutine());
+        save = LoadJsonFile<SAVE>(SAVE_PATH, SAVE_FILENAME);
         SoundManager.Instance.SetBackGroundSoundClip(BackGroundSoundState.Basic);
     }
 
@@ -87,7 +88,7 @@ public class GameManager : MonoSingleton<GameManager>
             if (!UIManager.Instance.GetMenuPanelActive() && !UIManager.Instance.GetSettingPanelActive())
                     UIManager.Instance.SetSettingMenuActive();
 
-        if (isGameStart == true && isCutscene == false) // ???????È∂??? ???????øÎîÖÎπ??
+        if (isGameStart == true && isCutscene == false) // ???????ÂÇ≠??? ???????Ïö©Î¥æÈçÆ??
         {
             timer += Time.deltaTime;
             //UIManager.Instance.SetTimerActive(true);
@@ -136,7 +137,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     public void QuitGame()
     {
-        SavePositionAndTimer();
+        //SavePositionAndTimer();
 
         #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
