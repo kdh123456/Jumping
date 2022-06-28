@@ -27,8 +27,9 @@ public class Finish : MonoBehaviour
     {
         if (collider.CompareTag("Player") && GameManager.Instance.IsGameStart)
         {
-            EventManager.TriggerEvent("Stop");
+            GameManager.Instance.SetGameStart(false);
             GameManager.Instance.SaveJson<SAVE>(GameManager.Instance.SAVE_PATH, GameManager.Instance.SAVE_FILENAME, GameManager.Instance.Save);
+            EventManager.TriggerEvent("Stop");
             image.DOFade(1, time).OnComplete(() =>
             {
                 SoundManager.Instance.SetBackGroundSoundClip(BackGroundSoundState.Ending);

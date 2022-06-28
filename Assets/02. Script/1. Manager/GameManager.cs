@@ -88,7 +88,7 @@ public class GameManager : MonoSingleton<GameManager>
             if (!UIManager.Instance.GetMenuPanelActive() && !UIManager.Instance.GetSettingPanelActive())
                     UIManager.Instance.SetSettingMenuActive();
 
-        if (isGameStart == true && isCutscene == false) // ??????????? ?????????몃뒇???
+        if (isGameStart == true && isCutscene == false) // ??????????? ?????????紐껊뭸???
         {
             timer += Time.deltaTime;
             //UIManager.Instance.SetTimerActive(true);
@@ -182,6 +182,9 @@ public class GameManager : MonoSingleton<GameManager>
 
         isGameStart = true;
         timer = 0;
+        UIManager.Instance.TimerText();
+        goalDistance = playerTr.position.y / (finish.position.y) * 100;
+        UIManager.Instance.UpdateGoalPercentText(goalDistance);
         player.transform.rotation = Quaternion.identity;
         PlayerStateManager.Instance.UpdateState(PlayerState.BASIC);
         player.GetComponent<PlayerMove>().UpdateAnimator();

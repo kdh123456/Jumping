@@ -38,16 +38,21 @@ public class LeaderBoard : MonoBehaviour
             rankIsEmptyText.gameObject.SetActive(false);
         }
 
-        for (int i = 1; i <= timeList.timeList.Length; i++)
+        int idx = 1;
+        int minute = 0, second = 0;
+        for (int i = timeList.timeList.Length - 1; i >= 0; i--)
         {
-            if (timeList.timeList[i - 1] != 0)
+            if (timeList.timeList[i] != 0)
             {
                 GameObject board = ObjectPool.Instance.GetObject(PoolObjectType.BOARD);
                 board.transform.SetParent(createPoint);
                 board.transform.position = Vector3.zero;
 
-                board.transform.GetChild(0).GetComponent<Text>().text = i.ToString();
-                board.transform.GetChild(1).GetComponent<Text>().text = string.Format("{0:F0}", timeList.timeList[i - 1]);
+                minute = (int)((timeList.timeList[i] % 3600) / 60);
+                second = (int)((timeList.timeList[i] % 3600) % 60);
+                board.transform.GetChild(0).GetComponent<Text>().text = idx++.ToString();
+                board.transform.GetChild(1).GetComponent<Text>().text = string.Format("{0:F0}분 {1:F0}초", minute, second);
+                Debug.Log($"{timeList.timeList[i]} : {minute}, {second}");
             }
         }
     }
