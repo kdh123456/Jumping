@@ -88,7 +88,7 @@ public class GameManager : MonoSingleton<GameManager>
             if (!UIManager.Instance.GetMenuPanelActive() && !UIManager.Instance.GetSettingPanelActive())
                     UIManager.Instance.SetSettingMenuActive();
 
-        if (isGameStart == true && isCutscene == false) // ??????????? ?????????紐껊뭸???
+        if (isGameStart == true && isCutscene == false) // ??????????? ?????????紐껊�???
         {
             timer += Time.deltaTime;
             //UIManager.Instance.SetTimerActive(true);

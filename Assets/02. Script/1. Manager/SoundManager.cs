@@ -61,7 +61,7 @@ public class SoundManager : MonoSingleton<SoundManager>
     {
         effectSound.volume = effectScrollbar.value;
     }
-    //癰귥눖?룟첎?????
+    //?곌램???�잛�?????
 
     public void BgmValueSave()
     {

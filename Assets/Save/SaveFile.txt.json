@@ -1,8 +1,8 @@
 {
     "position": {
-        "x": -6.901793003082275,
+        "x": -9.0,
         "y": 4.0
     },
-    "timer": 72.08180236816406,
-    "isFirst": true
+    "timer": 0.0,
+    "isFirst": false
 }

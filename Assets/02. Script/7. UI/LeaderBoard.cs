@@ -51,8 +51,7 @@ public class LeaderBoard : MonoBehaviour
                 minute = (int)((timeList.timeList[i] % 3600) / 60);
                 second = (int)((timeList.timeList[i] % 3600) % 60);
                 board.transform.GetChild(0).GetComponent<Text>().text = idx++.ToString();
-                board.transform.GetChild(1).GetComponent<Text>().text = string.Format("{0:F0}분 {1:F0}초", minute, second);
-                Debug.Log($"{timeList.timeList[i]} : {minute}, {second}");
+                board.transform.GetChild(1).GetComponent<Text>().text = string.Format("{0:F0}m {1:F0}s", minute, second);
             }
         }
     }
