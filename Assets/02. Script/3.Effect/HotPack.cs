@@ -5,12 +5,13 @@ using UnityEngine;
 public class HotPack : MonoBehaviour
 {
     public float time = 9f;
-    private float selectCountdown;
+    private float selectCountdown = 0f;
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (Mathf.Floor(selectCountdown) == time)
+        if (Mathf.Floor(selectCountdown) >= time)
         {
-
+            EventManager.TriggerEvent("Hotpack");
+            selectCountdown = 0f;
         }
         else
         {
@@ -20,8 +21,6 @@ public class HotPack : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        
+        selectCountdown = 0f;
     }
-
-
 }

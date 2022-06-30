@@ -78,7 +78,7 @@ public class CloudBlock : ItemEffect
     private IEnumerator ShakeCloudCoroutine()
     {
         spriteRenderer.material.SetFloat("_WindIntensity", 0.2f);
-        spriteRenderer.material.SetFloat("_WindSpee", 1.5f);
+        spriteRenderer.material.SetFloat("_WindSpee", 2f);
         yield return new WaitForSeconds(.3f);
         spriteRenderer.material.SetFloat("_WindIntensity", 0.1f);
         spriteRenderer.material.SetFloat("_WindSpee", 1);
