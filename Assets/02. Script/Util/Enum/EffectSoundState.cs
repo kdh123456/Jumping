@@ -6,4 +6,5 @@ public enum EffectSoundState
     Land,
     WaterSplat,
     Maple,
+    Icicle
 }
