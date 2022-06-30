@@ -25,7 +25,6 @@ public class Icicle : MonoBehaviour
         if (collision.CompareTag("Player") == true || collision.CompareTag("BaseFloor") == true)
         {
             rb.velocity = new Vector2(0, 0);
-            // 사운드 재생, 애니메이션 재생
             SoundManager.Instance.SetEffectSoundClip(EffectSoundState.Icicle);
             animator.SetTrigger(hashDestroy);
         }
