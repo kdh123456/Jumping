@@ -24,6 +24,11 @@ public class Icicle : MonoBehaviour
     {
         if (collision.CompareTag("Player") == true || collision.CompareTag("BaseFloor") == true)
         {
+            if (collision.CompareTag("Player"))
+            {
+                EventManager.TriggerEvent("ThunderExplode");
+            }
+
             rb.velocity = new Vector2(0, 0);
             SoundManager.Instance.SetEffectSoundClip(EffectSoundState.Icicle);
             animator.SetTrigger(hashDestroy);
