@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 5364260430477127601}
   - component: {fileID: 8204465306384918614}
   - component: {fileID: 6364650509303124790}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: IceFloor
-  m_TagString: Untagged
+  m_TagString: IceFloor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
