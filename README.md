@@ -49,7 +49,7 @@ Left and right movement: AD<br>
 Jump: SPACE<br>
 Eat Item: F<br>
 Using Capabilities: E<br>
-Pause: ESC
+Pause: ESC<br>
 ※ <b>CAUTION!</b> DO NOT AUTOMATIC SAVE
 
 Made by ManManGames
