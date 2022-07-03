@@ -45,10 +45,10 @@ How far can you go up?
 
 <b>Operation method</b>:
 
-Left and right movement: AD
-Jump: SPACE
-Eat Item: F
-Using Capabilities: E
+Left and right movement: AD<br>
+Jump: SPACE<br>
+Eat Item: F<br>
+Using Capabilities: E<br>
 Pause: ESC
 ※ <b>CAUTION!</b> DO NOT AUTOMATIC SAVE
 
