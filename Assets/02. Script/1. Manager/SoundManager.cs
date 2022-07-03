@@ -53,6 +53,18 @@ public class SoundManager : MonoSingleton<SoundManager>
         effectSound.clip = EfectClip[(int)state];
         effectSound.Play();
     }
+
+    public void PlayBgmSound()
+    {
+        if(bgm.isPlaying == false)
+            bgm.Play();
+    }
+
+    public void StopBgmSound()
+    {
+        bgm.Stop();
+    }
+
     public void bgmSetVolume()
     {
         bgm.volume = bgmScrollbar.value;
@@ -61,7 +73,7 @@ public class SoundManager : MonoSingleton<SoundManager>
     {
         effectSound.volume = effectScrollbar.value;
     }
-    //?곌램???�잛�?????
+    //?怨뚮옩???룹옕苡?????
 
     public void BgmValueSave()
     {

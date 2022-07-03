@@ -1,5 +1,6 @@
 public enum BackGroundSoundState
 {
     Basic,
-    Ending
+    Ending,
+    SpringBgm
 }

@@ -78,17 +78,20 @@ public class GameManager : MonoSingleton<GameManager>
 
         //StartCoroutine(SaveCoroutine());
         save = LoadJsonFile<SAVE>(SAVE_PATH, SAVE_FILENAME);
-        SoundManager.Instance.SetBackGroundSoundClip(BackGroundSoundState.Basic);
+        //SoundManager.Instance.SetBackGroundSoundClip(BackGroundSoundState.Basic);
+        //SoundManager.Instance.SetBackGroundSoundClip(BackGroundSoundState.SpringBgm);
     }
 
     void Update()
     {
-
         if (Input.GetKeyDown(KeyCode.Escape))
             if (!UIManager.Instance.GetMenuPanelActive() && !UIManager.Instance.GetSettingPanelActive())
-                    UIManager.Instance.SetSettingMenuActive();
+            {
+                UIManager.Instance.SetSettingMenuActive();
+                SoundManager.Instance.StopBgmSound();
+            }
 
-        if (isGameStart == true && isCutscene == false) // ??????????? ?????????紐껊�???
+        if (isGameStart == true && isCutscene == false) // ??????????? ?????????筌뤾퍓萸???
         {
             timer += Time.deltaTime;
             //UIManager.Instance.SetTimerActive(true);
@@ -106,6 +109,8 @@ public class GameManager : MonoSingleton<GameManager>
     public void ContinueGame()
     {
         SetGameStart(true);
+        SoundManager.Instance.SetBackGroundSoundClip(BackGroundSoundState.Basic);
+        //SoundManager.Instance.SetBackGroundSoundClip(BackGroundSoundState.SpringBgm);
         UIManager.Instance.SetMenuPanelActive();
         ItemSpawnManager.Instance.RockAndRopeRespawn();
         player.GetComponent<PlayerMove>().Reset();
@@ -130,6 +135,8 @@ public class GameManager : MonoSingleton<GameManager>
             save.isFirst = false;
             SaveJson<SAVE>(SAVE_PATH, SAVE_FILENAME, save);
         }
+        SoundManager.Instance.SetBackGroundSoundClip(BackGroundSoundState.Basic);
+        //SoundManager.Instance.SetBackGroundSoundClip(BackGroundSoundState.SpringBgm);
         SetGameStart(true);
         ItemSpawnManager.Instance.RockAndRopeRespawn();
         timer = save.timer;
