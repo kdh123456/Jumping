@@ -50,6 +50,7 @@ How far can you go up?
   - Eat Item: F<br>
   - Using Capabilities: E<br>
   - Pause: ESC<br>
+
 ※ <b>CAUTION!</b> DO NOT AUTOMATIC SAVE
 
 Made by ManManGames
