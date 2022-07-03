@@ -17,7 +17,7 @@
   
   ※ <b>주의!</b> 자동 세이브 안됨
   
-  Made by ManManGames
+  Made by 만만 게임즈
   
   
   <b>만만 게임즈 유튜브</b>
