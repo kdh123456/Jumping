@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Playables;
 using static Define;
 
 public class UIManager : MonoSingleton<UIManager>
@@ -24,6 +25,10 @@ public class UIManager : MonoSingleton<UIManager>
     private GameObject backPanel = null;
     [SerializeField]
     private Text continueText = null;
+    [SerializeField]
+    private GameObject skipButton = null;
+    [SerializeField]
+    private PlayableDirector playableDirector;
 
     public Text[] txt;
     void Start()
@@ -124,5 +129,15 @@ public class UIManager : MonoSingleton<UIManager>
     public void TimerTextActive()
     {
         timerText.gameObject.SetActive(toggle.isOn);
+    }
+
+    public void ActuveSkip(bool skip)
+    {
+        skipButton.SetActive(skip);
+    }
+
+    public void Skip()
+    {
+        playableDirector.Stop();
     }
 }

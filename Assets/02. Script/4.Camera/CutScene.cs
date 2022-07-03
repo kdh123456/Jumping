@@ -35,6 +35,7 @@ public class CutScene : MonoBehaviour
         EventManager.TriggerEvent("UPDOWNCUTSCENE");
         EventManager.TriggerEvent("ChangeCameraVector");
         EventManager.TriggerEvent("CUTSCENEPLUS");
+        UIManager.Instance.ActuveSkip(true);
         if (objvector.Length > CutSceneManager.Instance.twoCount)
         {
             this.gameObject.transform.position = objvector[CutSceneManager.Instance.twoCount];
