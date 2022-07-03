@@ -17,6 +17,8 @@
   
   ※ <b>주의!</b> 자동 세이브 안됨
   
+  Made by ManManGames
+  
   
   <b>만만 게임즈 유튜브</b>
    - https://www.youtube.com/channel/UC__bvUUBatVlj4bndzYXdSw
