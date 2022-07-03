@@ -20,11 +20,31 @@
   Made by 만만 게임즈
   
   
-  <b>만만 게임즈 유튜브</b>
+  
+Run up the well!
+
+Use your abilities by eating various <b>items</b>!
+
+Use your numerous abilities to jump over <b>obstacles</b> in your way!
+
+How far can you go up?
+
+<b>Operation method</b>:
+
+Left and right movement: AD
+Jump: SPACE
+Eat Item: F
+Using Capabilities: E
+Pause: ESC
+※ <b>CAUTION!</b> DO NOT AUTOMATIC SAVE
+
+Made by ManManGames
+  
+  <b>ManManGames Youtube</b>
    - https://www.youtube.com/channel/UC__bvUUBatVlj4bndzYXdSw
    
-   <b>만만 게임즈 페이스북</b>
+   <b>ManManGames FaceBook</b>
    - https://www.facebook.com/manmangames
    
    
-   ※ 추후 영상 추가
+   ※ Add a video later
