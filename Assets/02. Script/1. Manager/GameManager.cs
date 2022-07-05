@@ -76,18 +76,22 @@ public class GameManager : MonoSingleton<GameManager>
     {
         finish = GameObject.FindWithTag("Finish").transform;
 
-        StartCoroutine(SaveCoroutine());
-        SoundManager.Instance.SetBackGroundSoundClip(BackGroundSoundState.Basic);
+        //StartCoroutine(SaveCoroutine());
+        save = LoadJsonFile<SAVE>(SAVE_PATH, SAVE_FILENAME);
+        //SoundManager.Instance.SetBackGroundSoundClip(BackGroundSoundState.Basic);
+        //SoundManager.Instance.SetBackGroundSoundClip(BackGroundSoundState.SpringBgm);
     }
 
     void Update()
     {
-
         if (Input.GetKeyDown(KeyCode.Escape))
             if (!UIManager.Instance.GetMenuPanelActive() && !UIManager.Instance.GetSettingPanelActive())
-                    UIManager.Instance.SetSettingMenuActive();
+            {
+                UIManager.Instance.SetSettingMenuActive();
+                SoundManager.Instance.StopBgmSound();
+            }
 
-        if (isGameStart == true && isCutscene == false) // ???????È∂??? ???????øÎîÖÎπ??
+        if (isGameStart == true && isCutscene == false) // ??????????? ?????????Á≠åÎ§æÌçìËê∏???
         {
             timer += Time.deltaTime;
             //UIManager.Instance.SetTimerActive(true);
@@ -105,6 +109,8 @@ public class GameManager : MonoSingleton<GameManager>
     public void ContinueGame()
     {
         SetGameStart(true);
+        SoundManager.Instance.SetBackGroundSoundClip(BackGroundSoundState.Basic);
+        //SoundManager.Instance.SetBackGroundSoundClip(BackGroundSoundState.SpringBgm);
         UIManager.Instance.SetMenuPanelActive();
         ItemSpawnManager.Instance.RockAndRopeRespawn();
         player.GetComponent<PlayerMove>().Reset();
@@ -129,6 +135,8 @@ public class GameManager : MonoSingleton<GameManager>
             save.isFirst = false;
             SaveJson<SAVE>(SAVE_PATH, SAVE_FILENAME, save);
         }
+        SoundManager.Instance.SetBackGroundSoundClip(BackGroundSoundState.Basic);
+        //SoundManager.Instance.SetBackGroundSoundClip(BackGroundSoundState.SpringBgm);
         SetGameStart(true);
         ItemSpawnManager.Instance.RockAndRopeRespawn();
         timer = save.timer;
@@ -136,7 +144,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     public void QuitGame()
     {
-        SavePositionAndTimer();
+        //SavePositionAndTimer();
 
         #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
@@ -171,6 +179,7 @@ public class GameManager : MonoSingleton<GameManager>
         save.position = playerTr.position;
         save.timer = timer;
         SaveJson(SAVE_PATH, SAVE_FILENAME, save);
+        Debug.Log("Save!");
     }
 
     public void Reset()
@@ -180,6 +189,9 @@ public class GameManager : MonoSingleton<GameManager>
 
         isGameStart = true;
         timer = 0;
+        UIManager.Instance.TimerText();
+        goalDistance = playerTr.position.y / (finish.position.y) * 100;
+        UIManager.Instance.UpdateGoalPercentText(goalDistance);
         player.transform.rotation = Quaternion.identity;
         PlayerStateManager.Instance.UpdateState(PlayerState.BASIC);
         player.GetComponent<PlayerMove>().UpdateAnimator();

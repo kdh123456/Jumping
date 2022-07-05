@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using Random = UnityEngine.Random;
 
 public class PlayerMove : Player
 {
@@ -48,6 +49,7 @@ public class PlayerMove : Player
     public bool IsFaint { get => isFaint; }
     private bool isMove = true;
     private bool isThunder = false;
+    private bool isWater = false;
 
     private bool isOneWall = false;
 
@@ -85,6 +87,12 @@ public class PlayerMove : Player
         //Debug.Log(isWall);
     }
 
+<<<<<<< HEAD
+=======
+    /// <summary>
+    /// ??????????????????????????????????????????????猷몄굣?????????????????????????
+    /// </summary>
+>>>>>>> origin/kjp
     void PlayerAnimation()
     {
         if (isStop)
@@ -175,6 +183,10 @@ public class PlayerMove : Player
         }
     }
 
+    /// <summary>
+    /// isMove ????????????????????????????????????
+    /// </summary>
+    /// <param name="value"></param>
     public void ChangeIsMove(int value)
     {
         if (value == 0)
@@ -198,10 +210,10 @@ public class PlayerMove : Player
                     UpdateAnimator();
                     break;
                 case AbilityState.LADYBUG:
-                    ObjectPool.Instance.ReturnObject(PoolObjectType.LADYBUG, hit.collider.gameObject);
+                    ObjectPool.Instance.ReturnObject(PoolObjectType.LADYBUG, hit.collider.transform.parent.gameObject);
                     PlayerStateManager.Instance.UpdateState(PlayerState.LADYBUG);
 
-                    StartCoroutine(ItemSpawnManager.Instance.ItmeSpawn(PoolObjectType.LADYBUG, hit.collider.transform));
+                    StartCoroutine(ItemSpawnManager.Instance.ItmeSpawn(PoolObjectType.LADYBUG, hit.collider.transform.parent.transform));
                     UpdateAnimator();
                     break;
                 case AbilityState.SMALL:
@@ -240,13 +252,27 @@ public class PlayerMove : Player
         }
     }
 
+    private IEnumerator IceFloorCoroutine()
+    {
+        isFacingIce = true;
+        rigid.velocity = new Vector2(iceFloorPower, 0);
+        yield return new WaitForSeconds(.8f);
+        rigid.velocity = Vector2.zero;
+        isFacingIce = false;
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if(collision.collider.gameObject.layer == LayerMask.NameToLayer("ground"))
+        {
+            animator.Play("Idle");
+        }
         if (collision.collider.CompareTag("IceFloor"))
         {
             Debug.Log("iceice");
-            isFacingIce = true;
-            rigid.AddForce((isFacing ? Vector2.left : Vector2.right) * 180, ForceMode2D.Impulse);
+            //isFacingIce = true;
+            //rigid.AddForce((isFacing ? Vector2.left : Vector2.right) * iceFloorPower, ForceMode2D.Impulse);
+            StartCoroutine(IceFloorCoroutine());
         }
 
         //????????
@@ -254,6 +280,7 @@ public class PlayerMove : Player
         {
             if (DebuffManager.Instance.State == SeasonState.SUMMER_0)
             {
+                isWater = true;
                 DebuffManager.Instance.UpdateDown(true);
             }
             else if (DebuffManager.Instance.State == SeasonState.SUMMER_1)
@@ -277,14 +304,15 @@ public class PlayerMove : Player
         if (collision.collider.CompareTag("IceFloor"))
         {
             Debug.Log("iceice");
-            isFacingIce = false;
+            //isFacingIce = false;
         }
 
         if (collision.collider.CompareTag("Water"))
         {
             rPlayerpos = playerpos;
             playerScrollbar.maxValue = rPlayerMaxValue;
-
+            DebuffManager.Instance.UpdateDown(false);
+            isWater = false;
         }
         else if (collision.collider.CompareTag("LeftWall") || collision.collider.CompareTag("RightWall"))
         {
@@ -292,8 +320,6 @@ public class PlayerMove : Player
             isMove = true;
         }
     }
-    
-    
 
     private void OnCollisionStay2D(Collision2D collision)
     {
@@ -318,6 +344,34 @@ public class PlayerMove : Player
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Water"))
+        {
+            if (DebuffManager.Instance.State == SeasonState.SUMMER_0)
+            {
+                isWater = true;
+                DebuffManager.Instance.UpdateDown(true);
+            }
+            else if (DebuffManager.Instance.State == SeasonState.SUMMER_1)
+            {
+                rPlayerpos = waterplayerpos;
+                playerScrollbar.maxValue = waterplayerMaxValue;
+            }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Water"))
+        {
+            rPlayerpos = playerpos;
+            playerScrollbar.maxValue = rPlayerMaxValue;
+            DebuffManager.Instance.UpdateDown(false);
+            isWater = false;
+        }
+    }
+
     IEnumerator CreateDust()
     {
         if (!isWall)
@@ -331,9 +385,13 @@ public class PlayerMove : Player
         }
     }
 
-    #region
+    #region ?????????????????????????????뇞???????????????????????????????????????????????????????????????????????
+    /// <summary>
+    /// ???????????????????????????????????????? ?????????????????????????????????????
+    /// </summary>
     private void ChangeFacing()
     {
+        //?????????????????????????????????????
         if (hit.collider != null)
         {
             if (hit.collider.TryGetComponent(out Ability_State ability_State))
@@ -479,9 +537,21 @@ public class PlayerMove : Player
     private IEnumerator Thunder()
     {
         isThunder = true;
+        float random = Random.Range(0f, 1f);
+        Vector2 direction = random > 0.5f ? new Vector2(1, 0) : new Vector2(-1, 0);
+        rigid.AddForce(direction * thunderPower, ForceMode2D.Impulse);
         yield return new WaitForSeconds(1f);
+        rigid.velocity = new Vector2(0.2f, 0.2f);
+        yield return new WaitForSeconds(.1f);
+        rigid.velocity = Vector2.zero;
         isThunder = false;
     }
+
+    private void PlayerFly()
+    {
+        rigid.AddForce(Vector2.up * hotpackPower, ForceMode2D.Impulse);
+    }
+
     private void Init()
     {
         rPlayerpos = playerpos;
@@ -494,9 +564,9 @@ public class PlayerMove : Player
         EventManager.StartListening("ThunderExplode", ChangeWallBool);
         EventManager.StartListening("Faint", PlayerFaint);
         EventManager.StartListening("FloorCheck", IfFloor);
-        EventManager.StartListening("ColorChange", () => FrogColorChange(DebuffManager.Instance.IsDown));
         EventManager.StartListening("RESET", Reset);
         EventManager.StartListening("Stop", Stop);
+        EventManager.StartListening("Hotpack", PlayerFly);
     }
 
     public override void Reset()
@@ -512,6 +582,7 @@ public class PlayerMove : Player
         isScrollStart = false;
         transform.position = new Vector2(-4f, 9f);
         isStop = false;
+        rigid.bodyType = RigidbodyType2D.Dynamic;
         DebuffManager.Instance.Reset();
     }
 }

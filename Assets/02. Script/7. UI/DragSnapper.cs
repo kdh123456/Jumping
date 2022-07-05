@@ -20,11 +20,13 @@ public class DragSnapper : UIBehaviour, IEndDragHandler, IBeginDragHandler
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        Debug.Log("OnBeginDrag");
         StopCoroutine(SnapRect(direction == SnapDirection.Horizontal ? scrollRect.horizontalNormalizedPosition : scrollRect.verticalNormalizedPosition)); // if we are snapping, stop for the next input
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        Debug.Log("OnEndDrag");
         StartCoroutine(SnapRect(direction == SnapDirection.Horizontal ? scrollRect.horizontalNormalizedPosition : scrollRect.verticalNormalizedPosition)); // simply start our coroutine ( better than using update )
     }
 
@@ -74,7 +76,8 @@ public class DragSnapper : UIBehaviour, IEndDragHandler, IBeginDragHandler
         while (timer < 1f) // loop until we are done
         {
             timer = Mathf.Min(1f, timer + Time.deltaTime / duration); // calculate our timer based on our speed
-            float value = Mathf.Lerp(startNormal, endNormal, curve.Evaluate(timer)); // our value based on our animation curve, cause linear is lame
+            float curveValue = Mathf.Min(1f, curve.Evaluate(timer));
+            float value = Mathf.Lerp(startNormal, endNormal, curveValue); // our value based on our animation curve, cause linear is lame
 
             if (direction == SnapDirection.Horizontal) // depending on direction we set our horizontal or vertical position
                 scrollRect.horizontalNormalizedPosition = value;

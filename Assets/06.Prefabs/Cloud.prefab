@@ -70,6 +70,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 808e122f0bf172a40ad99ed4f3462273, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  time: 2
 --- !u!1 &1744560186666972498
 GameObject:
   m_ObjectHideFlags: 0
@@ -122,7 +123,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 720aef02276b1c24abddbe52722e1519, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

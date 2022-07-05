@@ -17,6 +17,11 @@ public class Leaf : ItemEffect
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
+    private void Update()
+    {
+        transform.Translate(Vector2.down * 2 * Time.deltaTime);
+    }
+
     public override void CreateEffect()
     {
         if (spriteRenderer == null)
@@ -38,7 +43,7 @@ public class Leaf : ItemEffect
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.CompareTag("Floor"))
+        if (collision.collider.CompareTag("BaseFloor"))
         {
             DestroyEffect();
         }

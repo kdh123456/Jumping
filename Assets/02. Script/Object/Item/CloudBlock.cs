@@ -21,11 +21,20 @@ public class CloudBlock : ItemEffect
         CreateEffect();
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
+            StartCoroutine(ShakeCloudCoroutine());
             StartCoroutine(DestroyBlock());
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            StartCoroutine(ShakeCloudCoroutine());
         }
     }
 
@@ -58,5 +67,20 @@ public class CloudBlock : ItemEffect
 
         seq.Play();
         //seq.AppendCallback(() => ObjectPool.Instance.ReturnObject(PoolObjectType.CLOUD, this.transform.parent.gameObject));
+    }
+
+    [System.Obsolete]
+    public void ShakeCloud()
+    {
+        StartCoroutine(ShakeCloudCoroutine());
+    }
+
+    private IEnumerator ShakeCloudCoroutine()
+    {
+        spriteRenderer.material.SetFloat("_WindIntensity", 0.2f);
+        spriteRenderer.material.SetFloat("_WindSpee", 2f);
+        yield return new WaitForSeconds(.3f);
+        spriteRenderer.material.SetFloat("_WindIntensity", 0.1f);
+        spriteRenderer.material.SetFloat("_WindSpee", 1);
     }
 }

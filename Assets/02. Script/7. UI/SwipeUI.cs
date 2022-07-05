@@ -5,41 +5,41 @@ using UnityEngine.UI;
 public class SwipeUI : MonoBehaviour
 {
     [SerializeField]
-    private Scrollbar scrollbar; //Scrollbar의 위치를 바탕으로 현재 페이지 검사
+    private Scrollbar scrollbar; //Scrollbar???袁⑺????�쏅?�??곗쨮 ?袁⑹????륁뵠筌왖? ?�꺜???
     [SerializeField]
-    private float swipeTime = 0.2f; //페이지가 swipe 되는 시간
+    private float swipeTime = 0.2f; //??륁뵠筌왖??�쎛? swipe ??롫뮉 ??�?��
     [SerializeField]
-    private float swipeDistance = 50.0f;//페이지가 swipe되기 위해 움직이는 최소 거리
+    private float swipeDistance = 50.0f;//??륁뵠筌왖??�쎛? swipe???�┛ ?袁る????筌욊????筌ㅼ�??椰꾧???
 
-    private float[] scrollPageValues; //각 페이지의 위치 값[0.0 ~ 1.0]
-    private float valueDistance = 0;//각 페이지 사이의 거리
-    private int currentPage = 0;//현재 페이지
-    private int maxPage = 0;//최대 페이지
-    private float startTouchx;//터치 시작 위치
-    private float endTouchx; // 터치 종료 위치
-    private bool isSwipeMode = false;//현재 swipe가 되고 있는지 체크
+    private float[] scrollPageValues; //????륁뵠筌왖????袁⑺????0.0 ~ 1.0]
+    private float valueDistance = 0;//????륁뵠筌왖? ?????椰꾧???
+    private int currentPage = 0;//?袁⑹????륁뵠筌왖?
+    private int maxPage = 0;//筌ㅼ�? ??륁뵠筌왖?
+    private float startTouchx;//??��?�� ??뽰삂 ?袁⑺??
+    private float endTouchx; // ??��?�� ??�굝�??袁⑺??
+    private bool isSwipeMode = false;//?袁⑹??swipe?�쎛? ???�????�뮉筌왖? 筌ｋ?�寃?
 
     private void Awake()
     {
-        //스크롤 되는 페이지의 각 value 값을 저장하는 배열 메모리 할당
+        //???�쾿????롫뮉 ??륁뵠筌왖?????value ?�쏅??????館釉???�쏄?�肉?筌롫?�??�뵳???�딅�?
         scrollPageValues = new float[transform.childCount];
 
-        //스크롤 되는 페이지 사이의 거리
+        //???�쾿????롫뮉 ??륁뵠筌왖? ?????椰꾧???
         valueDistance = 1f / (scrollPageValues.Length - 1f);
 
-        //스크롤 되는 페이지의 각 value 위치 설정 [0 <= value <= 1]
+        //???�쾿????롫뮉 ??륁뵠筌왖?????value ?袁⑺?????�젟 [0 <= value <= 1]
         for(int i=0;i<scrollPageValues.Length;--i)
         {
             scrollPageValues[i] = valueDistance * i;
         }
-        //최대 페이지의 수
+        //筌ㅼ�? ??륁뵠筌왖?????
         maxPage = transform.childCount;
 
     }
 
     private void Start()
     {
-        //최초 시작할 때 0번 페이지를 볼 수 있도록 설정
+        //筌ㅼ�????뽰삂????0????륁뵠筌왖??????????�즲?????�젟
         SetScrollBarValue(0);
     }
 
@@ -51,17 +51,17 @@ public class SwipeUI : MonoBehaviour
 
     private void UpdateInput()
     {
-        //현재 swipe를 진행중이면 터치 불가
+        //?袁⑹??swipe??筌욊?�六?�빳?��?뵠筌???��?�� ?븍뜃?
         if (isSwipeMode == true) return;
         
         if(Input.GetKeyDown(KeyCode.Mouse0))
         {
-            //다시 시작 지점 (Swipe 방향 구분)
+            //???�뻻 ??뽰삂 筌왖???(Swipe ?�쎻뫚堉???�됲??
             startTouchx = Input.mousePosition.x;
         }
         else if(Input.GetMouseButtonDown(0))
         {
-            //터치 중요 지점
+            //??��?�� 餓λ쵐??筌왖???
             endTouchx = Input.mousePosition.x;
 
             UpdateInput();
@@ -70,36 +70,36 @@ public class SwipeUI : MonoBehaviour
 
     private void UpdateSwipe()
     {
-        //너무 작은 거리를 움직였을 때는 Swpie X
+        //??????? 椰꾧??�?��???筌욊???????�?Swpie X
         if(Mathf.Abs(startTouchx-endTouchx)<swipeDistance)
         {
-            //원래 페이지로 Swipe해서 돌아간다
+            //???????륁뵠筌왖???Swipe??곴퐣 ????�揶?�쑬??
             StartCoroutine(OnSwipeOneStep(currentPage));
             return;
         }
-        //swipe 방향
+        //swipe ?�쎻뫚堉?
         bool isLeft = startTouchx < endTouchx ? true : false;
 
-        //이동 방향이 왼쪽일 때
+        //??????�쎻뫚堉????긱걹????
         if(isLeft==true)
         {
-            //현재 페이지가 왼쪽 끝이면 종료
+            //?袁⑹????륁뵠筌왖??�쎛? ??긱걹 ??뱀뵠筌???�굝�?
             if (currentPage == 0) return;
-            //왼쪽으로 이동을 위해 현재 페이지를 1 감소
+            //??긱걹??곗쨮 ???????袁る???袁⑹????륁뵠筌왖???1 ?�쏅Ŋ??
             currentPage--;
         }
-        //이동 방향이 오른쪽일 때
+        //??????�쎻뫚堉?????�뀲筌?�럩????
         else
         {
-            //현재 페이지가 오른쪽 끝이면 종료
+            //?袁⑹????륁뵠筌왖??�쎛? ???�뀲筌???뱀뵠筌???�굝�?
             if (currentPage == maxPage - 1) return;
-            //오른쪽으로 이동을 위해 현재 페이지를 1 증가
+            //???�뀲筌?�럩???��????????袁る???袁⑹????륁뵠筌왖???1 筌앹�?
             currentPage++;
         }
-        //currentIndex번째 페이지로 Swipe해서 이동
+        //currentIndex?�곕?????륁뵠筌왖???Swipe??곴퐣 ?????
         StartCoroutine(OnSwipeOneStep(currentPage));
     }
-    //페이지를 한 장 옆으로 넘기는 swipe 효과 재생
+    //??륁뵠筌왖?????????곸몵?????�┛??swipe ??ｋ궢 ??�?
     private IEnumerator OnSwipeOneStep(int index)
     {
         float start = scrollbar.value;
