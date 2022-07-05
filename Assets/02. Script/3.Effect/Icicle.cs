@@ -9,8 +9,15 @@ public class Icicle : MonoBehaviour
     Vector2 basicTransform;
     Rigidbody2D rb;
     private Animator animator;
+    public AudioSource audioSource;
+    public AudioClip clip;
 
     private readonly int hashDestroy = Animator.StringToHash("destroy");
+
+    private void Awake()
+    {
+        audioSource.clip = clip;
+    }
 
     void Start()
     {
@@ -22,15 +29,18 @@ public class Icicle : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+
         if (collision.CompareTag("Player") == true || collision.CompareTag("BaseFloor") == true)
         {
+            audioSource.volume = SoundManager.Instance.GetEffectVolume();
             if (collision.CompareTag("Player"))
             {
                 EventManager.TriggerEvent("ThunderExplode");
             }
 
             rb.velocity = new Vector2(0, 0);
-            SoundManager.Instance.SetEffectSoundClip(EffectSoundState.Icicle);
+            audioSource.Play();
+            Debug.Log(audioSource.clip);
             animator.SetTrigger(hashDestroy);
         }
     }
