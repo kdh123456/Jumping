@@ -19,6 +19,13 @@ public class PlayerMove : Player
     [SerializeField]
     private float waterplayerMaxValue = 0;
 
+    [SerializeField]
+    private float hotpackPower = 10f;
+    [SerializeField]
+    private float thunderPower = 100f;
+    [SerializeField]
+    private float iceFloorPower = 10f;
+
     [SerializeField, Tooltip("Stay In Order")]
     private List<AnimatorOverrideController> frogAnimators = new List<AnimatorOverrideController>();
 
@@ -87,12 +94,6 @@ public class PlayerMove : Player
         //Debug.Log(isWall);
     }
 
-<<<<<<< HEAD
-=======
-    /// <summary>
-    /// ??????????????????????????????????????????????猷몄굣?????????????????????????
-    /// </summary>
->>>>>>> origin/kjp
     void PlayerAnimation()
     {
         if (isStop)
