@@ -50,7 +50,18 @@ public class PlayerSlider : Player
             float sliderPos = spriteRenderer.flipX == true ? 1.5f : -1.5f;
             Vector3 _playerScrollPos =
                 Camera.main.WorldToScreenPoint(new Vector3(transform.position.x + sliderPos, transform.position.y + 1, 0));
+
+            if (Screen.height - 130 < _playerScrollPos.y)
+            {
+                _playerScrollPos.y += _playerScrollPos.y - Screen.height - 130;
+            }
+            else if (130 > _playerScrollPos.y)
+            {
+                _playerScrollPos.y += 130 - _playerScrollPos.y;
+            }
+
             GameManager.Instance.Pool.position = _playerScrollPos;
+
             playerScrollbar.value = 0;
             isScrollStart = true;
         }
