@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13b75c95f34a00d4e8c04f76b73312e6, type: 3}
+  m_Name: WallBushTile
+  m_EditorClassIdentifier: 
+  m_AnimatedSprites:
+  - {fileID: -3983516416726368769, guid: 2a1c50a0c162dfd4b96bb81926b63bea, type: 3}
+  - {fileID: -7159200517409778788, guid: 2a1c50a0c162dfd4b96bb81926b63bea, type: 3}
+  - {fileID: -8133482051158712020, guid: 2a1c50a0c162dfd4b96bb81926b63bea, type: 3}
+  - {fileID: 3916034725656905903, guid: 2a1c50a0c162dfd4b96bb81926b63bea, type: 3}
+  - {fileID: -5918809932011378564, guid: 2a1c50a0c162dfd4b96bb81926b63bea, type: 3}
+  - {fileID: 4530091988515709349, guid: 2a1c50a0c162dfd4b96bb81926b63bea, type: 3}
+  - {fileID: 7288091555422437670, guid: 2a1c50a0c162dfd4b96bb81926b63bea, type: 3}
+  - {fileID: -4358190533676196432, guid: 2a1c50a0c162dfd4b96bb81926b63bea, type: 3}
+  m_MinSpeed: 1
+  m_MaxSpeed: 1
+  m_AnimationStartTime: 0
+  m_AnimationStartFrame: 0
+  m_TileColliderType: 2

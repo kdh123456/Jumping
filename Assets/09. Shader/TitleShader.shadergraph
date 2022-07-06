@@ -1200,7 +1200,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "45ef62162cde4e1f87948dcde3265ce3",
     "m_Id": 0,
-    "m_DisplayName": "Float",
+    "m_DisplayName": "Force",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",

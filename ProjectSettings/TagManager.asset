@@ -76,3 +76,6 @@ TagManager:
   - name: Player
     uniqueID: 1855293625
     locked: 0
+  - name: CameraEffect
+    uniqueID: 4225400473
+    locked: 0

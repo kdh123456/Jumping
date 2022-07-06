@@ -18,10 +18,18 @@ public class PlayerMove : Player
     public bool IsFaint { get => isFaint; }
     public bool IsMove { get { return isMove; } }
 
-    #endregion
-
-    #region 퍼블릭 참조 변수
-    public GameObject itemButton = null;
+    private InteractionUI InteractionUI
+    {
+        get
+        {
+            interactionUI ??= FindObjectOfType<InteractionUI>();
+            return interactionUI;
+        }
+        set
+        {
+            interactionUI = value;
+        }
+    }
 
     #endregion
 
@@ -53,6 +61,7 @@ public class PlayerMove : Player
 
     #region 프라이빗 참조 변수
     private PlayerTrailEffect playerTrailEffect;
+    private InteractionUI interactionUI;
     
     #endregion
 
@@ -415,19 +424,18 @@ public class PlayerMove : Player
         //?????????????????????????????????????
         if (hit.collider != null)
         {
-            if (hit.collider.TryGetComponent(out Ability_State ability_State))
+            if (hit.collider.TryGetComponent(out IInteraction interaction))
             {
-                itemButton.transform.position = this.transform.position + new Vector3((facing == Facing.LEFT ? -1.5f : 1.5f), .7f, 0);
-                itemButton.SetActive(true);
+                InteractionUI?.ActiveUI(interaction);
             }
             else
             {
-                itemButton.SetActive(false);
+                InteractionUI?.InActiveUI();
             }
         }
         else
         {
-            itemButton.SetActive(false);
+            InteractionUI?.InActiveUI();
         }
 
         if (Time.timeScale != 0)
