@@ -50,6 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnDelay: 3
   audioSource: {fileID: 6488943719837340651}
+  clip: {fileID: 8300000, guid: b86e5d78fab83c8438cd29afe3e0715a, type: 3}
 --- !u!212 &6488943719845773895
 SpriteRenderer:
   m_ObjectHideFlags: 0

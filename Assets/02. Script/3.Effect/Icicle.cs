@@ -40,7 +40,7 @@ public class Icicle : MonoBehaviour
 
             rb.velocity = new Vector2(0, 0);
             audioSource.Play();
-            Debug.Log(audioSource.clip);
+            //Debug.Log(audioSource.clip);
             animator.SetTrigger(hashDestroy);
         }
     }

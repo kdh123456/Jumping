@@ -5,6 +5,7 @@ using System.Text;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.Experimental.Rendering.Universal;
+using System.Reflection;
 
 public class GameManager : MonoSingleton<GameManager>
 {
@@ -91,7 +92,7 @@ public class GameManager : MonoSingleton<GameManager>
                 SoundManager.Instance.StopBgmSound();
             }
 
-        if (isGameStart == true && isCutscene == false) // ??????????? ?????????筌뤾퍓萸???
+        if (isGameStart == true && isCutscene == false) // ??????????? ?????????癲ル슢??蹂?㎟???
         {
             timer += Time.deltaTime;
             //UIManager.Instance.SetTimerActive(true);
@@ -117,6 +118,10 @@ public class GameManager : MonoSingleton<GameManager>
         save = LoadJsonFile<SAVE>(SAVE_PATH, SAVE_FILENAME);
         playerTr.position = save.position;
         timer = save.timer;
+
+        //StartCoroutine(CameraMove());
+        MethodInfo mInfo = typeof(CameraMove).GetMethod("Movemenet", BindingFlags.Public);
+        mInfo?.Invoke(typeof(CameraMove), null);
     }
 
     public void NewGameCutSceen()
@@ -140,6 +145,16 @@ public class GameManager : MonoSingleton<GameManager>
         SetGameStart(true);
         ItemSpawnManager.Instance.RockAndRopeRespawn();
         timer = save.timer;
+
+        StartCoroutine(CameraMove());
+    }
+
+    private IEnumerator CameraMove()
+    {
+        yield return new WaitForSeconds(.5f);
+        MethodInfo mInfo = typeof(CameraMove).GetMethod("Movemenet", BindingFlags.Public);
+        mInfo?.Invoke(typeof(CameraMove), null);
+        Debug.Log("Success MethodInfo");
     }
 
     public void QuitGame()
