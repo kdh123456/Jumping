@@ -16,24 +16,29 @@ public class CameraMove : MonoBehaviour
 
     void Update()
     {
-        #region ÇÃ·¹ÀÌ¾î¿¡ µü ºÙ¾î¼­ °¡±â
+        #region í”Œë ˆì´ì–´ì— ë”± ë¶™ì–´ì„œ ê°€ê¸°
         //targetPos = playerTr.position;
         //targetPos.x = 0;
-        //targetPos.y = Mathf.Clamp(targetPos.y, 0, 10000000/*ÀÌ ¼ıÀÚ´Â ÈÄ¿¡ Á¶Á¤*/);
+        //targetPos.y = Mathf.Clamp(targetPos.y, 0, 10000000/*ì´ ìˆ«ìëŠ” í›„ì— ì¡°ì •*/);
         //targetPos.z = -10;
         //transform.position = targetPos;
         #endregion
 
-        #region ¾à°£ ´À¸®°Ô µû¶ó°¡±â
+        #region ì•½ê°„ ëŠë¦¬ê²Œ ë”°ë¼ê°€ê¸°
         //targetPos = playerTr.position;
-        //targetPos.y = Mathf.Clamp(targetPos.y, 0, 10000000/*ÀÌ ¼ıÀÚ´Â ÈÄ¿¡ Á¶Á¤*/);
-        //transform.position = Vector3.Lerp(transform.position, new Vector3(0, targetPos.y, -10), .5f/*ÀÌ ¼ıÀÚ Á¶Á¤ÇØ¼­ µû¶ó¿À´Â ¼Óµµ Á¶Àı °¡´É*/);
+        //targetPos.y = Mathf.Clamp(targetPos.y, 0, 10000000/*ì´ ìˆ«ìëŠ” í›„ì— ì¡°ì •*/);
+        //transform.position = Vector3.Lerp(transform.position, new Vector3(0, targetPos.y, -10), .5f/*ì´ ìˆ«ì ì¡°ì •í•´ì„œ ë”°ë¼ì˜¤ëŠ” ì†ë„ ì¡°ì ˆ ê°€ëŠ¥*/);
         #endregion
 
-        #region Á¡ÇÁÅ· ¹æ½Ä
+        #region ì í”„í‚¹ ë°©ì‹
+        Movememet();
+        #endregion
+    }
+
+    public void Movememet()
+    {
         targetPos = playerTr.position;
         count = (int)targetPos.y / _height;
         this.transform.position = new Vector3(0, (_height * count) + 10, -10);
-        #endregion
     }
 }
