@@ -7,6 +7,26 @@ using Random = UnityEngine.Random;
 
 public class PlayerMove : Player
 {
+    public enum Facing
+    {
+        LEFT,
+        RIGHT
+    }
+
+    #region 프로퍼티
+    public Facing facing { get; private set; }
+    public bool IsFaint { get => isFaint; }
+    public bool IsMove { get { return isMove; } }
+
+    #endregion
+
+    #region 퍼블릭 참조 변수
+    public GameObject itemButton = null;
+
+    #endregion
+
+    #region 인스펙터 조절 가능 변수
+
     [Header("Player Move Pos")]
     [SerializeField]
     private float playerpos = 0;
@@ -29,50 +49,45 @@ public class PlayerMove : Player
     [SerializeField, Tooltip("Stay In Order")]
     private List<AnimatorOverrideController> frogAnimators = new List<AnimatorOverrideController>();
 
+    #endregion
+
+    #region 프라이빗 참조 변수
+    private PlayerTrailEffect playerTrailEffect;
+    
+    #endregion
+
+    #region 속성
+
     private float rPlayerpos = 0;
     private float rPlayerMaxValue = 0;
-
-    private RaycastHit2D hit;
     private Vector3 direction;
     private Vector2 position;
-    public GameObject itemButton = null;
+    private RaycastHit2D hit;
+    private Transform effectTrm;
     private float moveInput;
     private bool isScrollStart;
-    public enum Facing
-    {
-        LEFT,
-        RIGHT
-    }
-
-    public Facing facing { get; private set; }
-
     private bool isFacing = false;
-
     private bool isFacingIce = false;
-
     private bool isJumpStart = false;
     private bool isJump = false;
     private bool isFaint = false;
-    public bool IsFaint { get => isFaint; }
     private bool isMove = true;
     private bool isThunder = false;
     private bool isWater = false;
-
     private bool isOneWall = false;
-
-    public bool IsMove { get { return isMove; } }
-
     private bool isStop = true;
 
+
+    #endregion
 
     protected override void Start()
     {
         base.Start();
-
+        playerTrailEffect = GetComponentInChildren<PlayerTrailEffect>();
         UpdateAnimator();
         Init();
         isFacing = (facing == Facing.LEFT) ? true : false;
-
+        effectTrm = transform.Find($"effectTrm");
     }
 
     protected override void Update()
@@ -102,6 +117,10 @@ public class PlayerMove : Player
 
         isJump = ((isGrounded != true) || isScrollStart);
 
+        if(isJump)
+        {
+            playerTrailEffect.ActiveTrail();
+        }
         animator.SetBool("isJump", isJump);
         animator.SetInteger("WalkPos", (int)(moveInput * playerpos));
         animator.SetBool("isWall", isWall);
@@ -267,6 +286,7 @@ public class PlayerMove : Player
         if(collision.collider.gameObject.layer == LayerMask.NameToLayer("ground"))
         {
             animator.Play("Idle");
+            playerTrailEffect.InActiveTrail();
         }
         if (collision.collider.CompareTag("IceFloor"))
         {
@@ -477,11 +497,19 @@ public class PlayerMove : Player
             if (!isJumpStart && GameManager.Instance.IsGameStart)
             {
                 if (Input.GetKey(KeySetting.keys[KeyAction.LEFT]))
+                {
                     moveInput = -1f;
+                    effectTrm.transform.localScale = new Vector3(-1, 1, 1);
+                }
                 else if (Input.GetKey(KeySetting.keys[KeyAction.RIGHT]))
+                {
                     moveInput = 1f;
+                    effectTrm.transform.localScale = new Vector3(1, 1, 1);
+                }
                 else
+                {
                     moveInput = 0;
+                }
 
                 if (isMove && !isThunder && !isFacingIce && !isStop)
                     rigid.velocity = new Vector3(moveInput * playerpos, rigid.velocity.y);
