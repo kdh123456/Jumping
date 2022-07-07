@@ -26,7 +26,7 @@
    - https://www.facebook.com/manmangames
    
    
-   {% include video id="XYj1v_vGxR0" provider="youtube" %}
+   <iframe width="900" height="506" src="https://www.youtube.com/embed/XYj1v_vGxR0" title="만만게임즈 우물 안 개구리 홍보영상" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
   
   
   
