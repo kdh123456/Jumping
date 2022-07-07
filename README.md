@@ -25,6 +25,9 @@
    <b>만만게임즈 페이스북</b>
    - https://www.facebook.com/manmangames
    
+   <b>다운로드</b>
+   - https://drive.google.com/file/d/1gD04665yJ-vdwSET_NpxABxHfe3XUkoa/view?usp=sharing
+   
    
    <br>
    
@@ -63,6 +66,9 @@ Made by ManManGames
    
    <b>ManManGames FaceBook</b>
    - https://www.facebook.com/manmangames
+   
+   <b>Download</b>
+   - https://drive.google.com/file/d/1gD04665yJ-vdwSET_NpxABxHfe3XUkoa/view?usp=sharing
    
    
    <br>
