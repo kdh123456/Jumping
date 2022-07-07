@@ -26,6 +26,7 @@
    - https://www.facebook.com/manmangames
    
    
+   <br>
    [![Video Label](https://user-images.githubusercontent.com/81199996/177677532-4c5f557f-e484-479a-837e-8f4a58b76fc2.png)](https://www.youtube.com/watch?v=XYj1v_vGxR0)
    
   
@@ -63,4 +64,5 @@ Made by ManManGames
    - https://www.facebook.com/manmangames
    
    
-   <iframe width="900" height="506" src="https://www.youtube.com/embed/XYj1v_vGxR0" title="만만게임즈 우물 안 개구리 홍보영상" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+   <br>
+   [![Video Label](https://user-images.githubusercontent.com/81199996/177677532-4c5f557f-e484-479a-837e-8f4a58b76fc2.png)](https://www.youtube.com/watch?v=XYj1v_vGxR0)
