@@ -26,7 +26,7 @@
    - https://www.facebook.com/manmangames
    
    
-   ※ 추후 영상 추가
+   https://www.youtube.com/watch?v=XYj1v_vGxR0
   
   
   
@@ -62,4 +62,4 @@ Made by ManManGames
    - https://www.facebook.com/manmangames
    
    
-   ※ Add a video later
+   https://www.youtube.com/watch?v=XYj1v_vGxR0
