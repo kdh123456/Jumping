@@ -25,8 +25,14 @@
    <b>만만게임즈 페이스북</b>
    - https://www.facebook.com/manmangames
    
+   <b>다운로드</b>
+   - https://drive.google.com/file/d/1gD04665yJ-vdwSET_NpxABxHfe3XUkoa/view?usp=sharing
    
-   ※ 추후 영상 추가
+   
+   <br>
+   
+   [![Video Label](https://user-images.githubusercontent.com/81199996/177677532-4c5f557f-e484-479a-837e-8f4a58b76fc2.png)](https://www.youtube.com/watch?v=XYj1v_vGxR0)
+   
   
   
   
@@ -61,5 +67,10 @@ Made by ManManGames
    <b>ManManGames FaceBook</b>
    - https://www.facebook.com/manmangames
    
+   <b>Download</b>
+   - https://drive.google.com/file/d/1gD04665yJ-vdwSET_NpxABxHfe3XUkoa/view?usp=sharing
    
-   ※ Add a video later
+   
+   <br>
+   
+   [![Video Label](https://user-images.githubusercontent.com/81199996/177677532-4c5f557f-e484-479a-837e-8f4a58b76fc2.png)](https://www.youtube.com/watch?v=XYj1v_vGxR0)
