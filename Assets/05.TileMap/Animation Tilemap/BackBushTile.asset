@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13b75c95f34a00d4e8c04f76b73312e6, type: 3}
+  m_Name: BackBushTile
+  m_EditorClassIdentifier: 
+  m_AnimatedSprites:
+  - {fileID: 6404689199462039043, guid: d88e51ec64fa5a1449ad7a5bb66cfeac, type: 3}
+  - {fileID: -1747735282770181899, guid: d88e51ec64fa5a1449ad7a5bb66cfeac, type: 3}
+  - {fileID: -5228722469139120387, guid: d88e51ec64fa5a1449ad7a5bb66cfeac, type: 3}
+  - {fileID: -281599088895640384, guid: d88e51ec64fa5a1449ad7a5bb66cfeac, type: 3}
+  - {fileID: 1113340730176273944, guid: d88e51ec64fa5a1449ad7a5bb66cfeac, type: 3}
+  - {fileID: -2158601779005388666, guid: d88e51ec64fa5a1449ad7a5bb66cfeac, type: 3}
+  - {fileID: 7474944830584779349, guid: d88e51ec64fa5a1449ad7a5bb66cfeac, type: 3}
+  - {fileID: -8505246818361038832, guid: d88e51ec64fa5a1449ad7a5bb66cfeac, type: 3}
+  - {fileID: 2560218065732530372, guid: d88e51ec64fa5a1449ad7a5bb66cfeac, type: 3}
+  m_MinSpeed: 1
+  m_MaxSpeed: 1
+  m_AnimationStartTime: 0
+  m_AnimationStartFrame: 0
+  m_TileColliderType: 2

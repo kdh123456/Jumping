@@ -61,6 +61,9 @@ TagManager:
   - name: Background
     uniqueID: 370719525
     locked: 0
+  - name: Effect
+    uniqueID: 157408839
+    locked: 0
   - name: Floor
     uniqueID: 1746217257
     locked: 0
@@ -72,4 +75,7 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 1855293625
+    locked: 0
+  - name: CameraEffect
+    uniqueID: 4225400473
     locked: 0
