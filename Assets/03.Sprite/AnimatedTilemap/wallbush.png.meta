@@ -48,6 +48,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -304,6 +305,15 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      wallbush_1: -7159200517409778788
+      wallbush_3: 3916034725656905903
+      wallbush_2: -8133482051158712020
+      wallbush_6: 7288091555422437670
+      wallbush_5: 4530091988515709349
+      wallbush_0: -3983516416726368769
+      wallbush_7: -4358190533676196432
+      wallbush_4: -5918809932011378564
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

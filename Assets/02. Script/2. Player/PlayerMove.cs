@@ -124,14 +124,15 @@ public class PlayerMove : Player
             return;
         animator.SetFloat("jump", rigid.velocity.y);
 
-        isJump = ((isGrounded != true) || isScrollStart);
+        //isJump = ((isGrounded != true) || isScrollStart);
 
         if(isJump)
         {
             playerTrailEffect.ActiveTrail();
         }
         animator.SetBool("isJump", isJump);
-        animator.SetInteger("WalkPos", (int)(moveInput * playerpos));
+        animator.SetInteger("WalkPos", (int)(rigid.velocity.x));
+        Debug.Log((int)(moveInput * playerpos));
         animator.SetBool("isWall", isWall);
         animator.SetBool("isStart", GameManager.Instance.IsGameStart);
         animator.SetInteger("timeScale", (int)Time.timeScale);
@@ -144,6 +145,7 @@ public class PlayerMove : Player
         {
             rigid.velocity = new Vector2(0.0f, rigid.velocity.y);
             isJumpStart = true;
+            isJump = true;
             isScrollStart = true;
         }
     }
@@ -492,6 +494,9 @@ public class PlayerMove : Player
         if (isGrounded)
         {
             isOneWall = true;
+
+            if (isJump && rigid.velocity.y < 0)
+                isJump = false;
             if (isFaint)
                 isMove = false;
             else
@@ -519,8 +524,11 @@ public class PlayerMove : Player
                     moveInput = 0;
                 }
 
-                if (isMove && !isThunder && !isFacingIce && !isStop)
+                if (isMove && !isThunder && !isFacingIce && !isStop && !isJumpStart)
                     rigid.velocity = new Vector3(moveInput * playerpos, rigid.velocity.y);
+
+                //if (isJumpStart)
+                //    rigid.velocity = Vector2.zero;
             }
         }
     }

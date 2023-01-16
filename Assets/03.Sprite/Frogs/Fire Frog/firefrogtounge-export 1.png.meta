@@ -51,6 +51,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -328,6 +329,16 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      firefrogtounge-export 1_8: -4007180919449510746
+      firefrogtounge-export 1_3: 1790064182127301688
+      firefrogtounge-export 1_4: 2040886448951717910
+      firefrogtounge-export 1_1: -6484853850853738574
+      firefrogtounge-export 1_6: -4402828918737762897
+      firefrogtounge-export 1_0: 1503460130173675070
+      firefrogtounge-export 1_2: 1985977120009589489
+      firefrogtounge-export 1_7: -8305705013505619550
+      firefrogtounge-export 1_5: 551487419520524294
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

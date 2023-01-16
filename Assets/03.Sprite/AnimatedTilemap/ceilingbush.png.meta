@@ -48,6 +48,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -304,6 +305,15 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      ceilingbush_1: 768263486068740533
+      ceilingbush_0: -8063336217153206579
+      ceilingbush_7: -8608679478892952706
+      ceilingbush_4: -5649550865563601551
+      ceilingbush_6: 2157931918678603595
+      ceilingbush_5: -3680407742958778937
+      ceilingbush_2: -7619709775280537096
+      ceilingbush_3: 2962039981305803357
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

@@ -303,6 +303,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -2361,6 +2362,100 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      cavesofgallet_tiles 1_66: -3755568581148730696
+      cavesofgallet_tiles 1_76: 8337659818963044312
+      cavesofgallet_tiles 1_21: -4696750482062479292
+      cavesofgallet_tiles 1_45: 6645798081501207532
+      cavesofgallet_tiles 1_67: -412179507334019284
+      cavesofgallet_tiles 1_27: 140299354041103893
+      cavesofgallet_tiles 1_57: 4187556588764645886
+      cavesofgallet_tiles 1_4: -4628515559011078044
+      cavesofgallet_tiles 1_86: 6556101039060165851
+      cavesofgallet_tiles 1_64: 1975358079923895481
+      cavesofgallet_tiles 1_11: -2599974931188331742
+      cavesofgallet_tiles 1_36: 8913753272342035194
+      cavesofgallet_tiles 1_38: -7940987687964582299
+      cavesofgallet_tiles 1_68: -5272700884493999099
+      cavesofgallet_tiles 1_55: 1292469007332775763
+      cavesofgallet_tiles 1_10: 2864847624980552579
+      cavesofgallet_tiles 1_88: -4262120746283536057
+      cavesofgallet_tiles 1_3: -5013373007431249714
+      cavesofgallet_tiles 1_65: 3702658564243485177
+      cavesofgallet_tiles 1_40: -5115806423164597574
+      cavesofgallet_tiles 1_58: -1659990716570650279
+      cavesofgallet_tiles 1_22: 2310479233110295927
+      cavesofgallet_tiles 1_61: 4543632002230493486
+      cavesofgallet_tiles 1_78: 2031056849576342517
+      cavesofgallet_tiles 1_1: -8015596509203923411
+      cavesofgallet_tiles 1_30: -1752366965102919367
+      cavesofgallet_tiles 1_75: -4556520870096498712
+      cavesofgallet_tiles 1_29: 7345381290469163894
+      cavesofgallet_tiles 1_59: 3314111772085529899
+      cavesofgallet_tiles 1_0: -3747551465865604452
+      cavesofgallet_tiles 1_23: 4607196834102481620
+      cavesofgallet_tiles 1_81: -2944436972282735799
+      cavesofgallet_tiles 1_84: 7156153894127924753
+      cavesofgallet_tiles 1_69: -4110416205051092043
+      cavesofgallet_tiles 1_41: 1970320342432453541
+      cavesofgallet_tiles 1_51: 3579693374047571026
+      cavesofgallet_tiles 1_79: 7091085251001729970
+      cavesofgallet_tiles 1_74: 4652690048128672854
+      cavesofgallet_tiles 1_71: -634779100649865020
+      cavesofgallet_tiles 1_24: 17124476157010243
+      cavesofgallet_tiles 1_16: 6163679425080812659
+      cavesofgallet_tiles 1_43: 1805740777328979675
+      cavesofgallet_tiles 1_6: -9129996232886505178
+      cavesofgallet_tiles 1_48: 4700128622398622468
+      cavesofgallet_tiles 1_19: 7704490625041411189
+      cavesofgallet_tiles 1_56: -3718187820002118941
+      cavesofgallet_tiles 1_28: -8884999854860334427
+      cavesofgallet_tiles 1_60: -1465579353634876091
+      cavesofgallet_tiles 1_92: -2832587193643678968
+      cavesofgallet_tiles 1_52: -8169674410738031939
+      cavesofgallet_tiles 1_2: 5219993953860525955
+      cavesofgallet_tiles 1_5: -2720284528750923332
+      cavesofgallet_tiles 1_25: 6055316258872231400
+      cavesofgallet_tiles 1_80: -281861245305619767
+      cavesofgallet_tiles 1_77: -2896810464118141135
+      cavesofgallet_tiles 1_7: -2452551050380672804
+      cavesofgallet_tiles 1_32: 9032977701346456854
+      cavesofgallet_tiles 1_85: -8222407296711177991
+      cavesofgallet_tiles 1_17: 1001957183377918464
+      cavesofgallet_tiles 1_49: 2812515848659736690
+      cavesofgallet_tiles 1_26: 3082871689487779703
+      cavesofgallet_tiles 1_33: -6926110140821592900
+      cavesofgallet_tiles 1_18: 1415189918008767793
+      cavesofgallet_tiles 1_47: 3096263344821794737
+      cavesofgallet_tiles 1_35: -7668591282536725813
+      cavesofgallet_tiles 1_37: -8574734726441248778
+      cavesofgallet_tiles 1_8: -5284819455386445875
+      cavesofgallet_tiles 1_63: -3460636204048319079
+      cavesofgallet_tiles 1_44: -762991304039807857
+      cavesofgallet_tiles 1_34: 4450549070598233059
+      cavesofgallet_tiles 1_89: 4998185908811052218
+      cavesofgallet_tiles 1_54: -1534179059350479595
+      cavesofgallet_tiles 1_73: 6583542998755819843
+      cavesofgallet_tiles 1_20: -7063362632718727139
+      cavesofgallet_tiles 1_42: 1491037396547318612
+      cavesofgallet_tiles 1_53: 6342966347371818664
+      cavesofgallet_tiles 1_39: -5745403396774539306
+      cavesofgallet_tiles 1_72: 7087900744329237815
+      cavesofgallet_tiles 1_50: -7065526715911548811
+      cavesofgallet_tiles 1_82: -2329761235961626844
+      cavesofgallet_tiles 1_9: -3644455479247089991
+      cavesofgallet_tiles 1_91: -4178419708965729369
+      cavesofgallet_tiles 1_14: -908743021870749293
+      cavesofgallet_tiles 1_15: -8367792938250836194
+      cavesofgallet_tiles 1_31: 4513160651568653832
+      cavesofgallet_tiles 1_90: 4234324588300970557
+      cavesofgallet_tiles 1_12: 6546974161062856242
+      cavesofgallet_tiles 1_70: -6740459996104001366
+      cavesofgallet_tiles 1_13: 8918270497976695113
+      cavesofgallet_tiles 1_87: -9146095038681332998
+      cavesofgallet_tiles 1_83: -8032207726146080772
+      cavesofgallet_tiles 1_62: 5006255140573100759
+      cavesofgallet_tiles 1_46: 7506092738838562652
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
