@@ -30,6 +30,8 @@ public class PlayerSlider : Player
         EventManager.StartListening("START", StartScroll);
         EventManager.StartListening("STARTING", StartScrolling);
         EventManager.StartListening("STOP", StopScrolling);
+
+        rect = playerScrollbar.GetComponent<RectTransform>();
     }
     protected override void Update()
     {
@@ -42,25 +44,28 @@ public class PlayerSlider : Player
         //    }
         //}
     }
+
+    RectTransform rect;
     private void StartScroll()
     {
         if (isGrounded || isWall)
         {
             alpaValue(1);
             float sliderPos = spriteRenderer.flipX == true ? 1.5f : -1.5f;
-            Vector3 _playerScrollPos =
-                Camera.main.WorldToScreenPoint(new Vector3(transform.position.x + sliderPos, transform.position.y + 1, 0));
 
-            if (Screen.height - 130 < _playerScrollPos.y)
-            {
-                _playerScrollPos.y += _playerScrollPos.y - Screen.height - 130;
-            }
-            else if (130 > _playerScrollPos.y)
-            {
-                _playerScrollPos.y += 130 - _playerScrollPos.y;
-            }
+            rect.anchoredPosition = new Vector3(sliderPos, rect.anchoredPosition.y, -1f);
+            //Vector3 _playerScrollPos = new Vector3(transform.localPosition.x + sliderPos, transform.localPosition.y + 1, 0);
 
-            GameManager.Instance.Pool.position = _playerScrollPos;
+            //if (Screen.height - 130 < _playerScrollPos.y)
+            //{
+            //    _playerScrollPos.y += _playerScrollPos.y - Screen.height - 130;
+            //}
+            //else if (130 > _playerScrollPos.y)
+            //{
+            //    _playerScrollPos.y += 130 - _playerScrollPos.y;
+            //}
+
+            /*GameManager.Instance.Pool.position = _playerScrollPos*/;
 
             playerScrollbar.value = 0;
             isScrollStart = true;

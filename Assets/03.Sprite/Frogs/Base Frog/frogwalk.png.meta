@@ -42,6 +42,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -256,6 +257,13 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      frogwalk_3: -1120376416727469267
+      frogwalk_1: -3651706497493047926
+      frogwalk_2: -4460222118971864042
+      frogwalk_0: 1687878776523456736
+      frogwalk_5: 7258798935224247883
+      frogwalk_4: 5039740261606478681
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

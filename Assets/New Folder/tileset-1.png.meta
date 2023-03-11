@@ -93,6 +93,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -101,9 +102,9 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
-    aniso: -1
-    mipBias: -100
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -690,6 +691,28 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      tileset-1_17: 1384810042094766153
+      tileset-1_0: 4498195393942252042
+      tileset-1_1: -6196192137620883914
+      tileset-1_22: 7234171166082060557
+      tileset-1_8: 4610520508967755653
+      tileset-1_18: 5154152278836768437
+      tileset-1_12: 4314772051407402038
+      tileset-1_15: 4705078015062925276
+      tileset-1_9: 2184689956740861483
+      tileset-1_20: 2822644896493402729
+      tileset-1_5: -1919359942066081203
+      tileset-1_6: -8576967149841373516
+      tileset-1_19: 2402774183893933131
+      tileset-1_10: 7418131603158202804
+      tileset-1_2: -8703799557467589289
+      tileset-1_11: -5410899710987886126
+      tileset-1_7: -7641831874693203878
+      tileset-1_16: -1944027865948834299
+      tileset-1_21: -4873041144117428996
+      tileset-1_13: -8811925801016034689
+      tileset-1_14: -975647262782537788
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

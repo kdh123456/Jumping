@@ -42,6 +42,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -256,6 +257,13 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      snake_hole_5: 7948784649365898021
+      snake_hole_0: 1008765329521611856
+      snake_hole_1: -7667407095824139821
+      snake_hole_2: 4724622745449246834
+      snake_hole_4: -7287389498308017095
+      snake_hole_3: -2950743990792579250
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

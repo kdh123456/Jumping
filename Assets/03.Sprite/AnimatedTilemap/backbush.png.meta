@@ -51,6 +51,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -328,6 +329,16 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      backbush_2: -5228722469139120387
+      backbush_4: 1113340730176273944
+      backbush_6: 7474944830584779349
+      backbush_1: -1747735282770181899
+      backbush_0: 6404689199462039043
+      backbush_3: -281599088895640384
+      backbush_5: -2158601779005388666
+      backbush_8: 2560218065732530372
+      backbush_7: -8505246818361038832
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
