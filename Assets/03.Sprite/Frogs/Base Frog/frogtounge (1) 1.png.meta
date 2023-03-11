@@ -51,7 +51,6 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
-  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -329,16 +328,6 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      frogtounge (1) 1_3: -6110840934529837865
-      frogtounge (1) 1_2: -1998267636883600970
-      frogtounge (1) 1_7: 5113014233759298733
-      frogtounge (1) 1_1: -2053209063846115476
-      frogtounge (1) 1_6: -1014149395232740542
-      frogtounge (1) 1_0: -2161229369212102584
-      frogtounge (1) 1_5: -3681860886605732777
-      frogtounge (1) 1_8: -1464885690879672916
-      frogtounge (1) 1_4: 4234002307123146687
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

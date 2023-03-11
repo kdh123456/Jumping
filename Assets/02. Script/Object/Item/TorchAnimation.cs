@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-
+using UnityEngine.Experimental.Rendering.Universal;
 
 public class TorchAnimation : MonoBehaviour
 {
@@ -17,10 +17,10 @@ public class TorchAnimation : MonoBehaviour
     [SerializeField]
     private float radiusRandomness;
 
-    private UnityEngine.Rendering.Universal.Light2D _light;
+    private Light2D _light;
     void Start()
     {
-        _light = GetComponentInChildren<UnityEngine.Rendering.Universal.Light2D>();
+        _light = GetComponentInChildren<Light2D>();
         baseIntensity = _light.intensity;
         baseRadius = _light.pointLightOuterRadius;
 

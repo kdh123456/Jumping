@@ -48,7 +48,6 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
-  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -305,15 +304,6 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      bonfire_2: -4144230483103788195
-      bonfire_5: -8759645116765742646
-      bonfire_6: 4937110352898362749
-      bonfire_3: 9098395064655027044
-      bonfire_1: -841097564060088913
-      bonfire_4: -5288405454392149618
-      bonfire_0: 5801255725635399724
-      bonfire_7: 4525032119046802881
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

@@ -20,7 +20,7 @@
   Made by 만만 게임즈
   
   <b>만만게임즈 유튜브</b>
-   - https://youtu.be/GNlec7o6iUE
+   - https://www.youtube.com/channel/UC__bvUUBatVlj4bndzYXdSw
    
    <b>만만게임즈 페이스북</b>
    - https://www.facebook.com/manmangames

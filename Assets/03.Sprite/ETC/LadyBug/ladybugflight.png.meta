@@ -42,7 +42,6 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
-  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -257,13 +256,6 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      ladybugflight_4: -5068597561827212622
-      ladybugflight_0: 7592456609076112240
-      ladybugflight_5: 2046138251906921599
-      ladybugflight_1: -2443824816376001301
-      ladybugflight_3: 3093239759564560988
-      ladybugflight_2: 5710686613566955825
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

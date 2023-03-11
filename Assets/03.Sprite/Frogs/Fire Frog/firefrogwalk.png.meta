@@ -42,7 +42,6 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
-  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -257,13 +256,6 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      firefrogwalk_2: -6669007097089391921
-      firefrogwalk_0: 4224065484374986299
-      firefrogwalk_1: -3180745347724053466
-      firefrogwalk_5: -3828797538810156271
-      firefrogwalk_4: 7031537701134084731
-      firefrogwalk_3: 8898902100070086395
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

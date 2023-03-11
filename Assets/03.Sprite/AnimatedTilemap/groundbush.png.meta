@@ -48,7 +48,6 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
-  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -305,15 +304,6 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      groundbush_7: -1405911502698547393
-      groundbush_4: -8906027679374249326
-      groundbush_3: 525042405511601800
-      groundbush_5: -6170766515868326326
-      groundbush_1: -7610856788901173221
-      groundbush_0: -9044208980071932064
-      groundbush_6: -619409080055831775
-      groundbush_2: -7799395785410424230
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
